@@ -1,0 +1,42 @@
+.btn {
+background-color: #92A134;
+color: white;
+padding: 16px 56px;
+border-radius: 6px;
+font-size: 20px;
+line-height: 1.3;
+font-weight: semibold;
+font-family: Montserrat,sans-serif;
+
+cursor: pointer;
+/* transition: 0,3s ease; */
+
+transition: background-color .3s ease,
+            box-shadow .2s ease,
+            transform .05s ease;   /* 0,3s -> 0.3s и добавили свойства */
+}
+
+.btn:hover{
+    background-color: #b3cd0e;
+}
+
+
+  /* Делаем красивый фокус вместо синей обводки браузера */
+  .btn:focus {
+    outline: none;               /* скрываем дефолтный */
+  }
+  
+  .btn:focus-visible {
+    /* доступный кастомный фокус */
+    box-shadow: 0 0 0 2px rgba(146, 161, 52, 0.45);
+  }
+  
+  /* Небольшой отклик при нажатии */
+  .btn:active {
+    transform: translateY(1px);
+  }
+  
+  /* По желанию: отключить серую подсветку тапов на iOS */
+  .btn {
+    -webkit-tap-highlight-color: transparent;
+  }

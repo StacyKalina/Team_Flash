@@ -1,0 +1,65 @@
+.BannerWrapper {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('../../Images/main-banner.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  width: 100%;
+  height: 86svh;
+
+
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 40px;
+  color: white;
+}
+
+
+.MainHeader {
+  font-family: Montserrat, sans-serif;
+  font-size: clamp(90px, 93px, 90px);
+  font-weight: bold;
+  line-height: 1.1;
+  margin-top: 80px;
+  margin-bottom: 40px;
+}
+
+@media screen and (max-width: 1050px) {
+  .MainHeader {
+    margin-top: 60px;
+    font-size: clamp(60px, 8vw, 90px);
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .BannerWrapper {
+    height: 476px;
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .BannerWrapper {
+    height: 634px;  
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+  .BannerWrapper {
+    height: 600px;
+  }
+ .MainHeader {
+  margin-top: 50px;
+  margin-bottom: 24px;
+}
+}
+
+@media screen and (max-width: 480px) {
+ 
+ .MainHeader {
+  font-size: clamp(8vw, 50px, 60px);
+}
+}
