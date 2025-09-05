@@ -1,0 +1,599 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul[class] {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+a[class] {
+  text-decoration: none;
+}
+
+body {
+  min-height: 100vh;
+  /* default text */
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: #373a39;
+}
+
+.container {
+  max-width: 1210px;
+  /* добавляем по 10 чтобы после паддингов еффективная ширина была как в макете */
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.header {
+  background: linear-gradient(rgba(12, 37, 40, 0.95) 0%,
+      rgba(13, 48, 44, 0.3) 20%,
+      rgba(0, 0, 0, 0) 60%),
+    url(../images/header_bg.jpg);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.header__top-inner {
+  padding-top: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  white-space: nowrap;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.menu__list {
+  display: flex;
+}
+
+.menu__list-item+.menu__list-item {
+  margin-left: 43px;
+}
+
+.menu__list-link {
+  padding-bottom: 5px;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 24px;
+  letter-spacing: 0.6;
+  color: #fff;
+  transition: all 0.5s;
+}
+
+.menu__list-link:hover {
+  border-bottom: 3px solid #00b2a0;
+}
+
+.header__content-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 93vh;
+}
+
+.header__title {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 200px;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 200px;
+  letter-spacing: 0.6;
+  color: #0d302c;
+  margin-top: 23vh;
+}
+
+.header__subtitle {
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 28px;
+  letter-spacing: 0.6;
+  color: #0d302c;
+  margin-bottom: auto;
+}
+
+.header__icon {
+  margin-bottom: 90px;
+}
+
+.logo img {
+  height: 46px;
+}
+
+.header__icon img {
+  width: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 48px;
+  line-height: 52px;
+  font-weight: 400;
+  font-family: "Raleway", serif;
+  text-transform: uppercase;
+  position: relative;
+  margin-bottom: 90px;
+}
+
+.title-line {
+  position: relative;
+  display: inline-block;
+  /* важно для ::after */
+}
+
+.title-line::after {
+  content: "";
+  position: absolute;
+  margin-left: 12px;
+  top: 100%;
+  transform: translateY(-50%) skewX(-20deg);
+  width: 7px;
+  height: 40px;
+  background-color: #48b2a0;
+}
+
+.about {
+  padding: 190px 0 190px;
+}
+
+.about__text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 8vw, 90px);
+}
+
+.about__text-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.about__text p {
+  padding-bottom: 10px;
+}
+
+.offer {
+  padding: 190px 0 190px;
+  background-color: #f8f8f8;
+}
+
+.offer__columns {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 100px;
+}
+
+.offer__column+.offer__column {
+  margin-left: 30px;
+}
+
+.offer__column {
+  padding-left: 70px;
+  /* для псевдокласса */
+  position: relative;
+}
+
+.offer__column::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+}
+
+/* и вставляем картинки каждому отдельно */
+.offer__column--accommodation::before {
+  background-image: url("../images/аufenthalt.svg");
+}
+
+.offer__column--insurance::before {
+  background-image: url("../images/versicherung.svg");
+}
+
+.offer__column--equipment::before {
+  background-image: url("../images/einriustung.svg");
+}
+
+.offer__column-title {
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #242121;
+
+  /* отступ до текста */
+  margin-bottom: 14px;
+}
+
+.offer__bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.offer__info {
+  padding-top: 22px;
+  width: 300px;
+  margin-right: 39px;
+  flex: none;
+}
+
+.offer__info-item {
+  padding: 2px 0 35px;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 1px;
+
+  position: relative;
+}
+
+.offer__info-item span {
+  display: block;
+  right: 0;
+  top: -18px;
+  font-size: 18px;
+  margin-right: -10px;
+
+  position: absolute;
+}
+
+.offer__info-item span::before {
+  content: "";
+  position: absolute;
+  left: calc(100% - 310px);
+  height: 15px;
+  width: calc(300px - 100%);
+  background-image: url(../images/Wave_fixed.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.offer__text p {
+  margin-bottom: 15px;
+  padding-left: 45px;
+}
+
+
+
+.magic {
+  position: relative;
+  padding: 190px 0 175px;
+  overflow: hidden;
+  /* чтобы не вылезал за секцию */
+}
+
+.magic::after {
+
+  content: "";
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  width: 50vw;
+  height: 100%;
+
+  background-image: url(../images/Photo_Wave.jpg);
+  background-repeat: no-repeat;
+  background-position: 80% 0;
+  background-size: cover;
+  z-index: 0;
+}
+
+.magic__container {
+  position: relative;
+  z-index: 1;
+}
+
+
+
+.magic__inner {
+  max-width: 470px;
+  margin-right: auto;
+}
+
+.magic__text p {
+  margin-bottom: 15px;
+}
+
+
+.portfolio {
+  padding: 190px 0;
+}
+
+.portfolio__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+  /* margin-bottom: 100px; */
+}
+
+.portfolio__filter-btn {
+  position: relative;
+  transform: translateY(50%);
+}
+
+.portfolio-btn {
+  background: none;
+  /* убирает заливку */
+  border: none;
+  /* убирает рамку */
+  cursor: pointer;
+  /* делает курсор как у ссылки */
+  transition: color 0.3s ease;
+  /* плавное изменение цвета */
+  font-size: 22px;
+  line-height: 16px;
+  letter-spacing: 0.6;
+}
+
+.portfolio-btn:hover {
+  color: turquoise;
+  /* цвет текста при наведении */
+}
+
+
+.portfolio__content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.portfolio__item {
+  height: 230px;
+  /* min-height: 100%;  "минимум такая же высота, как у родителя"  */
+  position: relative;
+  /* для ссылки внутри этого контейнера  */
+  overflow: hidden;  /* jpt - настаивает( */
+}
+
+.portfolio__item-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 112, 125, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2; /* jpt - настаивает( */
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.portfolio__item:hover .portfolio__item-link {
+  opacity: 1;
+}
+
+.portfolio__item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* Убирает нежеленные отступы и пробелы у <img>, которые по умолчанию ведут себя как inline-элементы */
+  object-fit: cover;
+  /* увеличит изображение так, чтобы заполнить блок по ширине  */
+  transition: transform 0.4s ease; /* для анимации легкий zoom при наведении */
+}
+
+.portfolio__item:hover img {
+  transform: scale(1.05); /* легкий zoom при наведении */
+}
+
+.span2 {
+  grid-column: span 2;
+}
+
+.portfolio_add {
+  font-size: 22px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  border: 1px solid #C4C4C4;
+  /* иначе border style */
+  width: 290px;
+  height: 60px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  /* !!! */
+}
+
+.portfolio_add a {
+  color: #242121;
+}
+
+.blockquote {
+  background-color: #e5e2e2;
+  font-size: 36px;
+  line-height: 32px;
+  font-style: italic;
+  padding: 80px 15px;
+  margin: 200px auto;
+  text-align: center;
+
+}
+
+.blockquote span {
+  display: block;
+  margin-top: 20px;
+  /* !!! */
+  position: relative;
+  /* !!! */
+  left: 60%;
+  /* задаем ширину!!! */
+  width: max-content;
+  font-size: 14px;
+  line-height: 18px;
+  font-style: italic;
+  font-weight: 200;
+}
+
+.portfolio__video {
+  min-height: 600px;
+  background-image: url(../images/port_video_bg.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  /* background-size: 100% 100%; исказиться чтобы всунуться */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 200px;
+}
+
+
+.portfolio_numbers {
+  display: flex;
+  justify-content: space-around;
+}
+
+.portfolio__numbers-item {
+  font-size: 64px;
+  color: #01353E;
+}
+
+.portfolio__numbers-item span {
+  display: block;
+  /* перенести спан на след строку */
+  text-align: center;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.6px;
+  font-weight: 200;
+  margin-top: 25px;
+  /* <--- вот это добавляет отступ между числом и текстом */
+}
+
+
+.slider-blog{
+  /* padding: 80px 0; */
+}
+
+.slider-blog__wrapper{
+  background-color: #e5e2e2;
+  padding-bottom: 70px;
+  background: linear-gradient(#014f61d5 0%,
+  rgba(13, 37, 48, 0.6) 20%,
+  rgba(13, 37, 48, 0.3) 60%),
+  url(../images/slider.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+}
+
+.slider-blog__item{
+padding: 250px 0;
+}
+
+.slider-blog__item-title{
+  font-size: 48px;
+  line-height: 56px;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  color: #ffff;
+  max-width: 600px;
+  margin-left: 50%;
+  display: inline-block; /* <--- елемент ведет себя как инлайновый но свойства блочные((( */
+}
+
+.slider-blog__item-descr{
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 300;
+  letter-spacing: 0.6px;
+  color: #ffff;
+  max-width: 500px;
+  margin-left: 50%;
+}
+
+
+.slick-dots{
+  display: flex;
+  justify-content: center;
+}
+
+.slick-dots li + li {
+  margin-left: 15px;
+}
+
+/* <--- чтобы набрать баллы по специфичности  SCC и перебить предыдущие свойства, можно не писать а спустить этот блок на один ниже предыдущего*/
+.slick-dots .slick-active button{
+  transform: scale(1.4);
+  transition: transform 0.4s ease;
+  background-color: turquoise;
+}
+
+.slick-dots button{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: none;
+  font-size: 0; /* <--- чтобы цифр не было */
+  padding: 0; /* <--- обнуляем то что по умолчанию */
+}
