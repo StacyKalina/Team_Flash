@@ -5,7 +5,6 @@ import { MainBanner } from '../Components/MainBanner'
 export const Main = () => {
 return (
 <div>
-    <Menu/>
     <MainBanner/>
 </div>
 );
