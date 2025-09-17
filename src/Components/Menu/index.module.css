@@ -22,7 +22,9 @@ align-items: center;
 .navItemsWrapper > li:not(:last-child) { 
 margin-right: 32px;
 }
-
+.active {
+    border-bottom: 1px rgb(131, 11, 217);
+}
 .logo, .cart, .navItemsWrapper > li {
 cursor: pointer;
 }

@@ -3,6 +3,7 @@ import { Template } from "./Pages/Template";
 import { Main } from "./Pages/Main";
 import { Categories } from "./Pages/Categories";
 import { Catalog } from "./Pages/Catalog";
+import { AllProducts } from "./Pages/AllProducts";
 
 
 export const AppRoutes = () => {
@@ -11,10 +12,11 @@ export const AppRoutes = () => {
             <Routes>
                 <Route path="/" element={<Template />}>
                     <Route index element={<Main />} />
-                    <Route path="categories">
+                    <Route path="allproducts" element= {<AllProducts/>}/>
+                        <Route path="categories">
                         <Route path="catalog" element={<Catalog />} />
                         <Route index element={<Categories />} />
-                    </Route >
+                     </Route >
                 </Route >
             </Routes>
         </BrowserRouter>
