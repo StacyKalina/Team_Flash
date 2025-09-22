@@ -1,5 +1,7 @@
 export const Categories = () => {
-    return <div>
+    return (
+    <div>
         Categories
     </div>
+    )
 }

@@ -1,11 +1,14 @@
 import React from 'react'
-import { Menu } from '../Components/Menu';
 import { MainBanner } from '../Components/MainBanner'
+import { SectionCategories } from '../Components/SectionCategories';
+
 
 export const Main = () => {
 return (
 <div>
     <MainBanner/>
+    <SectionCategories/>
+    
 </div>
 );
 

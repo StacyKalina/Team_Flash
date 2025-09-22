@@ -6,6 +6,8 @@ import { Main } from "./Pages/Main";
 import { Categories } from "./Pages/Categories";
 import { Catalog } from "./Pages/Catalog";
 import { Cart } from "./Pages/Cart";
+import { AllProducts } from "./Pages/AllProducts";
+import { Sales } from "./Pages/Sales";
 
 
 
@@ -27,6 +29,8 @@ export const AppRouter = () => {
                     <Route index element={ <Categories />} />
                 </Route>
 
+                <Route path = "allProducts" element = {<AllProducts/>} />
+                <Route path = "sales" element = {<Sales/>} />
                 <Route path = "cart" element = {<Cart/>} />
 
             </Route>

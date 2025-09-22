@@ -1,4 +1,4 @@
-export const AllProduct = () => {
+export const AllProducts = () => {
     return <div>
         AllProducts
     </div>
