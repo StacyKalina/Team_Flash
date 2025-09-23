@@ -59,3 +59,17 @@ html {
     appearance: none;            /* убирает нативный стиль на iOS/Safari */
     -webkit-appearance: none;
   }
+
+
+  .sectionWrapper {
+  margin: 0 40px;
+  padding-top: 80px;
+}
+
+  .sectionTitle {
+    font-size: 46px;
+    font-weight: bold;
+    line-height: 1.1;
+    color: rgb(1, 43, 44);
+    margin-bottom: 24px;
+  }
