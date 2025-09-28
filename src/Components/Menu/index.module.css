@@ -1,10 +1,10 @@
-.navWrapper { 
-display: flex;
-background-color: #fffff1;
-height: 128px;
-padding: 0 40px;
-justify-content: space-between;
-align-items: center;
+.navWrapper {
+    display: flex;
+    background-color: #fffff1;
+    height: 128px;
+    padding: 0 40px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .navItemsWrapper {
@@ -19,14 +19,24 @@ align-items: center;
     margin-left: 20px;
 }
 
-.navItemsWrapper > li:not(:last-child) { 
-margin-right: 32px;
+.navItemsWrapper>li:not(:last-child) {
+    margin-right: 32px;
 }
-.active {
-    border-bottom: 1px rgb(131, 11, 217);
+
+.navItemsWrapper a,
+.navItemsWrapper a:visited {
+    text-decoration: none;
+    color: inherit;
 }
-.logo, .cart, .navItemsWrapper > li {
-cursor: pointer;
+
+.navItemsWrapper a:active {
+    border-bottom: 1px solid grey;
+}
+
+.logo,
+.cart,
+.navItemsWrapper>li {
+    cursor: pointer;
 }
 
 .burgerMenu {
@@ -42,12 +52,14 @@ cursor: pointer;
 
 @media screen and (max-width: 768px) {
     .navWrapper {
-      height: 110px;
+        height: 110px;
     }
-    .navItemsWrapper{
+
+    .navItemsWrapper {
         display: none;
     }
-    .burgerMenu{
+
+    .burgerMenu {
         display: block;
         margin-left: 20px;
         cursor: pointer;
