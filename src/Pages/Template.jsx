@@ -5,8 +5,8 @@ import Footer from "../Components/Footer";
 export const Template = () =>{
     return (
         <>
-        <Menu/>
-        <Outlet/>
+        {/* <Menu/>
+        <Outlet/> */}
         <Footer/>
         </>
     );
