@@ -12,16 +12,16 @@ export const Menu = () => {
             </div>
 
             <ul className = {styles.navItemsWrapper}>
-                <li><NavLink to = "/" className={(isActive) =>{isActive?styles.active:""}}>
+                <li><NavLink to = "/" className={({isActive}) =>isActive?styles.active:""}>
                  Main Page </NavLink>
                 </li>
-                <li><NavLink to = "/categories" className={(isActive) =>{isActive?styles.active:""}}>
+                <li><NavLink to = "/categories" className={({isActive}) =>isActive?styles.active:""}>
                  Categories </NavLink>
                 </li>
-                <li><NavLink to ="/allproducts" className={(isActive) =>{isActive?styles.active:""}}>
+                <li><NavLink to ="/allproducts" className={({isActive}) =>isActive?styles.active:""}>
                  All products </NavLink>
                 </li>
-                <li><NavLink to ="/allsales" className={(isActive) =>{isActive?styles.active:""}}>
+                <li><NavLink to ="/allsales" className={({isActive}) =>isActive?styles.active:""}>
                 All Sales</NavLink></li>
             </ul>
             
