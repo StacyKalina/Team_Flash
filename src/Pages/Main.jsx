@@ -8,7 +8,6 @@ return (
 <div>
     <MainBanner/>
     <SectionCategories/>
-    
 </div>
 );
 

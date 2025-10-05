@@ -9,6 +9,7 @@ gap: 32px;
 }
 
 .contactsCard {
+    border-radius: 6px;
 background: #F2F6D3;
 padding: 32px;
 }
