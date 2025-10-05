@@ -98,12 +98,6 @@
     display: block;
 }
 
-@media (max-width: 1200px) {
-    .infoRow {
-        gap: 24px;
-    }
-}
-
 @media (max-width: 1000px) {
     .footer {
         padding: 0 20px 60px;
@@ -121,15 +115,33 @@
     }
 
     .infoRow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 20px;
-    }
-
-    .card {
-        padding: 32px;
-        gap: 16px;
     }
 
     .mapWrapper {
         height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .title,
+    .cards,
+    .mapWrapper {
+        max-width: 728px;
+    }
+
+    .title {
+        font-size: 56px;
+    }
+
+    .cards {
+        gap: 20px;
+    }
+
+    .infoRow {
+        grid-template-columns: minmax(0, 479px) minmax(0, 229px);
+        justify-content: center;
+        gap: 20px;
     }
 }
