@@ -18,27 +18,29 @@ export const Footer = () => {
                         </a>
                     </div>
 
-                    <div className={`${styles.card} ${styles.cardNarrow}`}>
-                        <span className={styles.cardLabel}>Socials</span>
-                        <div className={styles.socials}>
-                            <a
-                                className={styles.socialButton}
-                                href="https://instagram.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Instagram"
-                            >
-                                <img src={instagramIcon} alt="Instagram" />
-                            </a>
-                            <a
-                                className={styles.socialButton}
-                                href="https://wa.me"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="WhatsApp"
-                            >
-                                <img src={whatsappIcon} alt="WhatsApp" />
-                            </a>
+                    <div className={`${styles.card} ${styles.cardNarrow} ${styles.socialCard}`}>
+                        <div className={styles.socialHeader}>
+                            <span className={styles.cardLabel}>Socials</span>
+                            <div className={styles.socials}>
+                                <a
+                                    className={styles.socialButton}
+                                    href="https://instagram.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Instagram"
+                                >
+                                    <img src={instagramIcon} alt="Instagram" />
+                                </a>
+                                <a
+                                    className={styles.socialButton}
+                                    href="https://wa.me"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="WhatsApp"
+                                >
+                                    <img src={whatsappIcon} alt="WhatsApp" />
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,7 +49,7 @@ export const Footer = () => {
                     <div className={`${styles.card} ${styles.cardWide}`}>
                         <span className={styles.cardLabel}>Address</span>
                         <address className={`${styles.cardValue} ${styles.address}`}>
-                            Linkstra√üe 2, 8 OG, 10785, Berlin, Deutschland
+                            Linkstraﬂe 2, 8 OG, 10785, Berlin, Deutschland
                         </address>
                     </div>
 
@@ -66,4 +68,3 @@ export const Footer = () => {
 };
 
 export default Footer;
-

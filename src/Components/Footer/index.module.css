@@ -145,3 +145,61 @@
         gap: 20px;
     }
 }
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 0 20px 56px;
+        gap: 24px;
+    }
+
+    .title,
+    .cards,
+    .mapWrapper {
+        max-width: 440px;
+    }
+
+    .title {
+        font-size: 48px;
+    }
+
+    .cards {
+        gap: 12px;
+    }
+
+    .infoRow {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .card {
+        padding: 24px 20px;
+        gap: 12px;
+    }
+
+    .cardLabel {
+        font-size: 18px;
+    }
+
+    .cardValue {
+        font-size: 28px;
+    }
+
+    .socialCard {
+        gap: 12px;
+    }
+
+    .socialHeader {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .socialHeader .socials {
+        display: flex;
+        gap: 12px;
+    }
+
+    .mapWrapper {
+        height: 250px;
+    }
+}
