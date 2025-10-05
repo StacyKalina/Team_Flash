@@ -1,0 +1,78 @@
+.DiscountBannerWrapper {
+    
+  background:
+    linear-gradient(rgba(135, 147, 61, 1),rgba(85, 97, 11, 1)),
+    url('../../Images/discount-banner.png');
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+
+  width: 100%;
+  height: 86svh;
+
+ margin: 0 40 0 40 px;
+  margin-bottom: 24px;
+  padding: 0 px;
+  color: white;
+}
+
+
+.DiscountHeader {
+  font-family: Montserrat, sans-serif;
+  font-size: clamp(90px, 93px, 90px);
+  font-weight: bold;
+  line-height: 1.1;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  position: relative;
+  }
+
+.FormWrapper{
+  display:flex;
+}
+@media screen and (max-width: 1000px) {
+  .DiscountHeader {
+    margin-top: 1466px;
+    font-size: clamp(60px, 8vw, 90px);
+  }
+}
+
+@media screen and (max-width: 1360px) {
+  .DiscountBannerWrapper {
+    height: 486px;
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .DiscountBannerWrapper {
+    height: 434px;  
+  }
+}
+@media screen and (max-width: 728px) {
+  .DiscountBannerWrapper {
+    height: 426px;  
+  }
+}
+@media screen and (max-width: 440px) {
+  .DiscountBannerWrapper {
+    height: 592px;  
+  }
+}
+@media screen and (max-width: 320px) {
+  .DiscountBannerWrapper {
+    height: 592px;  
+  }
+}
+ .DiscountHeader {
+  margin-top: 50px;
+  margin-bottom: 24px;
+}
+
+
+@media screen and (max-width: 320px) {
+ 
+ .DiscountHeader {
+  font-size: clamp(8vw, 50px, 60px);
+}
+}
