@@ -203,3 +203,47 @@
         height: 250px;
     }
 }
+
+@media (max-width: 360px) {
+    .footer {
+        padding: 0 20px 56px;
+        gap: 24px;
+    }
+
+    .title,
+    .cards,
+    .mapWrapper {
+        max-width: 320px;
+    }
+
+    .title {
+        font-size: 40px;
+    }
+
+    .cards {
+        gap: 12px;
+    }
+
+    .card {
+        padding: 24px 20px;
+        gap: 12px;
+    }
+
+    .infoRow {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .socialCard {
+        gap: 12px;
+    }
+
+    .socialHeader {
+        gap: 12px;
+    }
+
+    .mapWrapper {
+        height: 250px;
+    }
+}
+
