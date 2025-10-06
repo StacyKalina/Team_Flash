@@ -9,6 +9,8 @@
 
   width: 100%;
   height: 86svh;
+  display: flex;
+  flex-direction: column;
 
  margin: 0 40 0 40 px;
   margin-bottom: 24px;
@@ -28,7 +30,7 @@
   }
 
 .FormWrapper{
-  display:flex;
+  display:inline-flex;
 }
 @media screen and (max-width: 1000px) {
   .DiscountHeader {

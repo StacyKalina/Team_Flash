@@ -18,10 +18,10 @@ export const RegistrationForm = () => {
         //     body:JSON.stringify(data)  
         //   })
         console.log("submit!");
-    };
+            };
 
     return (
-        <form onSubmit={handleSubmit(submitHandler)}>
+        <form onSubmit={handleSubmit(submitHandler) } >
             <div>
                 username
                 <input
