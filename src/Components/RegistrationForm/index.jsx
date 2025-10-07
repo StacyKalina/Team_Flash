@@ -18,13 +18,12 @@ export const RegistrationForm = () => {
         //     body:JSON.stringify(data)  
         //   })
         console.log("submit!");
-            };
+    };
 
     return (
-        <form onSubmit={handleSubmit(submitHandler) } >
+        <form onSubmit={handleSubmit(submitHandler)} >
             <div>
-                username
-                <input
+                <input placeholder="Name"
                     type="text"
                     id="userName"
 
@@ -44,9 +43,8 @@ export const RegistrationForm = () => {
                 {errors.userName && <span>{errors.userName.message}</span>}
             </div>
             <div>
-                phone
-                <input type="tel"
-                id="tel" 
+                <input type="tel" placeholder="Phone number"
+                    id="tel"
                     {...register("tel", {
                         required: "field is madatory",
                         pattern: {
@@ -59,9 +57,8 @@ export const RegistrationForm = () => {
                 {errors.tel && <span>{errors.tel.message}</span>}
             </div>
             <div>
-                email
-                <input type="email" 
-                id="email" 
+                <input type="email" placeholder="email"
+                    id="email"
                     {...register("email", {
                         required: "field is mandatory",
                         pattern: {
