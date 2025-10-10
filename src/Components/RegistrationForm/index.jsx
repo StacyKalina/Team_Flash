@@ -1,13 +1,12 @@
 import { useForm } from 'react-hook-form';
-import styles from './index.module.css'
-
-
+import styles from './index.module.css';
+//import { FormError } from './FormError';
 
 export const RegistrationForm = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors }
     } = useForm();
 
     const submitHandler = (data) => {
@@ -19,6 +18,12 @@ export const RegistrationForm = () => {
         //   })
         console.log("submit!");
     };
+    //const hasErrors = Object.keys(errors).length;
+    //let ErrorComponent = null;
+    //if (hasErrors>0) {
+    //   console.log("Form has errors:", errors);
+    //   ErrorComponent = <FormError text={errors[Object.keys(errors)[0]].message} />;
+    //}
 
     return (
         <form onSubmit={handleSubmit(submitHandler)} >
@@ -40,21 +45,24 @@ export const RegistrationForm = () => {
 
                     })} >
                 </input>
-                {errors.userName && <span>{errors.userName.message}</span>}
+                {/*errors.userName && <FormError text={errors.userName.message}></FormError>*/}
             </div>
             <div>
                 <input type="tel" placeholder="Phone number"
                     id="tel"
                     {...register("tel", {
-                        required: "field is madatory",
+                         // validate: (value) => {
+                       //     if (value. includes ("+49")) { return true;}
+                       // else { return "phone number should include +49";}
+                        required: "field is mandatory",
                         pattern: {
-                            value: "0123456789",
-                            message: "wrong input.Try again",
-                        }
+                            value: "",
+                            message: "wrong input.Try again"
+                                                     }
 
                     })} >
                 </input>
-                {errors.tel && <span>{errors.tel.message}</span>}
+                {/*errors.tel && <FormError text={errors.tel.message}></FormError>*/}
             </div>
             <div>
                 <input type="email" placeholder="email"
@@ -68,9 +76,10 @@ export const RegistrationForm = () => {
 
                     })} >
                 </input>
-                {errors.email && <span>{errors.email.message}</span>}
+               {/*errors.email && <FormError text={errors.email.message}></FormError>*/}
             </div>
-            <button type="submit">Get a discount</button>
+            {/* {<ErrorComponent/>} */}
+            <button type="submit" >Get a discount</button>
         </form>
     );
 }

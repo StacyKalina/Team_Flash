@@ -1,6 +1,5 @@
 import React from "react";
 import styles from './index.module.css'
-import discountBanner from '../../Images/discount-banner.png'
 import { RegistrationForm } from "../RegistrationForm";
 
 export const DiscountCard = () => {

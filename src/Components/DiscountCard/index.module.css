@@ -1,15 +1,16 @@
 .discountBannerWrapper {
-    
+
   background-image: url('../../Images/discount-banner.png'),
-    linear-gradient(rgba(135, 147, 61, 1),rgba(85, 97, 11, 1));
-    
+    linear-gradient(rgba(135, 147, 61, 1), rgba(85, 97, 11, 1));
+
   background-size: 50%, cover;
-  background-position: left-bottom;
+  background-position:left, bottom;
   background-repeat: no-repeat;
 
+border-radius:12px;
   width: 100%;
   color: white;
-   padding: 32px; 
+  padding: 32px;
 }
 
 
@@ -17,52 +18,74 @@
   text-align: center;
   font-family: Montserrat, sans-serif;
   font-size: clamp(90px, 93px, 90px);
+  font-size:64px;
   font-weight: bold;
   line-height: 1.1;
   position: relative;
   margin-bottom: 24px;
-  }
-.formWrapper{
-  display: flex;
-justify-content: flex-end;  
-}
-@media screen and (max-width: 1000px) {
-  .DiscountHeader {
-    font-size: clamp(60px, 8vw, 90px);
-  }
 }
 
+.formWrapper {
+  direction: rtl;
+    justify-content:right;
+}
+
+
+
 @media screen and (max-width: 1360px) {
-  .DiscountBannerWrapper {
+  .discountBannerContent {
+    width: 1360px;
+  }
+  .discountHeader {
+    font-size: clamp(60px, 8vw, 90px);
+font-size: 64px;
+font-weight: 700;
   }
 }
 
 @media screen and (max-width: 960px) {
-  .DiscountBannerWrapper {
-
+  .discountBannerContent {
+    width: 960px;
+  }
+   .discountHeader {
+    font-size: clamp(60px, 8vw, 90px);
+font-size: 64px;
+font-weight: 700;
   }
 }
+
 @media screen and (max-width: 728px) {
-  .DiscountBannerWrapper {
-
+  .discountBannerContent {
+    width: 728px;
+  }
+   .discountHeader {
+    font-size: clamp(60px, 8vw, 90px);
+font-size: 56px;
+font-weight: 700;
   }
 }
+
 @media screen and (max-width: 440px) {
-  .DiscountBannerWrapper {
+  .discountBannerContent {
+    width: 440px;
 
   }
-}
-@media screen and (max-width: 320px) {
-  .DiscountBannerWrapper {
-
+ .discountHeader {
+    font-size: clamp(60px, 8vw, 90px);
+font-size: 48px;
+font-weight: 700;
   }
 }
 
-
-
 @media screen and (max-width: 320px) {
- 
- .DiscountHeader {
-  font-size: clamp(8vw, 50px, 60px);
+  .discountBannerContent {
+    width: 320px;
+  }
+  .discountHeader {
+    font-size: clamp(60px, 8vw, 90px);
+font-size: 40px;
+font-weight: 700;
+  } 
 }
-}
+
+
