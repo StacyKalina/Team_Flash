@@ -1,13 +1,17 @@
 .error {
     color: red;
     display: flex;
+    width:fit-content;
+    flex-direction: row-reverse;
     align-items: center;
     gap: 8px;
 }
 .error img {
     width: 20px;
     height: 20px;
-}
+    margin-top: 4px;
+    margin-bottom: 4px;
+    }
 .errorMessage {
     font-family: Montserrat, sans-serif;
     font-size: 16px;

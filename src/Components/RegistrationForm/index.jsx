@@ -85,7 +85,7 @@ if (hasErrors) {
             
                     
     </div>
-           <FormError text={errorMessage} />
+           {hasErrors && <FormError text={errorMessage} />}
             <button type="submit" >Get a discount</button>
         </form>
     );
