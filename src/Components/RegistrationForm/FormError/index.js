@@ -1,11 +1,12 @@
 import React from "react";
-import styles from './index.module.css'
-//import icon from './icon.svg';
-//<img src={icon} alt="error-icon"></img>
+import styles from './index.module.css';
+import icon from './icon.svg';
+
 
 export const FormError = ({text}) => {
     return (
         <div className={styles.error}>
+         <img src={icon} alt="error-icon"></img>
         <span className="errorMessage">{text}</span>   
         </div>
     );

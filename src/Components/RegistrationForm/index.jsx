@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import styles from './index.module.css';
-//import { FormError } from './FormError';
+import { FormError } from './FormError';
 
 export const RegistrationForm = () => {
     const {
@@ -18,13 +18,15 @@ export const RegistrationForm = () => {
         //   })
         console.log("submit!");
     };
-    //const hasErrors = Object.keys(errors).length;
-    //let ErrorComponent = null;
-    //if (hasErrors>0) {
-    //   console.log("Form has errors:", errors);
-    //   ErrorComponent = <FormError text={errors[Object.keys(errors)[0]].message} />;
-    //}
-
+    const hasErrors = Object.keys(errors).length > 0;
+let errorMessage = "";
+if (hasErrors) {
+  console.log("Form has errors:", errors);
+  errorMessage = errors[Object.keys(errors)[0]].message;
+} else {
+  console.log("Form is valid");
+}
+    
     return (
         <form onSubmit={handleSubmit(submitHandler)} >
             <div>
@@ -36,29 +38,32 @@ export const RegistrationForm = () => {
                         required: "field is mandatory",
                         maxLength: {
                             value: 10,
-                            message: "max 10 characters allowed"
+                            //  message: "max 10 characters allowed"
+                            message: "wrong input.Try again"
                         },
                         minLength: {
                             value: 3,
-                            message: "username  should be more than 3 characters"
+                            message: "wrong input.Try again"
+                            //  message: "username  should be more than 3 characters"
                         }
 
                     })} >
                 </input>
                 {/*errors.userName && <FormError text={errors.userName.message}></FormError>*/}
+                {/*errors.userName && <span>{errors.userName.message}</span>*/}
             </div>
             <div>
                 <input type="tel" placeholder="Phone number"
                     id="tel"
                     {...register("tel", {
-                         // validate: (value) => {
-                       //     if (value. includes ("+49")) { return true;}
-                       // else { return "phone number should include +49";}
+                        // validate: (value) => {
+                        //     if (value. includes ("+49")) { return true;}
+                        // else { return "phone number should include +49";}
                         required: "field is mandatory",
                         pattern: {
-                            value: "",
+                            value: /^\+?[1-9]\d{1,14}$/,
                             message: "wrong input.Try again"
-                                                     }
+                        }
 
                     })} >
                 </input>
@@ -76,10 +81,15 @@ export const RegistrationForm = () => {
 
                     })} >
                 </input>
-               {/*errors.email && <FormError text={errors.email.message}></FormError>*/}
-            </div>
-            {/* {<ErrorComponent/>} */}
+                {/*errors.email && <FormError text={errors.email.message}></FormError>*/}
+            
+                    
+    </div>
+           <FormError text={errorMessage} />
             <button type="submit" >Get a discount</button>
         </form>
     );
 }
+
+  
+   
