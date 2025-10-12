@@ -47,7 +47,7 @@ export const FooterContact = () => {
         <div className={`${styles.card} ${styles.cardWide}`}>
           <span className={styles.cardLabel}>Address</span>
           <address className={`${styles.cardValue} ${styles.address}`}>
-            Linkstra�e 2, 8 OG, 10785, Berlin, Deutschland
+            Linkstraße 2, 8 OG, 10785, Berlin, Deutschland
           </address>
         </div>
 
