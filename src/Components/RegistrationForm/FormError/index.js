@@ -7,7 +7,7 @@ export const FormError = ({text}) => {
     return (
         <div className={styles.error}>
          <img src={icon} alt="error-icon"></img>
-        <span className="errorMessage">{text}</span>   
+        <p className="errorMessage">{text}</p>   
         </div>
     );
 }

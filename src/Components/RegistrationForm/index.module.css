@@ -11,9 +11,8 @@ input::placeholder {
 
 
 input {
-    position-anchor: auto;
+    
     box-shadow: none;
-    text-align: center;
     padding: 16px 32px 16px 32px;
     background-color: transparent;
     border: 1px solid white;

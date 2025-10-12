@@ -11,7 +11,9 @@ border-radius:12px;
   width: 100%;
   color: white;
   padding: 32px;
+  padding-bottom: 0px;
 }
+
 
 
 .discountHeader {
@@ -26,15 +28,16 @@ border-radius:12px;
 }
 
 .formWrapper {
-  direction: rtl;
-    justify-content:right;
+  display:flex;
+  justify-content:flex-end;
+  
 }
 
 
 
 @media screen and (max-width: 1360px) {
   .discountBannerContent {
-    width: 1360px;
+    /* width: 1360px; */
   }
   .discountHeader {
     font-size: clamp(60px, 8vw, 90px);
