@@ -52,7 +52,7 @@ html {
     font: inherit;
   }
   
-  a[class] {
+  a {
     text-decoration: none;
   }
 
@@ -75,3 +75,10 @@ html {
     margin-bottom: 24px;
   }
   
+
+  @media screen and (max-width: 1000px)  {
+    .sectionWrapper {
+  margin: 0 20px;
+ 
+}
+  }

@@ -9,6 +9,9 @@ import { Link, NavLink } from "react-router-dom";
 
 
 export const Menu = () => {
+
+const setActivKlass = ({ isActive }) => isActive ? styles.active : ""
+
     return (
         <nav className={styles.navWrapper}>
             <div className={styles.logo}>
@@ -24,21 +27,21 @@ export const Menu = () => {
 
                 <li>
                     <NavLink to="/categories"
-                        className={({ isActive }) => (isActive ? styles.active : undefined)}>
+                        className={setActivKlass}>
                         Categories
                     </NavLink>
                 </li>
                 <li>
                     <NavLink
                         to="/allProducts"
-                        className={({ isActive }) => (isActive ? styles.active : undefined)}>
+                        className={setActivKlass}>
                         All products
                     </NavLink>
                 </li>
                 <li>
                     <NavLink
                         to="/sales"
-                        className={({ isActive }) => (isActive ? styles.active : undefined)}>
+                        className={setActivKlass}>
                     All sales
                     </NavLink>
                     </li>

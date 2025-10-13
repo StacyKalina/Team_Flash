@@ -19,17 +19,15 @@
     margin-left: 20px;
 }
 
-
-.navItemsWrapper a,
-.navItemsWrapper a:visited {
-    text-decoration: none;
-    color: inherit;
+.navItemsWrapper > li > :visited {
+    color: #424436;
 }
 
-
-.navItemsWrapper a:active {
+.navItemsWrapper > li > a.active {
     color: #92A134
 }
+
+
 
 .navItemsWrapper>li:not(:last-child) {
     margin-right: 32px;
