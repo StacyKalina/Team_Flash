@@ -37,7 +37,7 @@ border-radius:12px;
 
 @media screen and (max-width: 1360px) {
   .discountBannerContent {
-    /* width: 1360px; */
+     width: 1360px; 
   }
   .discountHeader {
     font-size: clamp(60px, 8vw, 90px);

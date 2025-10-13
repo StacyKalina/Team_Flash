@@ -12,7 +12,8 @@ export const RegistrationForm = () => {
     const submitHandler = (data) => {
         console.log(data);
         console.log(errors);
-        //   fetch('https://adress', {
+        //dispatch(sendForm(data));
+        //   fetch('https://localhost:3333/sale/send', {
         //     method:'POST',
         //     body:JSON.stringify(data)  
         //   })
@@ -22,8 +23,9 @@ export const RegistrationForm = () => {
 let errorMessage = "";
 if (hasErrors) {
   console.log("Form has errors:", errors);
+    
   errorMessage = errors[Object.keys(errors)[0]].message;
-} else {
+  } else {
   console.log("Form is valid");
 }
     
@@ -44,7 +46,7 @@ if (hasErrors) {
                         minLength: {
                             value: 3,
                             message: "wrong input.Try again"
-                            //  message: "username  should be more than 3 characters"
+                          //    message: "username  should be more than 3 characters"
                         }
 
                     })} >
@@ -75,8 +77,9 @@ if (hasErrors) {
                     {...register("email", {
                         required: "field is mandatory",
                         pattern: {
-                            value: "",
-                            message: "wrong input.Try again"
+                           // value: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/,",
+                           value:"",
+                            message: "wrong  email input.Try again"
                         }
 
                     })} >
@@ -86,6 +89,7 @@ if (hasErrors) {
                     
     </div>
            {hasErrors && <FormError text={errorMessage} />}
+                         
             <button type="submit" >Get a discount</button>
         </form>
     );

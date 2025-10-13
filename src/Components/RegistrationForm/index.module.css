@@ -29,7 +29,9 @@ input:focus {
 }
 
 button {
+    
     margin-top: 10px;
+    margin-bottom: 32px;
     border: 1px solid white;
     border-radius: 6px;
     padding: 16px 32px 16px 32px;
