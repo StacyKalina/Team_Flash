@@ -66,22 +66,22 @@ export const SectionCategories = () => {
                         {status === "succeeded" && (
                                 <div className={styles.cardsGrid}>
                                         {randomCategories.map((category) => (
-                                                <div className={styles.imgWrap}>
-                                             
-                                                        <Link
-                                                                key={category.id}
-                                                                to={`/categories/${category.id}`}
-                                                                className={styles.categoryCard}
-                                                        >
-                                                                <img
-                                                                        src={`${BASE_URL}${category.image}`}
-                                                                        alt={category.title}
-                                                                        loading="lazy"
-                                                                />
 
-                                                                <p className={styles.caption}>{category.title}</p>
-                                                        </Link>
-                                                </div>
+
+                                                <Link
+                                                        key={category.id}
+                                                        to={`/categories/${category.id}`}
+                                                        className={styles.categoryCard}
+                                                >
+                                                        <img
+                                                                src={`${BASE_URL}${category.image}`}
+                                                                alt={category.title}
+                                                                loading="lazy"
+                                                        />
+
+                                                        <p className={styles.caption}>{category.title}</p>
+                                                </Link>
+
                                         ))}
                                 </div>
                         )}

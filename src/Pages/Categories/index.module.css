@@ -1,0 +1,51 @@
+
+.cardsGrid {
+    display: grid;
+
+    /* auto-fit - Создай столько колонок, сколько поместится в контейнер,
+и автоматически подстраивай количество при изменении ширины экрана.
+minmax() задаёт диапазон ширины для каждой колонки: */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+}
+
+
+/* это ссылка */
+.categoryCard {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+    border-radius: 10px
+}
+
+
+.categoryCard img {
+    /* Изображение занимает всю доступную ширину родительского контейнера */
+
+    width: 100%;
+    height: auto;
+    aspect-ratio: 10 / 9;
+
+    object-fit: cover;
+
+    /* display: block - занимает всю ширину (если указан width: 100%); уходит на новую строку; исчезает лишний отступ снизу. */
+    display: block;
+
+    transform: scale(1.5);      /* лёгкий зум, чтобы рамки ушли за края */
+  transform-origin: center;
+ 
+}
+
+
+.caption {
+    text-align: center;
+    margin-top: 58px;
+    font-weight: 500;
+    z-index: 1; 
+}
+
+.cardsGrid > a {
+    color: inherit;
+    text-decoration: none;
+}
