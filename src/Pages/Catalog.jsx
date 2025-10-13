@@ -1,87 +1,124 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
 import { ProductCard } from "../Components/ProductCard";
 import styles from "./Catalog.module.css";
 
-import secateursImg from "../Images/cards/Secateurs.png";
-import collectionBerriesImg from "../Images/cards/Collection for berries (plastic).png";
-import glovesBlackImg from "../Images/cards/Gloves (black).png";
-import sickleHacksawImg from "../Images/cards/Sickle-shaped hacksaw.png";
-import bayonetShovelImg from "../Images/cards/Bayonet shovel.png";
-import gardenPitchforkImg from "../Images/cards/Garden pitchfork.png";
-import barbellImg from "../Images/cards/Barbell.png";
-import souvenirThermometerImg from "../Images/cards/Souvenir thermometer.png";
+const API_BASE_URL = process.env.REACT_APP_API_BASE ?? "http://localhost:3333";
 
-const PRODUCTS = [
-    {
-        id: 1,
-        title: "Secateurs",
-        price: 199,
-        oldPrice: 240,
-        discount: 17,
-        imageSrc: secateursImg,
-    },
-    {
-        id: 2,
-        title: "Collection for berries",
-        price: 26,
-        oldPrice: 35,
-        discount: 26,
-        imageSrc: collectionBerriesImg,
-    },
-    {
-        id: 3,
-        title: "Gloves (black)",
-        price: 9,
-        oldPrice: 14,
-        discount: 36,
-        imageSrc: glovesBlackImg,
-    },
-    {
-        id: 4,
-        title: "Sickle-shaped hacksaw",
-        price: 155,
-        imageSrc: sickleHacksawImg,
-    },
-    {
-        id: 5,
-        title: "Bayonet shovel",
-        price: 180,
-        imageSrc: bayonetShovelImg,
-    },
-    {
-        id: 6,
-        title: "Garden pitchfork",
-        price: 179,
-        imageSrc: gardenPitchforkImg,
-    },
-    {
-        id: 7,
-        title: "Barbell",
-        price: 12,
-        imageSrc: barbellImg,
-    },
-    {
-        id: 8,
-        title: "Souvenir thermometer",
-        price: 98,
-        oldPrice: 120,
-        discount: 18,
-        imageSrc: souvenirThermometerImg,
-    },
-];
+const buildImageUrl = (relativePath) => {
+    if (!relativePath) {
+        return undefined;
+    }
+    if (/^https?:/i.test(relativePath)) {
+        return relativePath;
+    }
+    const normalized = relativePath.replace(/^\/+/, "");
+    return `${API_BASE_URL}/${normalized}`;
+};
+
+const mapProductToCard = (product) => {
+    const hasDiscount =
+        typeof product.discont_price === "number" &&
+        product.discont_price > 0 &&
+        product.discont_price < product.price;
+
+    const currentPrice = hasDiscount ? product.discont_price : product.price;
+    const oldPrice = hasDiscount ? product.price : undefined;
+
+    const discountPercent = hasDiscount && product.price
+        ? Math.round(((product.price - product.discont_price) / product.price) * 100)
+        : null;
+
+    return {
+        id: product.id,
+        title: product.title,
+        price: currentPrice,
+        oldPrice,
+        discount: discountPercent,
+        imageSrc: buildImageUrl(product.image),
+    };
+};
 
 export const Catalog = () => {
+    const { categoryId = "1" } = useParams();
+    const [products, setProducts] = useState([]);
+    const [status, setStatus] = useState("idle");
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        const loadCategoryProducts = async () => {
+            setStatus("loading");
+            setError(null);
+            try {
+                const response = await fetch(`${API_BASE_URL}/categories/${categoryId}`, {
+                    signal: controller.signal,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Request failed with status ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.status === "ERR") {
+                    throw new Error(data.message || "Category is empty");
+                }
+
+                if (!data || !Array.isArray(data.data)) {
+                    throw new Error("Unexpected response format");
+                }
+
+                setProducts(data.data);
+                setStatus("success");
+            } catch (fetchError) {
+                if (fetchError.name === "AbortError") {
+                    return;
+                }
+                console.error("Failed to load category products", fetchError);
+                setError(fetchError.message);
+                setStatus("error");
+            }
+        };
+
+        loadCategoryProducts();
+
+        return () => {
+            controller.abort();
+        };
+    }, [categoryId]);
+
+    const cards = useMemo(() => products.map(mapProductToCard), [products]);
+
     return (
         <section className={styles.wrapper}>
             <header className={styles.header}>
                 <h1 className={styles.pageTitle}>Tools and equipment</h1>
             </header>
 
-            <div className={styles.cardsGrid}>
-                {PRODUCTS.map((product) => (
-                    <ProductCard key={product.id} {...product} />
-                ))}
-            </div>
+            {status === "loading" && (
+                <p className={styles.stateMessage}>Loading category products...</p>
+            )}
+
+            {status === "error" && (
+                <p className={styles.stateMessage}>
+                    Could not load products for this category.
+                    {error ? ` (${error})` : ""}
+                </p>
+            )}
+
+            {status === "success" && cards.length === 0 && (
+                <p className={styles.stateMessage}>No products found in this category.</p>
+            )}
+
+            {cards.length > 0 && (
+                <div className={styles.cardsGrid}>
+                    {cards.map((product) => (
+                        <ProductCard key={product.id} {...product} />
+                    ))}
+                </div>
+            )}
         </section>
     );
 };

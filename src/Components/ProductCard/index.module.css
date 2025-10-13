@@ -108,6 +108,11 @@
     font-weight: 500;
     line-height: 1.3;
     color: #424436;
+    min-height: 78px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .priceRow {
@@ -131,7 +136,7 @@
     text-decoration: line-through;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
     .card {
         width: 225px;
         min-height: 398px;
@@ -160,11 +165,6 @@
 
     .priceRow {
         gap: 12px;
-    }
-
-    .title {
-        min-height: 52px;
-        text-align: left;
     }
 }
 
@@ -198,11 +198,6 @@
     .priceRow {
         gap: 12px;
     }
-
-    .title {
-        min-height: 52px;
-        text-align: left;
-    }
 }
 
 @media (max-width: 480px) {
@@ -234,8 +229,8 @@
 
     .title {
         font-size: 18px;
-        min-height: 46px;
-        text-align: left;
+        min-height: 68px;
+        -webkit-line-clamp: 3;
     }
 
     .priceRow {

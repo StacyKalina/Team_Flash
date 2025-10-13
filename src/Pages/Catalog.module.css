@@ -34,9 +34,9 @@
     color: #6f7a7e;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
     .wrapper {
-        max-width: 960px;
+        max-width: 920px;
         padding: 0 20px 48px;
         gap: 32px;
     }
