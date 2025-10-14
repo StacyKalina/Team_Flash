@@ -1,5 +1,9 @@
-export const Sales = () => {
-    return <div>
-        Sale
+
+
+export const AllSales = () => {
+     return (
+    <div>
+    All Sales
     </div>
+     )
 }

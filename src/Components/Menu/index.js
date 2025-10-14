@@ -2,11 +2,7 @@ import styles from './index.module.css'
 import logo from '../../Images/logo.svg'
 import cart from '../../Images/cart.svg'
 import burgerMenuIcon from '../../Images/burger.svg'
-
-import { Link, NavLink } from "react-router-dom";
-
-
-
+import {Link, NavLink} from 'react-router-dom'
 
 export const Menu = () => {
 
