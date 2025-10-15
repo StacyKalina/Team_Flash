@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ProductCard } from "../Components/ProductCard";
+import { ProductCard } from "../../Components/ProductCard";
 import styles from "./Catalog.module.css";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE ?? "http://localhost:3333";
