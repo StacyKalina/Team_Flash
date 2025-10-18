@@ -43,13 +43,7 @@ export const CategoriesPage = () => {
     useEffect(() => {
         // грузим только когда «ещё ничего не делали»
         if (status !== "idle") return;
-        const promise = dispatch(fetchCategories());
-        // ВАЖНО: санка из RTK — отменяемая. На размонтировании прерываем запрос.
-        return () => {
-            if (promise && typeof promise.abort === "function") {
-                promise.abort();
-            }
-        };
+        dispatch(fetchCategories());
     }, [status, dispatch]);
 
     return (

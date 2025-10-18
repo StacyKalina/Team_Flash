@@ -1,24 +1,23 @@
-/* index.module.css */
 
 /* Растягиваем секцию, задаём вертикальные отступы и промежутки */
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
   padding-bottom: 64px;
 }
 
 /* Сообщения о состоянии (loading/failed/empty) */
 .infoMessage {
   font-size: 16px;
-  color: #6f7a7e;
+  color: inherit;
   text-align: center;
 }
 
 /* Сетка карточек */
 .cardsGrid {
   display: grid;
-  gap: 24px;
+  gap: 32px;
   /* auto-fit — чтобы пустые «колонки» сжимались, карточки красиво переносятся */
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
@@ -29,16 +28,19 @@
   isolation: isolate;
 }
 
-/* Сама карточка (Link) */
+
+/* Linka */
 .categoryCard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 16px;
-  border-radius: 16px;
+  gap: 14px;
+  padding: 24px;
+  padding-bottom: 21px;
+  border-radius: 12px;
   background-color: #F2F6D3;
-  text-decoration: none; /* для Link */
+  text-decoration: none;
+  /* для Link */
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   will-change: transform;
 }
@@ -48,47 +50,59 @@
   box-shadow: 0 8px 16px rgba(1, 43, 44, 0.1);
 }
 
-.categoryCard:focus-visible {
-  outline: 2px solid #012b2c;
-  outline-offset: 3px;
-  box-shadow: 0 0 0 4px rgba(1, 43, 44, 0.15);
-}
 
 /* Контейнер миниатюры, чтобы управлять размерами и формой */
 .thumbWrapper {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  aspect-ratio: 9/11;
+  height: auto;
   border-radius: 12px;
-  background-color: #ffffff;
-  overflow: hidden; /* чтобы скругление применялось к <img> */
+
+  overflow: hidden;
+  /* Всё, что выходит за пределы, обрезается (не видно). */
+
   display: grid;
   place-items: center;
 }
 
 /* Само изображение */
 .thumbWrapper img {
-  width: 100%;
-  height: 100%;
+  width: 110%;
+  height: 110%;
   object-fit: cover;
   display: block;
 }
 
 /* Заголовок/подпись карточки */
 .caption {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 500;
   text-align: center;
-  color: #012b2c;
-  line-height: 1.2;
+  color: inherit;
+  line-height: 1.3;
 }
 
-/* Небольшая адаптивность: на очень узких экранах уменьшим миниатюру */
-@media (max-width: 420px) {
-  .thumbWrapper {
-    width: 96px;
-    height: 96px;
+
+
+
+@media screen and (max-width: 1050px) {
+  
+  .categoryCard {
+    padding: 18px;
   }
-  .caption {
-    font-size: 16px;
+
+ .cardsGrid {
+  gap: 24px;}
+
+  .thumbWrapper {
+    aspect-ratio: 4/3;
+  }
+}
+
+
+@media screen and (max-width: 460px) {
+
+  .thumbWrapper {
+    aspect-ratio: 5/3;
   }
 }

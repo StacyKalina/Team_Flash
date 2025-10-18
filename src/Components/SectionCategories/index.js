@@ -12,6 +12,13 @@ import {
         selectCategoriesError,
 } from "../../store/slices/categories";
 
+import placeHolderImage from "../../Images/placeholder.svg"
+
+
+
+
+
+
 // рендомная выборка 4 элементов - алгоритм Фишера–Йетса
 function getRandomFour(arr) {
         if (!Array.isArray(arr)) return [];
@@ -39,6 +46,7 @@ export const SectionCategories = () => {
         const status = useSelector(selectCategoriesStatus);
         const error = useSelector(selectCategoriesError);
 
+
         useEffect(() => {
                 if (status === "idle") {
                         dispatch(fetchCategories());
@@ -46,8 +54,17 @@ export const SectionCategories = () => {
         }, [status, dispatch]);
 
 
-        const randomCategories = useMemo(() => getRandomFour(categories), [categories]);
         const BASE_URL = "http://localhost:3333";
+
+        const randomCategories = useMemo(() => getRandomFour(categories), [categories]);
+
+        const buildImageUrl = (relativePath) => { //убираем у относительного пути слэши
+                if (!relativePath) return undefined;
+                if (/^https?:/i.test(relativePath)) return relativePath; // уже абсолютный URL
+                const normalized = String(relativePath).replace(/^\/+/, ""); // убираем начальные /
+                return `${BASE_URL}/${normalized}`;
+        };
+
 
         return (
                 <div className="sectionWrapper">
@@ -63,28 +80,40 @@ export const SectionCategories = () => {
                                 <p style={{ color: "crimson" }}>{error ?? "Etwas ist schiefgelaufen"}</p>
                         )}
 
+                        {status === "succeeded" && categories.length === 0 && (
+                                <p className={styles.infoMessage}> No categories found yet. </p>
+                        )}
+
                         {status === "succeeded" && (
                                 <div className={styles.cardsGrid}>
-                                        {randomCategories.map((category) => (
+                                        {randomCategories.map((category) => {
 
+                                                const title = category.title ?? category.name ?? "Category";
+                                                const imageSrc = buildImageUrl(category.image) ?? placeHolderImage;
 
-                                                <Link
-                                                        key={category.id}
-                                                        to={`/categories/${category.id}`}
-                                                        className={styles.categoryCard}
-                                                >
-                                                        <img
-                                                                src={`${BASE_URL}${category.image}`}
-                                                                alt={category.title}
-                                                                loading="lazy"
-                                                        />
+                                                return (
+                                                        // корневой элемент итерации, поэтому прописываем именно ему key
+                                                        <div className={styles.imgWrapper} key={category.id}>
+                                                                <Link className={styles.categoryCard}
+                                                                        to={`/categories/${category.id}`} >
 
-                                                        <p className={styles.caption}>{category.title}</p>
-                                                </Link>
+                                                                        <div className={styles.thumbWrapper}>
+                                                                                <img
+                                                                                        src={imageSrc}
+                                                                                        alt={title}
+                                                                                        loading="lazy"
+                                                                                />
+                                                                        </div>
+                                                                        <p className={styles.caption}>{category.title}</p>
 
-                                        ))}
+                                                                </Link>
+                                                        </div>
+
+                                                )
+                                        })}
                                 </div>
-                        )}
+                        )
+                        }
                 </div>
         );
 };

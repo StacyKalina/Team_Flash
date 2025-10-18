@@ -7,10 +7,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // fetch - принеси данные с сервера
 
 export const fetchCategories = createAsyncThunk("categories/fetchCategories",
-    async (_, thunkAPI) => {
+    async () => {
         try {
-            const res = await fetch("http://localhost:3333/categories/all", {signal: thunkAPI.signal })
-            // signal позволяет отменять запрос при размонтировании
+            const res = await fetch("http://localhost:3333/categories/all")
 
 
             if (!res.ok) {
