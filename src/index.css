@@ -2,74 +2,80 @@
 
 html {
     box-sizing: border-box;
-  }
-  
-  * {
+}
+
+*, *::before, *::after {
     box-sizing: inherit;
     padding: 0;
     margin: 0;
-  }
-  
-  ul[class],
-  ol[class] {
-    padding: 0;
-  }
-  
-  body,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  ul[class],
-  ol[class],
-  li,
-  figure,
-  figcaption,
-  blockquote,
-  dl,
-  dd {
-    margin: 0;
-  }
-  
-  ul[class] {
-    list-style: none;
-  }
-  
-  img {
-    max-width: 100%;
-    display: block;
-  }
-  
-  input,
-  button,
-  textarea,
-  select {
-    font: inherit;
-  }
-  
-  a[class] {
-    text-decoration: none;
-  }
-
-  button{
-    border: none;
-    appearance: none;            /* убирает нативный стиль на iOS/Safari */
-    -webkit-appearance: none;
-  }
-
-
-  .sectionWrapper {
-  margin: 0 40px;
-  padding-top: 80px;
 }
 
-  .sectionTitle {
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fffff1;
+    color: #012b2c;
+}
+
+ul[class] {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+a[class] {
+    text-decoration: none;
+}
+
+button {
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.sectionWrapper {
+    margin: 0 40px;
+    padding-top: 80px;
+}
+
+.sectionTitle {
     font-size: 46px;
     font-weight: bold;
     line-height: 1.1;
     color: rgb(1, 43, 44);
     margin-bottom: 24px;
-  }
+}
+
