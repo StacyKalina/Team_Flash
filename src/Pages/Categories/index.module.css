@@ -1,51 +1,94 @@
+/* index.module.css */
 
+/* Растягиваем секцию, задаём вертикальные отступы и промежутки */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 64px;
+}
+
+/* Сообщения о состоянии (loading/failed/empty) */
+.infoMessage {
+  font-size: 16px;
+  color: #6f7a7e;
+  text-align: center;
+}
+
+/* Сетка карточек */
 .cardsGrid {
-    display: grid;
-
-    /* auto-fit - Создай столько колонок, сколько поместится в контейнер,
-и автоматически подстраивай количество при изменении ширины экрана.
-minmax() задаёт диапазон ширины для каждой колонки: */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 32px;
+  display: grid;
+  gap: 24px;
+  /* auto-fit — чтобы пустые «колонки» сжимались, карточки красиво переносятся */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
+/* Обёртка под каждую карточку (нужна из-за Link внутри) */
+.imgWrapper {
+  /* позволяет тени не обрезаться и даёт пространство для hover-сдвига */
+  isolation: isolate;
+}
 
-/* это ссылка */
+/* Сама карточка (Link) */
 .categoryCard {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    overflow: hidden;
-    border-radius: 10px
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 16px;
+  background-color: #F2F6D3;
+  text-decoration: none; /* для Link */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  will-change: transform;
 }
 
-
-.categoryCard img {
-    /* Изображение занимает всю доступную ширину родительского контейнера */
-
-    width: 100%;
-    height: auto;
-    aspect-ratio: 10 / 9;
-
-    object-fit: cover;
-
-    /* display: block - занимает всю ширину (если указан width: 100%); уходит на новую строку; исчезает лишний отступ снизу. */
-    display: block;
-
-    transform: scale(1.5);      /* лёгкий зум, чтобы рамки ушли за края */
-  transform-origin: center;
- 
+.categoryCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(1, 43, 44, 0.1);
 }
 
+.categoryCard:focus-visible {
+  outline: 2px solid #012b2c;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(1, 43, 44, 0.15);
+}
 
+/* Контейнер миниатюры, чтобы управлять размерами и формой */
+.thumbWrapper {
+  width: 150px;
+  height: 150px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  overflow: hidden; /* чтобы скругление применялось к <img> */
+  display: grid;
+  place-items: center;
+}
+
+/* Само изображение */
+.thumbWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Заголовок/подпись карточки */
 .caption {
-    text-align: center;
-    margin-top: 58px;
-    font-weight: 500;
-    z-index: 1; 
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: #012b2c;
+  line-height: 1.2;
 }
 
-.cardsGrid > a {
-    color: inherit;
-    text-decoration: none;
+/* Небольшая адаптивность: на очень узких экранах уменьшим миниатюру */
+@media (max-width: 420px) {
+  .thumbWrapper {
+    width: 96px;
+    height: 96px;
+  }
+  .caption {
+    font-size: 16px;
+  }
 }

@@ -1,6 +1,6 @@
 
 
-export const AllSales = () => {
+export const Sales = () => {
      return (
     <div>
     All Sales
