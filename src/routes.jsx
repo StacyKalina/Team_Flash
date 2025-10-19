@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import { Template } from "./Pages/Template";
 
 import { Main } from "./Pages/Main";
@@ -8,6 +7,7 @@ import { Cart } from "./Pages/Cart";
 import { AllProducts } from "./Pages/AllProducts";
 import { Sales } from "./Pages/Sales";
 import CategoriesPage from "./Pages/Categories";
+import { NotFound } from "./Pages/NotFound";
 
 
 
@@ -28,6 +28,7 @@ export const AppRouter = () => {
                     <Route path="allProducts" element={<AllProducts />} />
                     <Route path="sales" element={<Sales />} />
                     <Route path="cart" element={<Cart />} />
+                    <Route path="*" element={<NotFound/>}></Route> 
                 </Route>
             </Routes>
         </BrowserRouter>
