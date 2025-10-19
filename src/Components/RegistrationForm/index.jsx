@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import styles from "./index.module.css";
+import styles from './index.module.css';
 import { FormError } from './FormError';
 
 export const RegistrationForm = () => {

@@ -11,7 +11,6 @@ input::placeholder {
 
 
 input {
-
     box-shadow: none;
     padding: 16px 32px 16px 32px;
     background-color: transparent;
@@ -29,7 +28,6 @@ input:focus {
 }
 
 button {
-
     margin-top: 10px;
     margin-bottom: 32px;
     border: 1px solid white;

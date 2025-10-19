@@ -1,15 +1,16 @@
-import React from "react";
+import { FooterContact } from "./footerContact";
+import { contact } from "../../data/contact";
+import {FooterMap} from "./footerMap"
 import styles from "./index.module.css";
-import FooterContact from "./footerContact";
-import FooterMap from "./footerMap";
+
+
 
 export const Footer = () => {
     return (
-        <footer className={styles.footer}>
-            <h2 className={styles.title}>Contact</h2>
-            <FooterContact />
-            <FooterMap />
-        </footer>
-    );
-};
+    <footer className = {styles.footer}>
+        <FooterContact contact = {contact}/>
+        <FooterMap/>
 
+    </footer>
+    )
+}

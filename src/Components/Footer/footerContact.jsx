@@ -1,63 +1,51 @@
-import React from "react";
-import styles from "./index.module.css";
-import instagramIcon from "../../Images/icons/Insta.svg";
-import whatsappIcon from "../../Images/icons/ic-whatsapp.svg";
+import styles from "./index.module.css"
 
-export const FooterContact = () => {
-  return (
-    <div className={styles.cards}>
-      <div className={styles.infoRow}>
-        <div className={`${styles.card} ${styles.cardWide}`}>
-          <span className={styles.cardLabel}>Phone</span>
-          <a className={styles.cardValue} href="tel:+499999999999">
-            +49 999 999 99 99
-          </a>
-        </div>
 
-        <div
-          className={`${styles.card} ${styles.cardNarrow} ${styles.socialCard}`}
-        >
-          <div className={styles.socialHeader}>
-            <span className={styles.cardLabel}>Socials</span>
-            <div className={styles.socials}>
-              <a
-                className={styles.socialButton}
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-              >
-                <img src={instagramIcon} alt="Instagram" />
-              </a>
-              <a
-                className={styles.socialButton}
-                href="https://wa.me"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-              >
-                <img src={whatsappIcon} alt="WhatsApp" />
-              </a>
+export const FooterContact = ({ contact }) => {
+
+    const socials = contact.socials || [];
+
+    return (
+            <div className = "sectionWrapper">
+
+            <h2 className="sectionTitle" >
+                Contact
+            </h2>
+            <div className={styles.contactsGrid}>
+
+                <div className={styles.contactsCard}>
+                    <div className={styles.cardLabel}>Phone</div>
+                    <div className={styles.cardValue}>{contact.phone}</div>
+                </div>
+
+                <div className={styles.contactsCard}>
+                    
+                    <div className={styles.cardLabel}>Socials</div>
+                    <div className={styles.cardValueSocials}>
+                        {socials.length === 0 ? (
+                            <span>—</span>
+                        ) : (
+                            socials.map(s => (
+                                <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer">
+                                    <img src={s.icon} alt={s.name} />
+                                </a>
+                            ))
+                        )}
+                    </div>
+                </div>
+
+                <div className={styles.contactsCard}>
+                    <div className={styles.cardLabel}>Address</div>
+                    <div className={styles.cardValue}>{contact.address}</div>
+                </div>
+
+                <div className={styles.contactsCard}>
+                    <div className={styles.cardLabel}>Working hours</div>
+                    <div className={styles.cardValue}>{contact.hours}</div>
+                </div>
+
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.infoRow}>
-        <div className={`${styles.card} ${styles.cardWide}`}>
-          <span className={styles.cardLabel}>Address</span>
-          <address className={`${styles.cardValue} ${styles.address}`}>
-            Linkstraße 2, 8 OG, 10785, Berlin, Deutschland
-          </address>
         </div>
 
-        <div className={`${styles.card} ${styles.cardNarrow}`}>
-          <span className={styles.cardLabel}>Working Hours</span>
-          <span className={styles.cardValue}>24 hours a day</span>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default FooterContact;
+    )
+}
