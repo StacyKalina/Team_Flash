@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { MainBanner } from '../Components/MainBanner'
 import { SectionCategories } from '../Components/SectionCategories';
+import { DiscountCard } from '../Components/DiscountCard'
 
 
 export const Main = () => {
@@ -16,6 +17,7 @@ export const Main = () => {
     return (
         <div>
             <MainBanner />
+            <DiscountCard/>
             <SectionCategories />
         </div>
     );
