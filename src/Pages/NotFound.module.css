@@ -1,0 +1,62 @@
+.notFoundPageContent {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  justify-content: center;
+  margin-top: 80px;
+  
+   
+  flex-direction: column;
+   /* width: 100%;
+   height: 86svh; */
+}
+
+
+
+.notFoundImgContent {
+  background:
+    url('../Images/404.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 270px;
+}
+
+.notFoundTextContent {
+  background:
+    url('../Images/404-txt.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+    width: 100%;
+  height: 128px;
+  
+}
+
+/* width: 100%;
+   height: 86svh;*/
+
+
+
+
+
+@media screen and (max-width: 1000px) {
+  .notFoundPageContent {
+    height: 476px;
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .notFoundPageContent {
+    height: 634px;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+  .notFoundPageContent {
+    height: 600px;
+  }
+}

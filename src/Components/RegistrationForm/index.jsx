@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import styles from './index.module.css';
+import styles from "./index.module.css";
 import { FormError } from './FormError';
 
 export const RegistrationForm = () => {
@@ -74,12 +74,12 @@ if (hasErrors) {
             <div>
                 <input type="email" placeholder="email"
                     id="email"
+                    
                     {...register("email", {
                         required: "field is mandatory",
                         pattern: {
-                           // value: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/,",
-                           value:"",
-                            message: "wrong  email input.Try again"
+                           /* value:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/,*/
+                             message: "wrong input.Try again"
                         }
 
                     })} >
