@@ -2,10 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Template } from "./Pages/Template";
 
 import { Main } from "./Pages/Main";
-import { Catalog } from "./Pages/Catalog";
+import { Catalog } from "./Pages/Catalog/categoryProducts";
 import { Cart } from "./Pages/Cart";
-import { AllProducts } from "./Pages/AllProducts";
-import { Sales } from "./Pages/Sales";
+import { AllProducts } from "./Pages/Catalog/allProducts";
+import { Sales } from "./Pages/Catalog/allSaleProducts";
 import CategoriesPage from "./Pages/Categories";
 import { NotFound } from "./Pages/NotFound";
 

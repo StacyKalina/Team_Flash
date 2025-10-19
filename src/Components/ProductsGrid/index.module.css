@@ -1,0 +1,39 @@
+.cardsGrid {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: repeat(4, 316px);
+    justify-content: center;
+}
+.stateMessage {
+    font-size: 16px;
+    color: #6f7a7e;
+}
+
+@media (max-width: 1000px) {
+  .cardsGrid {
+    gap: 20px;
+    grid-template-columns: repeat(4, 212px);
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 768px) {
+  .cardsGrid {
+    gap: 20px;
+    grid-template-columns: repeat(2, 354px);
+    justify-content: center;
+  }
+}
+@media (max-width: 480px) {
+  .cardsGrid {
+    gap: 20px;
+    grid-template-columns: repeat(2, 210px);
+    justify-content: center;
+  }
+}
+@media (max-width: 360px) {
+  .cardsGrid {
+    gap: 20px;
+    grid-template-columns: repeat(1, 320px);
+    justify-content: center;
+  }
+}
