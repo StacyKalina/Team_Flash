@@ -1,15 +1,15 @@
-import { Outlet } from "react-router-dom";
-import { Menu } from "../Components/Menu";
-import Footer from "../Components/Footer";
+import { Menu } from "../Components/Menu"
+import { Outlet } from "react-router-dom"
+import { Footer } from "../Components/Footer"
+
+
 
 export const Template = () => {
     return (
         <>
-            <Menu />
-            <main className="sectionWrapper">
-                <Outlet />
-            </main>
-            <Footer />
+        <Menu/>
+        <Outlet/>
+        <Footer/>
         </>
-    );
-};
+    )
+}

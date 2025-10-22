@@ -110,7 +110,6 @@
     color: #424436;
     min-height: 78px;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -238,7 +237,6 @@
     .title {
         font-size: 18px;
         min-height: 68px;
-        -webkit-line-clamp: 3;
     }
 
     .priceRow {
@@ -284,7 +282,6 @@
     .title {
         font-size: 18px;
         min-height: 68px;
-        -webkit-line-clamp: 3;
     }
 
     .priceRow {

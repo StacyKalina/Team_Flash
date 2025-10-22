@@ -1,8 +1,7 @@
 import React from "react";
 import styles from "./index.module.css";
 
-const PLACEHOLDER_IMAGE =
-    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='180' viewBox='0 0 260 180'><rect fill='%23f3f4f6' width='260' height='180'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='16' fill='%239aa3a8'>No image</text></svg>";
+import placeHolderImage from "../../Images/placeholder.svg"
 
 const defaultAddToCart = (payload) => {
     console.log("Mock add to cart", payload);
@@ -38,7 +37,7 @@ export const ProductCard = ({
         return discount;
     };
 
-    const discountLabel = resolveDiscountLabel();
+    const resolvedImageSrc = imageSrc || placeHolderImage;
     const payload = {
         id,
         title,
@@ -47,7 +46,6 @@ export const ProductCard = ({
         imageSrc: resolvedImageSrc,
         quantity: 1,
     };
-    const resolvedImageSrc = imageSrc || PLACEHOLDER_IMAGE;
 
     const handleAddToCart = () => {
         onAddToCart(payload);

@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MainBanner } from '../Components/MainBanner'
-import { Categories } from '../Components/Categories';
+import { SectionCategories } from '../Components/SectionCategories';
+import { DiscountCard } from '../Components/DiscountCard'
+
+
 export const Main = () => {
-return (
-<div>
-        <MainBanner/>
-        <Categories />
-</div>
-);
+
+    useEffect(() => {
+        fetch("http://localhost:3333/products/all")
+            .then((res) => res.json())
+            .then((products) => {
+                console.log(products)
+            })
+    }, [])
+
+    return (
+        <div>
+            <MainBanner />
+            <DiscountCard/>
+            <SectionCategories />
+        </div>
+    );
 
 }

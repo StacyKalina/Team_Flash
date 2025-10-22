@@ -1,0 +1,68 @@
+.discountBannerWrapper {
+
+  background-image: url('../../Images/discount-banner.png'),
+    linear-gradient(rgba(135, 147, 61, 1), rgba(85, 97, 11, 1));
+
+  background-size: 50%, cover;
+  background-position: left, bottom;
+  background-repeat: no-repeat;
+
+  border-radius: 12px;
+  width: 100%;
+  color: white;
+  padding: 32px;
+  padding-bottom: 0px;
+}
+
+
+
+.discountHeader {
+  text-align: center;
+  font-family: Montserrat, sans-serif;
+  font-size: clamp(90px, 93px, 90px);
+  font-size: 64px;
+  font-weight: bold;
+  line-height: 1.1;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.formWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+
+
+@media screen and (max-width: 1000px) {
+
+  .discountHeader {
+
+    font-size: 64px;
+
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .discountHeader {
+    font-size: 56px;
+    ;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .discountHeader {
+
+    font-size: 48px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .discountHeader {
+
+    font-size: 40px;
+  }
+}
