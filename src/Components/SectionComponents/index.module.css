@@ -1,0 +1,22 @@
+/* .sectionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 64px;
+} */
+
+.cardsGrid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.infoMessage {
+  font-size: 16px;
+  color: #6f7a7e;
+  text-align: center;
+}
+
+@media screen and (max-width: 1050px) {
+  .cardsGrid { gap: 20px; }
+}

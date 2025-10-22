@@ -1,68 +1,166 @@
-.discountBannerWrapper {
-
-  background-image: url('../../Images/discount-banner.png'),
-    linear-gradient(rgba(135, 147, 61, 1), rgba(85, 97, 11, 1));
-
-  background-size: 50%, cover;
-  background-position: left, bottom;
-  background-repeat: no-repeat;
-
+.banner {
+  /* position: relative; */
   border-radius: 12px;
+  overflow: hidden;
   width: 100%;
-  color: white;
-  padding: 32px;
-  padding-bottom: 0px;
+  color: #fff;
+  padding: 32px 32px 0 0;
+  min-height: 360px;
+  background: linear-gradient(rgba(135, 147, 61, 1), rgba(85, 97, 11, 1));
 }
 
-
-
-.discountHeader {
+/* контент */
+.title {
+  /* position: relative; */
   text-align: center;
   font-family: Montserrat, sans-serif;
-  font-size: clamp(90px, 93px, 90px);
   font-size: 64px;
-  font-weight: bold;
-  line-height: 1.1;
-  position: relative;
-  margin-bottom: 24px;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0 0 24px 0;
+  z-index: 1;
 }
 
-.formWrapper {
+
+
+
+
+
+.inner {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+
+/* КОЛОНКА С КАРТИНКОЙ: сжимается, но сама картинка — нет */
+.visual {
+  position: relative;
+  flex: 1 1 auto;       /* эта колонка отдаёт место при сужении окна */
+  min-height: 320px;
+  overflow: hidden;     /* важно: режем картинку слева при сжатии */
+  /* сама картинка как background */
+  background-image: url('../../Images/discount-banner.png');
+  background-repeat: no-repeat;
+
+  /* Ключ: фиксируем РАЗМЕР картинки в пикселях,
+     НЕ масштабируем — она всегда одного размера */
+  background-size: 700px auto;    /* ширина иллюстрации фикс 760px */
+
+  /* Ключ: правый-низ — якорь. При сжатии контейнера
+     картинка "держится" за правый край и уезжает влево (обрезается) */
+  background-position: right bottom;
+}
+
+
+
+/* ФОРМА: фиксированная ширина, не сжимается */
+.formCol {
+  flex: 0 0 37%;      /* grow=0, shrink=0, basis=520px */
+  min-width: 37%;     /* держим ширину до брейкпоинта */
+  z-index: 1;
 }
 
 
 
 
 
-@media screen and (max-width: 1000px) {
 
-  .discountHeader {
 
-    font-size: 64px;
 
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 1000px) {
+  .banner{
+    padding: 20px 20px 0 0;
   }
-}
-
-@media screen and (max-width: 768px) {
-
-  .discountHeader {
-    font-size: 56px;
-    ;
+  .title {
+    font-size: 54px;
   }
+.formCol {
+  flex: 0 0 50%;      /* grow=0, shrink=0, basis=520px */
+  min-width: 50%;     /* держим ширину до брейкпоинта */
+}
 }
 
-@media screen and (max-width: 480px) {
-  .discountHeader {
-
-    font-size: 48px;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .discountHeader {
-
+@media (max-width: 768px) {
+  .title {
     font-size: 40px;
   }
 }
+
+@media (max-width: 600px) {
+
+.banner {
+  position: relative;
+  padding: 20px 20px 0 20px;
+}
+
+
+  .title {
+    font-size: 35px;
+  }
+
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .formCol {
+    order: 1;
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .visual {
+    order: 2;
+    width: 100%;
+    height: 20vw;
+
+    min-height: 0;
+    height: clamp(180px, 45vw, 260px);
+
+    /* руки снизу и целиком влезают */
+    background-size: auto 85%;
+    background-position: center bottom;
+
+    /* підтягнути ближче до форми (правильний порядок для clamp: min < preferred < max) */
+    margin-top: clamp(-28px, -6vw, -10px);
+
+    /* точно не нужен отрицательный нижний отступ */
+    margin-bottom: 0;
+
+}
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 35px;
+  }
+}
+
+  @media (max-width: 480px) {
+  .title {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .visual {
+    background-size: auto 75%;
+  }
+  }

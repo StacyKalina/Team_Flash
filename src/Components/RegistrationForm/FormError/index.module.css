@@ -1,19 +1,20 @@
 .error {
-    color: white;
-    display: flex;
-     width:fit-content;
-     gap: 8px;
-     font-family: Montserrat, sans-serif;
+  color: #fff;
+  display: flex;
+  align-items: center;    /* NEW: выровняли по вертикали */
+  gap: 8px;
+  font-family: Montserrat, sans-serif;
+  width: fit-content;
 }
+
 .error img {
-    width: 20px;
-    height: 20px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    }
+  width: 20px;
+  height: 20px;
+}
+
 .errorMessage {
-    font-family: Montserrat, sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    padding-top: 4px;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  padding-top: 2px; /* чуть смещаем, чтобы текст визуально центрировался */
 }
