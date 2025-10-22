@@ -39,7 +39,14 @@ export const ProductCard = ({
     };
 
     const discountLabel = resolveDiscountLabel();
-    const payload = { id, title, price };
+    const payload = {
+        id,
+        title,
+        price,
+        oldPrice,
+        imageSrc: resolvedImageSrc,
+        quantity: 1,
+    };
     const resolvedImageSrc = imageSrc || PLACEHOLDER_IMAGE;
 
     const handleAddToCart = () => {

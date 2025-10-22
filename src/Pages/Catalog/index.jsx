@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ProductCard } from "../../Components/ProductCard";
+import { useCart } from "../../context/CartContext";
 import styles from "./Catalog.module.css";
 import sortIcon from "../../Images/icons/Vector.svg";
 
@@ -63,6 +64,7 @@ export const Catalog = () => {
     const [products, setProducts] = useState([]);
     const [status, setStatus] = useState("idle");
     const [error, setError] = useState(null);
+    const { addItem } = useCart();
     const [filters, setFilters] = useState({
         priceFrom: "",
         priceTo: "",
@@ -283,7 +285,11 @@ export const Catalog = () => {
             {filteredCards.length > 0 && (
                 <div className={styles.cardsGrid}>
                     {filteredCards.map((product) => (
-                        <ProductCard key={product.id} {...product} />
+                        <ProductCard
+                            key={product.id}
+                            {...product}
+                            onAddToCart={addItem}
+                        />
                     ))}
                 </div>
             )}
