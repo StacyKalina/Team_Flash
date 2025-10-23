@@ -38,6 +38,7 @@ export const ProductCard = ({
     };
 
     const resolvedImageSrc = imageSrc || placeHolderImage;
+    const discountLabel = resolveDiscountLabel();
     const payload = {
         id,
         title,

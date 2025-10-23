@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { useCart } from "../context/CartContext";
+import closeIcon from "../Images/icons/ic x.svg";
 import styles from "./Cart.module.css";
 
 const formatCurrency = (value) =>
@@ -42,7 +45,12 @@ const CartItem = ({ item, onIncrement, onDecrement, onRemove }) => {
                         onClick={() => onRemove(item.id)}
                         aria-label={`Remove ${item.title} from cart`}
                     >
-                        &times;
+                        <img
+                            src={closeIcon}
+                            alt=""
+                            aria-hidden="true"
+                            className={styles.removeIcon}
+                        />
                     </button>
                 </div>
 
@@ -55,21 +63,63 @@ const CartItem = ({ item, onIncrement, onDecrement, onRemove }) => {
                         <button
                             type="button"
                             className={styles.quantityButton}
-                            onClick={() => onDecrement(item.id)}
-                            disabled={isDecreaseDisabled}
-                            aria-label={`Decrease quantity of ${item.title}`}
+                        onClick={() => onDecrement(item.id)}
+                        disabled={isDecreaseDisabled}
+                        aria-label={`Decrease quantity of ${item.title}`}
+                    >
+                        <span
+                            className={styles.quantityIcon}
+                            aria-hidden="true"
                         >
-                            -
-                        </button>
-                        <span className={styles.quantityValue}>{item.quantity}</span>
-                        <button
-                            type="button"
-                            className={styles.quantityButton}
-                            onClick={() => onIncrement(item.id)}
-                            aria-label={`Increase quantity of ${item.title}`}
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M4 12H20"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                />
+                            </svg>
+                        </span>
+                    </button>
+                    <span className={styles.quantityValue}>{item.quantity}</span>
+                    <button
+                        type="button"
+                        className={styles.quantityButton}
+                        onClick={() => onIncrement(item.id)}
+                        aria-label={`Increase quantity of ${item.title}`}
+                    >
+                        <span
+                            className={styles.quantityIcon}
+                            aria-hidden="true"
                         >
-                            +
-                        </button>
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M4 12H20"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                />
+                                <path
+                                    d="M12 4V20"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                />
+                            </svg>
+                        </span>
+                    </button>
                     </div>
 
                     <div className={styles.priceBlock}>
@@ -89,7 +139,29 @@ const CartItem = ({ item, onIncrement, onDecrement, onRemove }) => {
 };
 
 export const Cart = () => {
-    const { items, incrementItem, decrementItem, removeItem } = useCart();
+    const {
+        items,
+        incrementItem,
+        decrementItem,
+        removeItem,
+        totalItems,
+        totalPrice,
+        clearCart,
+    } = useCart();
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors, isSubmitting, isSubmitSuccessful },
+    } = useForm({
+        mode: "onBlur",
+        defaultValues: {
+            name: "",
+            phone: "",
+            email: "",
+        },
+    });
+    const [submitMessage, setSubmitMessage] = useState(null);
 
     const hasItems = items.length > 0;
 
@@ -119,9 +191,117 @@ export const Cart = () => {
                     )}
                 </div>
                 <aside className={styles.summaryColumn}>
-                    <div className={styles.summaryPlaceholder}>
-                        Order details will appear here soon.
-                    </div>
+                    <form
+                        className={styles.summaryCard}
+                        onSubmit={handleSubmit((data) => {
+                            const payload = {
+                                customer: data,
+                                cart: {
+                                    totalItems,
+                                    totalPrice,
+                                    items,
+                                },
+                            };
+                            console.log("Order submission", payload);
+                            setSubmitMessage("Thank you! We will contact you soon.");
+                            clearCart();
+                            reset();
+                        })}
+                    >
+                        <div className={styles.summaryTop}>
+                            <h2 className={styles.summaryTitle}>Order details</h2>
+                            <p className={styles.summaryItems}>
+                                {totalItems} {totalItems === 1 ? "item" : "items"}
+                            </p>
+                            <div className={styles.summaryRow}>
+                                <span className={styles.summaryLabel}>Total</span>
+                                <span className={styles.summaryTotal}>
+                                    {formatCurrency(totalPrice)}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className={styles.summaryInputs}>
+                            <label className={styles.summaryField}>
+                                <input
+                                    type="text"
+                                    placeholder="Name"
+                                    className={`${styles.summaryInput} ${
+                                        errors.name ? styles.summaryInputError : ""
+                                    }`}
+                                    {...register("name", {
+                                        required: "Name is required",
+                                        minLength: {
+                                            value: 2,
+                                            message: "Enter at least 2 characters",
+                                        },
+                                    })}
+                                />
+                                {errors.name && (
+                                    <span className={styles.summaryError}>
+                                        {errors.name.message}
+                                    </span>
+                                )}
+                            </label>
+
+                            <label className={styles.summaryField}>
+                                <input
+                                    type="tel"
+                                    placeholder="Phone number"
+                                    className={`${styles.summaryInput} ${
+                                        errors.phone ? styles.summaryInputError : ""
+                                    }`}
+                                    {...register("phone", {
+                                        required: "Phone number is required",
+                                        pattern: {
+                                            value: /^\+?[0-9\s\-()]{7,}$/u,
+                                            message: "Enter a valid phone number",
+                                        },
+                                    })}
+                                />
+                                {errors.phone && (
+                                    <span className={styles.summaryError}>
+                                        {errors.phone.message}
+                                    </span>
+                                )}
+                            </label>
+
+                            <label className={styles.summaryField}>
+                                <input
+                                    type="email"
+                                    placeholder="Email"
+                                    className={`${styles.summaryInput} ${
+                                        errors.email ? styles.summaryInputError : ""
+                                    }`}
+                                    {...register("email", {
+                                        required: "Email is required",
+                                        pattern: {
+                                            value:
+                                                /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/u,
+                                            message: "Enter a valid email address",
+                                        },
+                                    })}
+                                />
+                                {errors.email && (
+                                    <span className={styles.summaryError}>
+                                        {errors.email.message}
+                                    </span>
+                                )}
+                            </label>
+                        </div>
+
+                        <button
+                            type="submit"
+                            className={styles.summaryButton}
+                            disabled={totalItems === 0 || isSubmitting}
+                        >
+                            Order
+                        </button>
+
+                        {submitMessage && isSubmitSuccessful && (
+                            <p className={styles.summaryMessage}>{submitMessage}</p>
+                        )}
+                    </form>
                 </aside>
             </div>
         </section>

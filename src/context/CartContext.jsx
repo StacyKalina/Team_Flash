@@ -1,6 +1,35 @@
-import { createContext, useContext, useMemo, useReducer } from "react";
+import { createContext, useContext, useEffect, useMemo, useReducer } from "react";
 
 const CartContext = createContext(undefined);
+
+const STORAGE_KEY = "cart_state";
+
+const readStoredItems = () => {
+    try {
+        const raw = window.localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+            return [];
+        }
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+            return parsed;
+        }
+        if (parsed && Array.isArray(parsed.items)) {
+            return parsed.items;
+        }
+    } catch (error) {
+        console.warn("Failed to read cart from storage", error);
+    }
+    return [];
+};
+
+const writeStoredItems = (items) => {
+    try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    } catch (error) {
+        console.warn("Failed to persist cart to storage", error);
+    }
+};
 
 const initialState = {
     items: [],
@@ -97,7 +126,26 @@ const cartReducer = (state, action) => {
 };
 
 export const CartProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(cartReducer, initialState);
+    const [state, dispatch] = useReducer(cartReducer, initialState, (baseState) => {
+        if (typeof window === "undefined") {
+            return baseState;
+        }
+        const storedItems = readStoredItems();
+        if (!storedItems.length) {
+            return baseState;
+        }
+        return {
+            ...baseState,
+            items: storedItems.map((item) => ({
+                id: item.id,
+                title: item.title,
+                price: item.price,
+                oldPrice: item.oldPrice ?? null,
+                imageSrc: item.imageSrc ?? null,
+                quantity: ensureQuantity(item.quantity),
+            })),
+        };
+    });
 
     const totals = useMemo(() => {
         const totalItems = state.items.reduce((acc, entry) => acc + entry.quantity, 0);
@@ -107,6 +155,10 @@ export const CartProvider = ({ children }) => {
         );
 
         return { totalItems, totalPrice };
+    }, [state.items]);
+
+    useEffect(() => {
+        writeStoredItems(state.items);
     }, [state.items]);
 
     const value = useMemo(() => {
