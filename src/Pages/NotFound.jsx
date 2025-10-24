@@ -12,7 +12,7 @@ export const NotFound = () => {
 
 
                 <NavLink to="/" className={({ isActive }) => isActive ? styles.active : ""}                >
-                    <Button text="Go Home" onClick={() => alert('Go Home!')} />
+                    <Button text="Go Home"/>
                 </NavLink>
             </div>
         </nav>
