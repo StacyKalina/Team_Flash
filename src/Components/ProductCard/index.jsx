@@ -4,6 +4,14 @@ import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 import placeHolderImage from "../../Images/placeholder.svg";
 
+
+
+
+
+
+
+
+
 const defaultAddToCart = (payload) => {
   console.log("Mock add to cart", payload);
 };
