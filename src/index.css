@@ -83,6 +83,10 @@ button {
 .sectionWrapper {
   margin: 0 40px;
   padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 64px;
 }
 
   .sectionTitle {

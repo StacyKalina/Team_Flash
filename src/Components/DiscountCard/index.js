@@ -4,14 +4,14 @@ import { RegistrationForm } from "../RegistrationForm";
 
 export const DiscountCard = () => {
     return (
-
-        <div className={styles.discountBannerWrapper} >
-            <div className={styles.discountBannerContent}>
-                < h1 className={styles.discountHeader}>
-                    5% off on the first order
-                </h1>
-                <div className={styles.formWrapper}>
-                    <RegistrationForm />
+        <div className="sectionWrapper">
+            <div className={styles.banner}>
+                <h1 className={styles.title}>5% off on the first order</h1>
+                <div className={styles.inner}>
+                    <div className={styles.visual} aria-hidden="true" />
+                    <div className={styles.formCol}>
+                        <RegistrationForm />
+                    </div>
                 </div>
             </div>
         </div>

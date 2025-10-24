@@ -8,6 +8,7 @@ import { AllProducts } from "./Pages/Catalog/allProducts";
 import { Sales } from "./Pages/Catalog/allSaleProducts";
 import CategoriesPage from "./Pages/Categories";
 import { NotFound } from "./Pages/NotFound";
+import { ProductPage } from "./Pages/Product";
 
 
 
@@ -28,6 +29,7 @@ export const AppRouter = () => {
                     <Route path="allProducts" element={<AllProducts />} />
                     <Route path="sales" element={<Sales />} />
                     <Route path="cart" element={<Cart />} />
+                    <Route path="product/:productId" element={<ProductPage />} />
                     <Route path="*" element={<NotFound/>}></Route> 
                 </Route>
             </Routes>
