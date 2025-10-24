@@ -1,3 +1,5 @@
+
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE ?? "http://localhost:3333";
@@ -10,6 +12,8 @@ const toArray = (json) => {
 };
 
 // === THUNKS ===
+
+// Все продукты
 export const fetchAllProducts = createAsyncThunk(
   "products/fetchAll",
   async () => {
@@ -20,6 +24,7 @@ export const fetchAllProducts = createAsyncThunk(
   }
 );
 
+// Продукты по категории
 export const fetchProductsByCategory = createAsyncThunk(
   "products/fetchByCategory",
   async (categoryId) => {
@@ -30,6 +35,7 @@ export const fetchProductsByCategory = createAsyncThunk(
   }
 );
 
+// Товары со скидкой
 export const fetchSalesProducts = createAsyncThunk(
   "products/fetchSales",
   async () => {
@@ -46,14 +52,26 @@ export const fetchSalesProducts = createAsyncThunk(
   }
 );
 
+//  Товар по ID
+export const fetchProductById = createAsyncThunk(
+  "products/fetchById",
+  async (id) => {
+    const res = await fetch(`${API_BASE_URL}/products/${id}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  }
+);
+
 // === SLICE ===
+
 const productsSlice = createSlice({
   name: "products",
   initialState: {
     items: [],
-    status: "idle",            // "idle" | "loading" | "succeeded" | "failed"
+    selectedProduct: null,
+    status: "idle", // "idle" | "loading" | "succeeded" | "failed"
     error: null,
-    source: null,              // "all" | "sales" | `category:${id}`
+    source: null,
   },
   reducers: {
     clearProducts(state) {
@@ -62,9 +80,12 @@ const productsSlice = createSlice({
       state.error = null;
       state.source = null;
     },
+    clearSelectedProduct(state) {
+      state.selectedProduct = null;
+    },
   },
   extraReducers: (builder) => {
-    // ✅ принимаем второй аргумент — функцию, которая вернёт значение source
+    // Универсальный обработчик для массивов
     const bind = (thunk, sourceGetter) => {
       builder
         .addCase(thunk.pending, (s) => {
@@ -73,7 +94,13 @@ const productsSlice = createSlice({
         })
         .addCase(thunk.fulfilled, (s, a) => {
           s.status = "succeeded";
-          s.items = a.payload;
+          if (thunk === fetchProductById) {
+            s.selectedProduct = Array.isArray(a.payload)
+              ? a.payload[0]
+              : a.payload;
+          } else {
+            s.items = Array.isArray(a.payload) ? a.payload : [a.payload];
+          }
           s.source = sourceGetter ? sourceGetter(a) : null;
         })
         .addCase(thunk.rejected, (s, a) => {
@@ -82,18 +109,18 @@ const productsSlice = createSlice({
         });
     };
 
-    bind(fetchAllProducts,        () => "all");
-    bind(fetchSalesProducts,      () => "sales");
+    bind(fetchAllProducts, () => "all");
+    bind(fetchSalesProducts, () => "sales");
     bind(fetchProductsByCategory, (a) => `category:${a.meta.arg}`);
+    bind(fetchProductById, (a) => `id:${a.meta.arg}`);
   },
 });
 
-export const { clearProducts } = productsSlice.actions;
+export const { clearProducts, clearSelectedProduct } = productsSlice.actions;
 export default productsSlice.reducer;
 
-// Селекторы (если понадобятся)
-export const selectAllProducts    = (state) => state.products.items;
+// === Селекторы ===
+export const selectAllProducts = (state) => state.products.items;
 export const selectProductsStatus = (state) => state.products.status;
-export const selectProductsError  = (state) => state.products.error;
-// Можно добавить при желании:
-// export const selectProductsSource = (state) => state.products.source;
+export const selectProductsError = (state) => state.products.error;
+export const selectSelectedProduct = (state) => state.products.selectedProduct;
