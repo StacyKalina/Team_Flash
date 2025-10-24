@@ -1,0 +1,70 @@
+.filtersBar {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    min-height: 36px;
+    align-self: flex-start;
+}
+.filterSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    min-height: 36px;
+}
+.filterLabel {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 130%;
+    color: #424436;
+    white-space: nowrap;
+}
+.priceInputs { display: flex; gap: 16px; }
+.priceInput {
+    width: 112px; min-width: 112px; height: 36px; padding: 8px 16px;
+    border: 1px solid #dddddd; border-radius: 8px; background-color: #fff;
+    font-family: "Montserrat", sans-serif; font-weight: 500; font-size: 16px; line-height: 126%; color: #424436;
+}
+.priceInput::placeholder { color: #8b8b8b; }
+.priceInput:focus { outline: 2px solid rgba(66,68,54,.2); outline-offset: 1px; }
+
+.discountToggle { display: flex; align-items: center; gap: 16px; min-height: 36px; }
+.discountCheckbox {
+    appearance: none; width: 36px; height: 36px; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;
+    display: grid; place-items: center; cursor: pointer; transition: border-color .2s ease, background-color .2s ease;
+}
+.discountCheckbox:focus-visible { outline: 2px solid rgba(66,68,54,.3); outline-offset: 2px; }
+.discountCheckbox::after { content: ""; width: 12px; height: 12px; border-radius: 3px; background-color: transparent; transition: background-color .2s ease; }
+.discountCheckbox:checked { background-color: #424436; border-color: #424436; }
+.discountCheckbox:checked::after { background-color: #fff; }
+
+.sortControl { position: relative; display: flex; align-items: center; width: 200px; }
+.sortSelect {
+    appearance: none; width: 100%; height: 36px; padding: 8px 40px 8px 16px;
+    border: 1px solid #ddd; border-radius: 8px; background-color: #fff;
+    font-family: "Montserrat", sans-serif; font-weight: 500; font-size: 16px; line-height: 126%; color: #424436;
+}
+.sortSelect:focus { outline: 2px solid rgba(66,68,54,.2); outline-offset: 1px; }
+.sortIcon { position: absolute; right: 16px; pointer-events: none; width: 12px; height: 6px; object-fit: contain; }
+
+.resetBtn {
+    height: 36px; padding: 0 16px; border-radius: 8px; border: 1px solid #dddddd; background: #ffffff;
+    font-family: "Montserrat", sans-serif; font-weight: 500; font-size: 14px; line-height: 126%; color: #424436;
+    cursor: pointer; transition: box-shadow .15s ease, transform .05s ease;
+}
+.resetBtn:hover { box-shadow: 0 1px 0 rgba(0,0,0,.05); }
+.resetBtn:active { transform: translateY(1px); }
+
+/* адаптив — перенесли из твоего CSS ровно для блока фильтров */
+@media (max-width: 768px) {
+  .filtersBar { flex-direction: column; align-items: flex-start; width: 100%; }
+  .priceInputs { width: 100%; }
+  .priceInput, .sortControl { width: 100%; }
+  .filterSection { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+@media (max-width: 480px) {
+  .filtersBar { gap: 20px; }
+  .filterSection { width: 100%; }
+}

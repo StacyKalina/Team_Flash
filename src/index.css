@@ -2,9 +2,11 @@
 
 html {
     box-sizing: border-box;
-}
-
-*, *::before, *::after {
+    font-family: Montserrat;
+    background-color: #FFFFF1;
+  }
+  
+  * {
     box-sizing: inherit;
     padding: 0;
     margin: 0;
@@ -47,7 +49,19 @@ ul[class] {
 img {
     max-width: 100%;
     display: block;
-}
+  }
+  
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 
 input,
 button,
@@ -64,18 +78,29 @@ button {
     border: none;
     appearance: none;
     -webkit-appearance: none;
-}
+  }
 
 .sectionWrapper {
-    margin: 0 40px;
-    padding-top: 80px;
+  margin: 0 40px;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 64px;
 }
 
-.sectionTitle {
+  .sectionTitle {
     font-size: 46px;
     font-weight: bold;
     line-height: 1.1;
     color: rgb(1, 43, 44);
     margin-bottom: 24px;
-}
+  }
+  
 
+  @media screen and (max-width: 1000px)  {
+    .sectionWrapper, .page {
+  margin: 0 20px;
+ 
+}
+  }
