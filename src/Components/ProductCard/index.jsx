@@ -1,7 +1,16 @@
 import React from "react";
-import styles from "./index.module.css";
+import { Link } from "react-router-dom";
 
+import styles from "./index.module.css";
 import placeHolderImage from "../../Images/placeholder.svg"
+
+
+
+
+
+
+
+
 
 const defaultAddToCart = (payload) => {
     console.log("Mock add to cart", payload);
@@ -59,42 +68,50 @@ export const ProductCard = ({
     return (
         <article className={styles.card}>
             {discountLabel && <span className={styles.badge}>{discountLabel}</span>}
-            <div className={styles.imageWrapper}>
-                <img
-                    className={styles.image}
-                    src={resolvedImageSrc}
-                    alt={title}
-                    loading="lazy"
-                />
-                <button
-                    type="button"
-                    className={styles.ctaButton}
-                    onClick={handleAddToCart}
-                >
-                    Add to cart
-                </button>
-            </div>
-            <div
-                className={styles.footer}
-                role="button"
-                tabIndex={0}
-                onClick={handleFooterClick}
-                onKeyDown={handleFooterKeyDown}
-            >
-                <h3 className={styles.title}>{title}</h3>
-                <div className={styles.priceRow}>
-                    <span className={styles.price}>
-                        {currencySymbol}
-                        {formatPrice(price)}
-                    </span>
-                    {oldPrice && (
-                        <span className={styles.oldPrice}>
-                            {currencySymbol}
-                            {formatPrice(oldPrice)}
-                        </span>
-                    )}
+
+
+            <Link to={`/product/${id}`} className={styles.footerLink}>
+
+
+                <div className={styles.imageWrapper}>
+                    <img
+                        className={styles.image}
+                        src={resolvedImageSrc}
+                        alt={title}
+                        loading="lazy"
+                    />
+                    <button
+                        type="button"
+                        className={styles.ctaButton}
+                        onClick={handleAddToCart}
+                    >
+                        Add to cart
+                    </button>
                 </div>
-            </div>
+
+
+                <div
+                    className={styles.footer}
+                    role="button"
+                    tabIndex={0}
+                    onClick={handleFooterClick}
+                    onKeyDown={handleFooterKeyDown}
+                >
+                    <h3 className={styles.title}>{title}</h3>
+                    <div className={styles.priceRow}>
+                        <span className={styles.price}>
+                            {currencySymbol}
+                            {formatPrice(price)}
+                        </span>
+                        {oldPrice && (
+                            <span className={styles.oldPrice}>
+                                {currencySymbol}
+                                {formatPrice(oldPrice)}
+                            </span>
+                        )}
+                    </div>
+                </div>
+            </Link>
         </article>
     );
 };
