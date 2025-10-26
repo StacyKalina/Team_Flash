@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useCart } from "../context/CartContext";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    incrementItem,
+    decrementItem,
+    removeItem,
+    clearCart,
+} from "../store/slices/cartSlice";
 import closeIcon from "../Images/icons/ic x.svg";
 import styles from "./Cart.module.css";
 
@@ -139,15 +145,8 @@ const CartItem = ({ item, onIncrement, onDecrement, onRemove }) => {
 };
 
 export const Cart = () => {
-    const {
-        items,
-        incrementItem,
-        decrementItem,
-        removeItem,
-        totalItems,
-        totalPrice,
-        clearCart,
-    } = useCart();
+    const dispatch = useDispatch();
+    const { items, totalItems, totalPrice } = useSelector((state) => state.cart);
     const {
         register,
         handleSubmit,
@@ -181,9 +180,13 @@ export const Cart = () => {
                             <CartItem
                                 key={item.id}
                                 item={item}
-                                onIncrement={incrementItem}
-                                onDecrement={decrementItem}
-                                onRemove={removeItem}
+                                onIncrement={(id, amount = 1) =>
+                                    dispatch(incrementItem({ id, amount }))
+                                }
+                                onDecrement={(id, amount = 1) =>
+                                    dispatch(decrementItem({ id, amount }))
+                                }
+                                onRemove={(id) => dispatch(removeItem(id))}
                             />
                         ))
                     ) : (
@@ -204,7 +207,7 @@ export const Cart = () => {
                             };
                             console.log("Order submission", payload);
                             setSubmitMessage("Thank you! We will contact you soon.");
-                            clearCart();
+                            dispatch(clearCart());
                             reset();
                         })}
                     >
