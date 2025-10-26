@@ -27,6 +27,34 @@
     color: #92A134
 }
 
+.iconsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Задает расстояние между иконками */
+}
+
+.favoriteIconWrapper {
+  position: relative; /* Чтобы позиционировать бейдж */
+  display: inline-block;
+  cursor: pointer;
+}
+
+.favoriteCount {
+  position: absolute;
+  top: 50%; 
+  transform: translateY(-50%);
+  left: -5px; 
+  background-color: #92a134;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 6px;
+  font-size: 12px;
+  min-width: 30px; /* Увеличиваем минимальную ширину для большей ширины кружка */
+  text-align: center;
+  line-height: 1;
+  border: 1px solid white; /* Белая обводка для лучшей видимости */
+}
+
 
 
 .navItemsWrapper>li:not(:last-child) {
@@ -70,3 +98,5 @@
     }
 
 }
+
+
