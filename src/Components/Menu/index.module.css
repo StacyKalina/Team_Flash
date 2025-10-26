@@ -34,9 +34,43 @@
 }
 
 .logo,
-.cart,
+.cartLink,
 .navItemsWrapper>li {
     cursor: pointer;
+}
+
+.cart {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cartLink {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cartLink img {
+    display: block;
+}
+
+.cartBadge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    min-width: 22px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background-color: #92A134;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(146, 161, 52, 0.35);
 }
 
 .burgerMenu {
