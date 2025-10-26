@@ -53,7 +53,7 @@
 }
 
 .mapContainer {
-    margin: 8px 40px 72px;
+    margin: 32px 40px 72px;
 }
 
 .mapWrapper {
@@ -110,7 +110,7 @@
     }
 
     .mapContainer {
-        margin: 8px 20px 52px;
+        margin: 32px 20px 52px;
     }
 }
 
@@ -196,7 +196,7 @@
     }
 
     .mapContainer {
-        margin: 8px 20px 40px;
+        margin: 32px 20px 40px;
     }
 }
 
@@ -245,6 +245,6 @@
     }
 
     .mapContainer {
-        margin: 8px 20px 32px;
+        margin: 32px 20px 32px;
     }
 }
