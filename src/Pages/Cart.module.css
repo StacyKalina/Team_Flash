@@ -10,20 +10,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 40px;
+    gap: 24px;
     flex-wrap: wrap;
-    position: relative;
     padding-bottom: 16px;
 }
 
-.header::after {
-    content: "";
-    position: absolute;
-    inset-inline-start: 0;
-    inset-inline-end: 0;
-    bottom: 0;
+.headerDivider {
+    flex: 1 1 auto;
     height: 1px;
     background-color: #dddddd;
+    min-width: 120px;
 }
 
 .title {
@@ -173,7 +169,7 @@
 
 .itemFooter {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     gap: 32px;
     flex-wrap: wrap;
@@ -235,7 +231,7 @@
 
 .priceBlock {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: 16px;
 }
 
@@ -457,6 +453,10 @@
 @media (max-width: 640px) {
     .header {
         align-items: flex-start;
+    }
+
+    .headerDivider {
+        display: none;
     }
 
     .cartItem {

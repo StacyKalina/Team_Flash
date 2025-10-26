@@ -168,6 +168,7 @@ export const Cart = () => {
         <section className={styles.cartPage}>
             <header className={styles.header}>
                 <h1 className={styles.title}>Shopping cart</h1>
+                <span className={styles.headerDivider} aria-hidden="true" />
                 <Link to="/" className={styles.backLink}>
                     Back to the store
                 </Link>
@@ -310,3 +311,5 @@ export const Cart = () => {
         </section>
     );
 };
+
+export default Cart;
