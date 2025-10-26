@@ -30,5 +30,221 @@
 
 .cardValueSocials {
     display: flex;
-    gap: 18px;
+    gap: 16px;
+    align-items: center;
+}
+
+.cardValueSocials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardValueSocials img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+}
+
+.footer :global(.sectionWrapper) {
+    margin: 0 40px 8px;
+    padding-top: 32px;
+    padding-bottom: 0;
+}
+
+.mapContainer {
+    margin: 8px 40px 72px;
+}
+
+.mapWrapper {
+    width: 100%;
+    height: 350px;
+    border-radius: 32px;
+    overflow: hidden;
+    background-color: #d9d9d9;
+}
+
+.mapWrapper iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+}
+
+.mapWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 1000px) {
+    .footer {
+        padding: 0 20px 60px;
+        gap: 32px;
+    }
+
+    .title,
+    .cards,
+    .mapWrapper {
+        max-width: 960px;
+    }
+
+    .cards {
+        gap: 20px;
+    }
+
+    .infoRow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .mapWrapper {
+        height: 250px;
+    }
+
+    .footer :global(.sectionWrapper) {
+        margin: 0 20px 8px;
+        padding-top: 24px;
+        padding-bottom: 0;
+    }
+
+    .mapContainer {
+        margin: 8px 20px 52px;
+    }
+}
+
+@media (max-width: 768px) {
+    .title,
+    .cards,
+    .mapWrapper {
+        max-width: 728px;
+    }
+
+    .title {
+        font-size: 56px;
+    }
+
+    .cards {
+        gap: 20px;
+    }
+
+    .infoRow {
+        grid-template-columns: minmax(0, 479px) minmax(0, 229px);
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 0 20px 56px;
+        gap: 24px;
+    }
+
+    .title,
+    .cards,
+    .mapWrapper {
+        max-width: 440px;
+    }
+
+    .title {
+        font-size: 48px;
+    }
+
+    .cards {
+        gap: 12px;
+    }
+
+    .infoRow {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .card {
+        padding: 24px 20px;
+        gap: 12px;
+    }
+
+    .cardLabel {
+        font-size: 18px;
+    }
+
+    .cardValue {
+        font-size: 28px;
+    }
+
+    .socialCard {
+        gap: 12px;
+    }
+
+    .socialHeader {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .socialHeader .socials {
+        display: flex;
+        gap: 12px;
+    }
+
+    .footer :global(.sectionWrapper) {
+        margin: 0 20px 8px;
+        padding-top: 24px;
+        padding-bottom: 0;
+    }
+
+    .mapContainer {
+        margin: 8px 20px 40px;
+    }
+}
+
+@media (max-width: 360px) {
+    .footer {
+        padding: 0 20px 56px;
+        gap: 24px;
+    }
+
+    .title,
+    .cards,
+    .mapWrapper {
+        max-width: 320px;
+    }
+
+    .title {
+        font-size: 40px;
+    }
+
+    .cards {
+        gap: 12px;
+    }
+
+    .card {
+        padding: 24px 20px;
+        gap: 12px;
+    }
+
+    .infoRow {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .socialCard {
+        gap: 12px;
+    }
+
+    .socialHeader {
+        gap: 12px;
+    }
+
+    .footer :global(.sectionWrapper) {
+        margin: 0 20px 8px;
+        padding-top: 24px;
+        padding-bottom: 0;
+    }
+
+    .mapContainer {
+        margin: 8px 20px 32px;
+    }
 }
