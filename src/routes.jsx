@@ -7,11 +7,8 @@ import { Cart } from "./Pages/Cart";
 import { AllProducts } from "./Pages/Catalog/allProducts";
 import { Sales } from "./Pages/Catalog/allSaleProducts";
 import CategoriesPage from "./Pages/Categories";
-import { NotFound } from "./Pages/NotFound";
 import { ProductDetail } from "./Pages/ProductDetail";
-
-
-// == подключаем Роуты ==
+import { NotFound } from "./Pages/NotFound";
 
 export const AppRouter = () => {
   return (
@@ -26,8 +23,8 @@ export const AppRouter = () => {
           <Route path="allProducts" element={<AllProducts />} />
           <Route path="sales" element={<Sales />} />
           <Route path="cart" element={<Cart />} />
-          <Route path="*" element={<NotFound />}></Route>
-          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="product/:id" element={<ProductDetail />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
