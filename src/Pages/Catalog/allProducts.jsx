@@ -31,7 +31,7 @@ export const AllProducts = () => {
 
       {status === "loading" && <p className={styles.stateMessage}>Loading…</p>}
       {status === "failed" && <p className={styles.stateMessage}>Error: {error}</p>}
-      {status === "succeeded" && <ProductsGrid />}
+      {status === "succeeded" && <ProductsGrid cameFrom={{ type: "all" }} />}
     </section>
   );
 };

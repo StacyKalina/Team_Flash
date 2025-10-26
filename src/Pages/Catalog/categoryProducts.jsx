@@ -17,18 +17,18 @@ import { ProductsGrid } from "../../Components/ProductsGrid";
 import styles from "./index.module.css";
 
 export const Catalog = () => {
-  const dispatch   = useDispatch();
+  const dispatch = useDispatch();
   const { categoryId } = useParams();           // строка из URL
-  const catIdNum   = useMemo(() => Number(categoryId), [categoryId]);
+  const catIdNum = useMemo(() => Number(categoryId), [categoryId]);
 
-  const status     = useSelector(selectProductsStatus);
-  const error      = useSelector(selectProductsError);
-  const products   = useSelector(selectAllProducts);
+  const status = useSelector(selectProductsStatus);
+  const error = useSelector(selectProductsError);
+  const products = useSelector(selectAllProducts);
 
   // Достанем заголовок категории из уже загруженных категорий (если есть)
   const categories = useSelector(selectAllCategories);
-  const category   = categories.find(c => Number(c.id) === catIdNum);
-  const pageTitle  = category?.title || category?.name || `Category #${categoryId}`;
+  const category = categories.find(c => Number(c.id) === catIdNum);
+  const pageTitle = category?.title || category?.name || `Category #${categoryId}`;
 
   // Чтобы не мигали старые товары при переключении категории:
   // 1) чистим список
@@ -52,15 +52,15 @@ export const Catalog = () => {
 
       <FiltersBar />
 
-      {status === "loading"   && <p className={styles.stateMessage}>Loading…</p>}
-      {status === "failed"    && (
+      {status === "loading" && <p className={styles.stateMessage}>Loading…</p>}
+      {status === "failed" && (
         <p className={styles.stateMessage}>
           Error: {error || "Failed to load products for this category"}
         </p>
       )}
       {status === "succeeded" && (
         products?.length
-          ? <ProductsGrid />
+          ? <ProductsGrid cameFrom={{ type: "category", id: Number(categoryId) }} />
           : <p className={styles.stateMessage}>No products in this category yet.</p>
       )}
     </section>

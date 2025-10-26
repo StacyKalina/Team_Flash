@@ -31,8 +31,7 @@ const buildImageUrl = (relativePath) => { //убираем у относител
 
 export const CategoriesPage = () => {
 
-    // Она ничего не знает о том, как устроен Redux внутри, он подписывается на Redux-состояние (через useSelector)
-    // и отправляет экшены (через dispatch)
+    // Он ничего не знает о том, как устроен Redux внутри, подписывается на Redux-состояние (через useSelector) и отправляет экшены (через dispatch)
 
     const dispatch = useDispatch();
 
@@ -104,4 +103,4 @@ export const CategoriesPage = () => {
 
 
 
-export default CategoriesPage;
+
