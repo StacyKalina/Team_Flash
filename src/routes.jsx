@@ -33,9 +33,9 @@ export const AppRouter = () => {
             <Route path="allProducts" element={<AllProducts />} />
             <Route path="sales" element={<Sales />} />
             <Route path="cart" element={<Cart />} />
-            <Route path="*" element={<NotFound />}></Route>
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/favorites" element={<Favorites />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>
