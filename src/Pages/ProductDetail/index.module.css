@@ -1,0 +1,331 @@
+.container {
+  display: flex;
+  gap: 30px;
+  padding: 40px;
+  align-items: flex-start;
+}
+
+.image {
+  max-width: 400px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 16px;
+  color: #555;
+}
+
+.price {
+  font-size: 48px;
+  color: #282828;
+  font-weight: bold;
+}
+.counterAndCart {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.counter {
+  display: flex;
+  align-items: baseline;
+}
+
+.counter button {
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+}
+
+.cartButton {
+  margin-top: 15px;
+  background-color: #92a134;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.counterBtn {
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.counterBox {
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: transparent; /* Прозрачный фон */
+  color: #000; /* Цвет текста для цифры */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box; /* Учитываем рамку при расчете размера */
+}
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.discountPrice {
+  font-size: 48px;
+  font-weight: bold;
+  color: #282828;
+}
+
+.oldPrice {
+  font-size: 28px;
+  color: #8b8b8b;
+  text-decoration: line-through;
+}
+
+.discountPercentage {
+  background-color: #f26d22;
+  color: #fff;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* ====== АДАПТИВ ====== */
+
+/* --- от 1026px до 769px — всё адаптируется (кнопка, цена, счётчик) --- */
+@media (max-width: 1026px) and (min-width: 769px) {
+  .container {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 25px;
+    padding: 30px;
+  }
+
+  .image {
+    max-width: 35%;
+  }
+
+  .info {
+    max-width: 50%;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .discountPrice {
+    font-size: 40px;
+  }
+
+  .oldPrice {
+    font-size: 22px;
+  }
+
+  .cartButton {
+    font-size: 15px;
+    padding: 9px 18px;
+  }
+
+  .counterBtn,
+  .counterBox {
+    width: 28px;
+    height: 28px;
+    font-size: 15px;
+  }
+}
+
+/* --- до 768px — описание полностью под картинкой --- */
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .image {
+    max-width: 45%;
+    height: auto;
+  }
+
+  .info {
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .title,
+  .description {
+    order: 2;
+    width: 100%;
+  }
+
+  .priceContainer,
+  .counterAndCart {
+    order: 1;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  /* адаптив кнопки */
+  .cartButton {
+    flex: 1 1 100%;
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .counterBtn,
+  .counterBox {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
+
+  .discountPrice {
+    font-size: 32px;
+  }
+
+  .oldPrice {
+    font-size: 20px;
+  }
+}
+
+/* --- до 480px — та же логика --- */
+@media (max-width: 480px) {
+  .container {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .image {
+    max-width: 45%;
+  }
+
+  .info {
+    max-width: 50%;
+  }
+
+  .title,
+  .description {
+    order: 2;
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .cartButton {
+    width: 100%;
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .discountPrice {
+    font-size: 28px;
+  }
+
+  .counterBtn,
+  .counterBox {
+    width: 24px;
+    height: 24px;
+    font-size: 13px;
+  }
+}
+
+/* --- до 360px — всё под картинкой (колонка) --- */
+@media (max-width: 360px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .image {
+    max-width: 100%;
+  }
+
+  .info {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .title,
+  .description {
+    order: 3;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .priceContainer,
+  .counterAndCart {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cartButton {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+/* .title {
+  font-size: 3rem; /* Большая надпись */
+/* font-weight: bold;
+} */
+
+.readMoreBtn {
+  background: none; /* Убирает фоновый цвет */
+  border: none; /* Убирает рамку */
+  color: #282828;
+  cursor: pointer; /* Курсор в виде указателя */
+  padding: 0; /* Убирает внутренние отступы */
+  font-size: 1em; /* Размер шрифта */
+  margin-top: 5px; /* Небольшой отступ сверху */
+  text-align: left; /* Выравнивает текст по левому краю */
+  align-self: flex-start; /* Прижимает кнопку к левому краю, если родитель — flex-контейнер */
+  text-decoration: underline; /* Добавляет постоянное подчеркивание */
+
+}
+
+/* Убираем эффект нажатия и фокуса, чтобы внешний вид не менялся */
+.readMoreBtn:active,
+.readMoreBtn:focus {
+  outline: none; /* Убирает стандартную рамку фокуса */
+  background: none; /* Убирает изменение фона */
+  box-shadow: none; /* Убирает тень */
+  color: inherit;
+  text-decoration: underline; /* Сохраняет подчеркивание */
+  border: none;
+}
