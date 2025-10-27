@@ -74,6 +74,9 @@ export const ProductCard = ({
                     Add to cart
                 </button>
             </div>
+            <div>
+                <Modal/>
+            </div>
             <div
                 className={styles.footer}
                 role="button"
