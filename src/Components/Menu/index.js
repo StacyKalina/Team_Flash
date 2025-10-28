@@ -7,9 +7,13 @@ import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
 export const Menu = () => {
-  const favoriteItemsCount = useSelector(
-    (state) => state.favorites.items.length
-  );
+  const favoriteItemsCount =
+    useSelector((state) => state.favorites.items.length) ?? 0;
+
+  const totalItems = useSelector((state) => state.cart?.totalItems ?? 0);
+  const hasItems = totalItems > 0;
+  const displayCount = totalItems > 99 ? "99+" : totalItems;
+
   const setActivKlass = ({ isActive }) => (isActive ? styles.active : "");
 
   return (
@@ -22,7 +26,7 @@ export const Menu = () => {
 
       <ul className={styles.navItemsWrapper}>
         <li>
-          <NavLink to="/" className={setActivKlass}>
+          <NavLink to="/" end className={setActivKlass}>
             Main Page
           </NavLink>
         </li>
@@ -44,15 +48,31 @@ export const Menu = () => {
       </ul>
 
       <div className={styles.iconsWrapper}>
-        <Link to="/favorites" className={styles.favoriteIconWrapper}>
+        <Link
+          to="/favorites"
+          className={styles.favoriteIconWrapper}
+          aria-label="Open favorites"
+        >
           <img src={favoriteIcon} alt="favorite icon" />
           {favoriteItemsCount > 0 && (
-            <span className={styles.favoriteCount}>{favoriteItemsCount}</span>
+            <span className={styles.favoriteCount}>
+              {favoriteItemsCount}
+            </span>
           )}
         </Link>
-        <div className={styles.cart}>
+
+        <Link
+          to="/cart"
+          className={styles.cartLink}
+          aria-label="Open cart"
+        >
           <img src={cart} alt="cart icon" />
-        </div>
+          {hasItems && (
+            <span className={styles.cartBadge} aria-live="polite">
+              {displayCount}
+            </span>
+          )}
+        </Link>
       </div>
 
       <div className={styles.burgerMenu}>

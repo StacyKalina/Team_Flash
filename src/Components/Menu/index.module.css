@@ -24,47 +24,79 @@
 }
 
 .navItemsWrapper > li > a.active {
-    color: #92A134
+    color: #92A134;
 }
 
 .iconsWrapper {
-  display: flex;
-  align-items: center;
-  gap: 15px; /* Задает расстояние между иконками */
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .favoriteIconWrapper {
-  position: relative; /* Чтобы позиционировать бейдж */
-  display: inline-block;
-  cursor: pointer;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
 }
 
 .favoriteCount {
-  position: absolute;
-  top: 50%; 
-  transform: translateY(-50%);
-  left: -5px; 
-  background-color: #92a134;
-  color: white;
-  border-radius: 50%;
-  padding: 4px 6px;
-  font-size: 12px;
-  min-width: 30px; /* Увеличиваем минимальную ширину для большей ширины кружка */
-  text-align: center;
-  line-height: 1;
-  border: 1px solid white; /* Белая обводка для лучшей видимости */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -5px;
+    background-color: #92a134;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 6px;
+    font-size: 12px;
+    min-width: 30px;
+    text-align: center;
+    line-height: 1;
+    border: 1px solid white;
 }
 
-
-
-.navItemsWrapper>li:not(:last-child) {
+.navItemsWrapper > li:not(:last-child) {
     margin-right: 32px;
 }
 
 .logo,
-.cart,
-.navItemsWrapper>li {
+.cartLink,
+.navItemsWrapper > li {
     cursor: pointer;
+}
+
+.cart {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cartLink {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cartLink img {
+    display: block;
+}
+
+.cartBadge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    min-width: 22px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background-color: #92A134;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(146, 161, 52, 0.35);
 }
 
 .burgerMenu {
@@ -96,7 +128,4 @@
     .logo {
         margin-right: auto;
     }
-
 }
-
-
