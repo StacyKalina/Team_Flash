@@ -24,18 +24,44 @@
 }
 
 .navItemsWrapper > li > a.active {
-    color: #92A134
+    color: #92A134;
 }
 
+.iconsWrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
+.favoriteIconWrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
 
-.navItemsWrapper>li:not(:last-child) {
+.favoriteCount {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -5px;
+    background-color: #92a134;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 6px;
+    font-size: 12px;
+    min-width: 30px;
+    text-align: center;
+    line-height: 1;
+    border: 1px solid white;
+}
+
+.navItemsWrapper > li:not(:last-child) {
     margin-right: 32px;
 }
 
 .logo,
 .cartLink,
-.navItemsWrapper>li {
+.navItemsWrapper > li {
     cursor: pointer;
 }
 
@@ -102,5 +128,4 @@
     .logo {
         margin-right: auto;
     }
-
 }

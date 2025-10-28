@@ -2,6 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 import placeHolderImage from "../../Images/placeholder.svg";
+import heartIcon from "../../Images/icons/heart.svg"; // Импортируем пустую иконку
+import heartFilledIcon from "../../Images/icons/heart-filled.svg"; // Импортируем заполненную
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavorite } from "../../store/slices/favoriteSlice";
 
 const defaultAddToCart = (payload) => {
   console.log("Mock add to cart", payload);
@@ -16,17 +20,18 @@ export const ProductCard = ({
   discount,
   currencySymbol = "$",
   onAddToCart = defaultAddToCart,
-  onFooterClick,
 }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const favoriteItems = useSelector((state) => state.favorites.items);
+  const isFavorite = favoriteItems.some((item) => item.id === id);
 
   const formatPrice = (value) =>
     typeof value === "number" ? value.toLocaleString("en-US") : value;
 
   const resolveDiscountLabel = () => {
-    if (discount === undefined || discount === null || discount === 0) {
+    if (discount === undefined || discount === null || discount === 0)
       return null;
-    }
     if (typeof discount === "number") {
       const absolute = Math.abs(discount);
       const sign = discount > 0 ? "-" : "";
@@ -35,39 +40,33 @@ export const ProductCard = ({
     return discount;
   };
 
-  const resolvedImageSrc = imageSrc || placeHolderImage;
   const discountLabel = resolveDiscountLabel();
-  const payload = {
-    id,
-    title,
-    price,
-    oldPrice,
-    imageSrc: resolvedImageSrc,
-    quantity: 1,
-  };
+  const payload = { id, title, price, imageSrc, oldPrice, discount };
+  const resolvedImageSrc = imageSrc || placeHolderImage;
 
   const handleAddToCart = () => {
     onAddToCart(payload);
   };
 
-  const handleFooterClick = () => {
-    if (typeof onFooterClick === "function") {
-      onFooterClick(payload);
-      return;
-    }
-    navigate(`/product/${id}`);
+  const handleToggleFavorite = (event) => {
+    event.stopPropagation(); // Остановить всплытие, чтобы не сработал переход на страницу товара
+    dispatch(toggleFavorite(payload));
   };
 
-  const handleFooterKeyDown = (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      handleFooterClick();
-    }
+  const handleFooterClick = () => {
+    navigate(`/product/${id}`);
   };
 
   return (
     <article className={styles.card}>
       {discountLabel && <span className={styles.badge}>{discountLabel}</span>}
+
+      <button className={styles.favoriteButton} onClick={handleToggleFavorite}>
+        <img
+          src={isFavorite ? heartFilledIcon : heartIcon}
+          alt="favorite icon"
+        />
+      </button>
 
       <div className={styles.imageWrapper}>
         <img
@@ -90,7 +89,6 @@ export const ProductCard = ({
         role="button"
         tabIndex={0}
         onClick={handleFooterClick}
-        onKeyDown={handleFooterKeyDown}
       >
         <h3 className={styles.title}>{title}</h3>
         <div className={styles.priceRow}>
@@ -109,5 +107,3 @@ export const ProductCard = ({
     </article>
   );
 };
-
-export default ProductCard;
