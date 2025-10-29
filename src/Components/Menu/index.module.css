@@ -79,6 +79,10 @@
   cursor: pointer;
 }
 
+.cartLink img {
+  display: block;
+}
+
 .cartBadge {
   position: absolute;
   top: -6px;

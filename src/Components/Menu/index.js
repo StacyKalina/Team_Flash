@@ -24,13 +24,8 @@ export const Menu = () => {
 
   const setActiveClass = ({ isActive }) => (isActive ? styles.active : "");
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen((prev) => !prev);
-  };
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
+  const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   const cartHasItems = cartItemsCount > 0;
   const cartBadgeValue =
@@ -85,6 +80,7 @@ export const Menu = () => {
             <span className={styles.cartBadge}>{cartBadgeValue}</span>
           )}
         </Link>
+      </div>
 
         <button
           type="button"
