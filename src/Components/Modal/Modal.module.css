@@ -3,21 +3,26 @@
     min-height: 200px;
     background-color: #92a134;
     display: flex;
-    margin: 260px auto 0 auto;
+    margin: 260px auto 260px auto;
     padding: 32px;
     border-radius: 16px;
     z-index: 2;
     position: relative;
+    
+
 }
 
 .modalContent {
     font-family: Montserrat, sans-serif;
     flex-grow: 1;
     align-self: stretch;
+    padding:32px;
+    padding-right: 92px;
 }
 .iconWrapper > img {
     cursor: pointer;
 }
+
 
 
 .modalBackdrop {
@@ -27,4 +32,46 @@
     background-color: rgba(40, 40, 40, 0.4);
     top: 0;
     z-index: 1;
+}
+p{
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+    
+}
+.modalContent {
+    font-family: Montserrat, sans-serif;
+    flex-grow: 1;
+    align-self: stretch;
+    padding:32px;
+    padding-right: 92px;
+}
+h2{
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    justify-content: center;
+}
+img {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+}
+@media screen and (max-width: 600px) {
+    .modalOverlay {
+        width: 90%;
+        margin: 200px auto 200px auto;
+        padding: 16px;
+                
+    }
+  
+}
+@media screen and (max-width: 600px) {
+  h2 {
+     font-size: clamp(20px, 8vw, 40px);
+  }
 }
