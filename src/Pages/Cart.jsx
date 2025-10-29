@@ -16,6 +16,8 @@ const formatCurrency = (value) =>
         style: "currency",
         currency: "USD",
         maximumFractionDigits: 2,
+        minimumFractionDigits: 2,
+        useGrouping: false,
     }).format(value);
 
 const CartItem = ({ item, onIncrement, onDecrement, onRemove }) => {

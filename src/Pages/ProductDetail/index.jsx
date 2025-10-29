@@ -5,6 +5,7 @@ import {
   fetchProductById,
   selectSelectedProduct,
 } from "../../store/slices/productsSlice";
+import { addItem } from "../../store/slices/cartSlice";
 import styles from "./index.module.css";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE ?? "http://localhost:3333";
@@ -16,21 +17,39 @@ export const ProductDetail = () => {
   const product = useSelector(selectSelectedProduct);
   const status = useSelector((state) => state.products.status);
   const [count, setCount] = useState(1);
-  const [showFullDescription, setShowFullDescription] = useState(false); // Новое состояние
+  const [showFullDescription, setShowFullDescription] = useState(false); 
 
   useEffect(() => {
     dispatch(fetchProductById(id));
   }, [dispatch, id]);
 
   const handleIncrement = () => setCount((prev) => prev + 1);
-  const handleDecrement = () => setCount((prev) => (prev > 1 ? prev - 1 : 0));
-  const toggleDescription = () => setShowFullDescription((prev) => !prev); // Обработчик для кнопки
+  const handleDecrement = () => setCount((prev) => (prev > 1 ? prev - 1 : 1));
+  const toggleDescription = () => setShowFullDescription((prev) => !prev); 
+  const handleAddToCart = () => {
+    if (!product) return;
+
+    const price = product.discont_price ?? product.price;
+    const oldPrice = product.discont_price ? product.price : null;
+    const imageSrc = `${API_BASE_URL}${product.image}`;
+
+    dispatch(
+      addItem({
+        id: product.id,
+        title: product.title,
+        price,
+        oldPrice,
+        imageSrc,
+        quantity: count,
+      })
+    );
+  };
 
   if (status === "loading") return <p>Loading product...</p>;
   if (!product) return <p>Product not found.</p>;
 
   const imageUrl = `${API_BASE_URL}${product.image}`;
-  const needsReadMore = product.description.length > DESCRIPTION_LIMIT; // Проверка, нужно ли показывать кнопку
+  const needsReadMore = product.description.length > DESCRIPTION_LIMIT; // �Y�?������?ѧ��, ѫ����ѫ�� ѯ�� Ѩ��ѧ�����<�����'�O ѧѫ��Ѩѧ��
 
   return (
     <div className={styles.container}>
@@ -38,7 +57,7 @@ export const ProductDetail = () => {
       <div className={styles.info}>
         <h1 className={styles.title}>{product.title}</h1>
         <div className={styles.priceAndActions}>
-          {/* Контейнер для цен */}
+          {/* �s��ѫ�'����ѫ��? ��ѯ�? ����ѫ */}
           <div className={styles.priceContainer}>
             {product.discont_price ? (
               <span className={styles.discountPrice}>
@@ -71,7 +90,9 @@ export const ProductDetail = () => {
                 +
               </button>
             </div>
-            <button className={styles.cartButton}>Add to cart</button>
+            <button className={styles.cartButton} onClick={handleAddToCart}>
+              Add to cart
+            </button>
           </div>
         </div>
         <h2>Description</h2>
