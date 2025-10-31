@@ -1,12 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 import Button from "../MainButton";
+import { Link, NavLink } from "react-router-dom";
 
 
 
 export const MainBanner = () => {
     return (
+        <>
         <nav>
             <div className={styles.BannerWrapper} >
                 <div className={styles.BannerContent}>
@@ -20,8 +22,9 @@ export const MainBanner = () => {
                 </div>
             </div>
         </nav>
+        </>
     );
-};
+}
 
 
 

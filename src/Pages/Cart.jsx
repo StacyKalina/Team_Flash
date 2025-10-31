@@ -310,9 +310,9 @@ export const Cart = () => {
                                         Order
                                    </button>
 
-                                   {submitMessage && isSubmitSuccessful && (
+                                   {/* {submitMessage && isSubmitSuccessful && (
                                         <p className={styles.summaryMessage}>{submitMessage}</p>
-                                   )}
+                                   )} */}
                               </form>
                          </aside>
                     </div>

@@ -90,7 +90,6 @@ export const Menu = () => {
         >
           <img src={burgerMenuIcon} alt="burger icon" />
         </button>
-      </div>
 
       <aside
         className={`${styles.mobileMenu} ${
@@ -140,14 +139,19 @@ export const Menu = () => {
         </div>
       </aside>
 
-      {isMobileMenuOpen && (
-        <button
-          type="button"
-          className={styles.mobileMenuBackdrop}
-          aria-label="Close navigation menu"
-          onClick={closeMobileMenu}
-        />
-      )}
-    </nav>
+      {
+    isMobileMenuOpen && (
+      <button
+        type="button"
+        className={styles.mobileMenuBackdrop}
+        aria-label="Close navigation menu"
+        onClick={closeMobileMenu}
+      />
+    )
+  }
+</nav >
   );
 };
+
+
+
