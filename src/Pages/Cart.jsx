@@ -14,11 +14,13 @@ import { Modal } from "../Components/Modal/Modal.jsx";
 
 
 const formatCurrency = (value) =>
-     new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "USD",
-          maximumFractionDigits: 2,
-     }).format(value);
+    new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 2,
+        useGrouping: false,
+    }).format(value);
 
 const CartItem = ({ item, onIncrement, onDecrement, onRemove }) => {
      const linePrice = item.price * item.quantity;

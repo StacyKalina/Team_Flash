@@ -1,10 +1,7 @@
 import React from "react";
-import styles from './index.module.css'
+import { useNavigate } from "react-router-dom";
+import styles from "./index.module.css";
 import Button from "../MainButton";
-import { Link, NavLink } from 'react-router-dom'
-
-
-
 
 
 
@@ -25,3 +22,28 @@ export const MainBanner = () => {
         </nav>
     );
 };
+
+
+
+
+
+
+
+//   const navigate = useNavigate();
+
+//   const handleCheckoutClick = () => {
+//     navigate("/cart");
+//   };
+
+//   return (
+//     <div className={styles.BannerWrapper}>
+//       <div className={styles.BannerContent}>
+//         <h1 className={styles.MainHeader}>
+//           Amazing Discounts on Garden Products!
+//         </h1>
+//         <Button text="Check out" onClick={handleCheckoutClick} />
+//       </div>
+//     </div>
+//   );
+// };
+
