@@ -1,77 +1,106 @@
-.modalOverlay {
-    width: 548px;
-    min-height: 200px;
-    background-color: #92a134;
-    display: flex;
-    margin: 260px auto 260px auto;
-    padding: 32px;
-    border-radius: 16px;
-    z-index: 2;
-    position: relative;
-    
-
-}
-
-.modalContent {
-    font-family: Montserrat, sans-serif;
-    flex-grow: 1;
-    align-self: stretch;
-    padding:32px;
-    padding-right: 92px;
-}
-.iconWrapper > img {
-    cursor: pointer;
-}
 
 
-
+/* =========================
+   ФОН (тёмная подложка)
+   ========================= */
 .modalBackdrop {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(40, 40, 40, 0.4);
-    top: 0;
-    z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* затемнение */
+  z-index: 999; /* ниже модалки */
 }
-p{
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 1.3;
-    
+
+/* =========================
+   ОБОЛОЧКА МОДАЛКИ
+   ========================= */
+.modalOverlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color:  rgba(146, 161, 52, 1);
+ /* твой зелёный цвет */
+  color: #fff; /* белый текст для контраста */
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 548px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  z-index: 1000; /* поверх фона */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: fixed;
 }
+
+/* =========================
+   КОНТЕНТ МОДАЛКИ
+   ========================= */
 .modalContent {
-    font-family: Montserrat, sans-serif;
-    flex-grow: 1;
-    align-self: stretch;
-    padding:32px;
-    padding-right: 92px;
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  position: relative;
 }
-h2{
-    font-size: 40px;
-    font-weight: 600;
-    line-height: 1.3;
-    margin-bottom: 16px;
-    justify-content: center;
+
+h2 {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 16px;
 }
-img {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 44px;
-    height: 44px;
-    cursor: pointer;
+
+p {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 8px;
 }
+
+/* =========================
+   КНОПКА ЗАКРЫТИЯ
+   ========================= */
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1001;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.closeButton:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+.closeIcon {
+  width: 44px;
+  height: 44px;
+  display: block;
+  pointer-events: none; /* чтобы клик шел по кнопке */
+}
+
+/* =========================
+   АДАПТИВ
+   ========================= */
 @media screen and (max-width: 600px) {
-    .modalOverlay {
-        width: 90%;
-        margin: 200px auto 200px auto;
-        padding: 16px;
-                
-    }
-  
-}
-@media screen and (max-width: 600px) {
-  h2 {
-     font-size: clamp(20px, 8vw, 40px);
+  .modalOverlay {
+    padding: 1.5rem;
   }
+
+  h2 {
+    font-size: clamp(20px, 6vw, 32px);
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  
 }

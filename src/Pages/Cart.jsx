@@ -28,6 +28,9 @@ const CartItem = ({ item, onIncrement, onDecrement, onRemove }) => {
                : undefined;
      const isDecreaseDisabled = item.quantity <= 1;
 
+
+
+
      return (
           <article className={styles.cartItem}>
                <div className={styles.itemImageWrapper}>
@@ -149,6 +152,7 @@ const CartItem = ({ item, onIncrement, onDecrement, onRemove }) => {
 export const Cart = () => {
      const dispatch = useDispatch();
      const { items, totalItems, totalPrice } = useSelector((state) => state.cart);
+     const [isModalOpen, setIsModalOpen] = useState(false);
      const {
           register,
           handleSubmit,
@@ -168,6 +172,7 @@ export const Cart = () => {
 
      return (
           <>
+
                <section className={styles.cartPage}>
                     <header className={styles.header}>
                          <h1 className={styles.title}>Shopping cart</h1>
@@ -213,6 +218,7 @@ export const Cart = () => {
                                         setSubmitMessage("Thank you! We will contact you soon.");
                                         dispatch(clearCart());
                                         reset();
+                                        setIsModalOpen(true);
                                    })}
                               >
                                    <div className={styles.summaryTop}>
@@ -308,15 +314,17 @@ export const Cart = () => {
                               </form>
                          </aside>
                     </div>
+                    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+
+                         <div className={styles.modalContent}>
+                              <h2>Congratulations! </h2>
+                              <p>Your order has been successfully placed on the website.</p>
+                              <p>A manager will contact you shortly to confirm your order.</p>
+                         </div>
+                    </Modal>
                </section>
-                <Modal isOpen={true} onClose = {closeIcon}> 
-                    <div className={styles.modalContent}>
-                         <h2>Congratulations! </h2>
-                         <p>Your order has been successfully placed on the website.</p>
-                          <p>A manager will contact you shortly to confirm your order.</p>
-                    </div>
-               </Modal>
-               
+
+
           </>
 
      );
