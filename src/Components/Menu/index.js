@@ -90,7 +90,6 @@ export const Menu = () => {
         >
           <img src={burgerMenuIcon} alt="burger icon" />
         </button>
-      </div>
 
       <aside
         className={`${styles.mobileMenu} ${
