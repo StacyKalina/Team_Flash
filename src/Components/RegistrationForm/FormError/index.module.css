@@ -1,5 +1,5 @@
 .error {
-  color: #fff;
+  color: var(--color-text-inverted);
   display: flex;
   align-items: center;    /* NEW: выровняли по вертикали */
   gap: 8px;
@@ -10,6 +10,8 @@
 .error img {
   width: 20px;
   height: 20px;
+  filter: var(--color-icon-filter-primary);
+  transition: filter 0.3s ease;
 }
 
 .errorMessage {

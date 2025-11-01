@@ -18,7 +18,7 @@
 
 .filterLabel {
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-secondary);
 }
 
 .priceInputs {
@@ -30,9 +30,13 @@
 .priceInput {
   width: 80px;
   padding: 8px 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 6px; /* Добавляем скругление */
   font-size: 14px;
+  background-color: var(--color-surface);
+  color: var(--color-text-secondary);
+  transition: border-color 0.2s ease, background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .discountToggle {
@@ -42,19 +46,22 @@
   cursor: pointer;
 }
 
+
 .discountCheckbox {
   appearance: none;
   width: 20px;
   height: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 4px; /* Добавляем скругление */
   position: relative;
   cursor: pointer;
+  background-color: var(--color-surface);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .discountCheckbox:checked {
-  background-color: #4caf50;
-  border-color: #4caf50;
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 .discountCheckbox:checked::after {
@@ -64,7 +71,7 @@
   top: 1px;
   width: 5px;
   height: 10px;
-  border: solid white;
+  border: solid var(--color-text-inverted);
   border-width: 0 3px 3px 0;
   transform: rotate(45deg);
 }
@@ -75,15 +82,19 @@
 
 .sortSelect {
   padding: 8px 30px 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px; /* Добавляем скругление */
+  border: 1px solid var(--color-border);
+  border-radius: 6px; /* Rounded corners */
   font-size: 14px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: #fff;
+  background-color: var(--color-surface);
+  color: var(--color-text-secondary);
   cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease,
+    color 0.2s ease;
 }
+
 
 .sortIcon {
   position: absolute;
@@ -91,17 +102,32 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
+  filter: var(--color-icon-filter-primary);
+  transition: filter 0.2s ease;
 }
+
 
 .resetBtn {
   padding: 8px 16px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 6px; /* Добавляем скругление */
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px; /* Rounded corners */
   cursor: pointer;
-  transition: background-color 0.2s;
+  color: var(--color-text-secondary);
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
 }
 
+
 .resetBtn:hover {
-  background-color: #e0e0e0;
+  background-color: var(--color-surface-muted);
 }
+
+
+
+
+
+
+
+
+

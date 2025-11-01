@@ -1,12 +1,74 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+:root {
+    color-scheme: light;
+    --color-background: #fffff1;
+    --color-surface: #ffffff;
+    --color-surface-muted: #f8f8f0;
+    --color-border: #dddddd;
+    --color-text-primary: #012b2c;
+    --color-text-secondary: #424436;
+    --color-text-muted: #8b8b8b;
+    --color-text-inverted: #ffffff;
+    --color-accent: #92a134;
+    --color-accent-strong: #f26d22;
+    --color-accent-strong-hover: #d65b19;
+    --color-accent-hover: #809027;
+    --color-accent-disabled: #c5caa6;
+    --color-accent-contrast: #4f5c1a;
+    --color-nav-background: #fffff1;
+    --color-nav-text: #424436;
+    --color-toggle-track: #e6e6dd;
+    --color-toggle-thumb: #ffffff;
+    --color-toggle-icon: #424436;
+    --color-icon-filter-primary: none;
+    --shadow-elevated: 0 12px 24px rgba(1, 43, 44, 0.12);
+    --color-focus-outline: rgba(66, 68, 54, 0.25);
+    --color-danger: #d14343;
+    --shadow-focus-accent: 0 0 0 3px rgba(146, 161, 52, 0.25);
+    --color-skeleton-base: #e0e0e0;
+    --color-skeleton-highlight: #f0f0f0;
+}
+
+body[data-theme='dark'] {
+    color-scheme: dark;
+    --color-background: #474942;
+    --color-surface: #2a2c23;
+    --color-surface-muted: #34362b;
+    --color-border: #4a4c3e;
+    --color-text-primary: #f4f4e8;
+    --color-text-secondary: #d8d8c8;
+    --color-text-muted: #a4a48f;
+    --color-text-inverted: #ffffff;
+    --color-accent: #a8c13c;
+    --color-accent-strong: #f26d22;
+    --color-accent-strong-hover: #c95716;
+    --color-accent-hover: #6f8626;
+    --color-accent-disabled: #444933;
+    --color-accent-contrast: #dfe6b3;
+    --color-nav-background: #424436;
+    --color-nav-text: #f4f4e8;
+    --color-toggle-track: #3a3c30;
+    --color-toggle-thumb: #f4f4e8;
+    --color-toggle-icon: #f4f4e8;
+    --color-icon-filter-primary: brightness(0) invert(1);
+    --shadow-elevated: 0 12px 24px rgba(0, 0, 0, 0.4);
+    --color-focus-outline: rgba(244, 244, 232, 0.45);
+    --color-danger: #f07272;
+    --shadow-focus-accent: 0 0 0 3px rgba(168, 193, 60, 0.35);
+    --color-skeleton-base: #363830;
+    --color-skeleton-highlight: #45483d;
+}
+
 html {
     box-sizing: border-box;
-    font-family: Montserrat;
-    background-color: #FFFFF1;
-  }
-  
-  * {
+    font-family: Montserrat, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
     box-sizing: inherit;
     padding: 0;
     margin: 0;
@@ -38,8 +100,9 @@ dd {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #fffff1;
-    color: #012b2c;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ul[class] {
@@ -93,7 +156,7 @@ button {
     font-size: 46px;
     font-weight: bold;
     line-height: 1.1;
-    color: rgb(1, 43, 44);
+    color: var(--color-text-primary);
     margin-bottom: 24px;
   }
   
@@ -104,3 +167,4 @@ button {
  
 }
   }
+

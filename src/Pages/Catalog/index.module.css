@@ -17,11 +17,11 @@
     font-weight: 700;
     font-size: 64px;
     line-height: 110%;
-    color: #424436;
+    color: var(--color-text-secondary);
 }
 .stateMessage { /* оставим, чтобы не дублировать */
     font-size: 16px;
-    color: #6f7a7e;
+    color: var(--color-text-muted);
 }
 
 @media (max-width: 1000px) {
@@ -39,3 +39,4 @@
   .wrapper { max-width: 360px; padding: 0 20px 48px; gap: 24px; }
   .pageTitle { font-size: 40px; }
 }
+

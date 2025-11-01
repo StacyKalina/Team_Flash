@@ -6,6 +6,7 @@ import logo from "../../Images/logo.svg";
 import cartIcon from "../../Images/cart.svg";
 import burgerMenuIcon from "../../Images/burger.svg";
 import favoriteIcon from "../../Images/icons/heart.svg";
+import { ThemeToggle } from "../ThemeToggle";
 
 const NAV_LINKS = [
   { to: "/", label: "Main Page", end: true },
@@ -47,10 +48,15 @@ export const Menu = () => {
 
   return (
     <nav className={styles.navWrapper}>
-      <div className={styles.logo}>
-        <Link to="/">
-          <img src={logo} alt="main logo" />
-        </Link>
+      <div className={styles.brandSection}>
+        <div className={styles.logo}>
+          <Link to="/">
+            <img src={logo} alt="main logo" />
+          </Link>
+        </div>
+        <div className={styles.themeToggleDesktop}>
+          <ThemeToggle />
+        </div>
       </div>
 
       <ul className={styles.navItemsWrapper}>{renderNavItems()}</ul>
@@ -61,7 +67,11 @@ export const Menu = () => {
           className={styles.favoriteIconWrapper}
           aria-label="Open favorites"
         >
-          <img src={favoriteIcon} alt="favorite icon" />
+          <img
+            src={favoriteIcon}
+            alt="favorite icon"
+            className={styles.iconImage}
+          />
           {favoriteItemsCount > 0 && (
             <span className={styles.favoriteCount}>
               {favoriteItemsCount}
@@ -75,7 +85,11 @@ export const Menu = () => {
           aria-label="Open cart"
           onClick={closeMobileMenu}
         >
-          <img src={cartIcon} alt="cart icon" />
+          <img
+            src={cartIcon}
+            alt="cart icon"
+            className={styles.iconImage}
+          />
           {cartHasItems && (
             <span className={styles.cartBadge}>{cartBadgeValue}</span>
           )}
@@ -88,7 +102,11 @@ export const Menu = () => {
         aria-label="Toggle navigation menu"
         onClick={toggleMobileMenu}
       >
-        <img src={burgerMenuIcon} alt="burger icon" />
+        <img
+          src={burgerMenuIcon}
+          alt="burger icon"
+          className={styles.iconImage}
+        />
       </button>
 
       <aside
@@ -106,6 +124,10 @@ export const Menu = () => {
           &times;
         </button>
 
+        <div className={styles.mobileThemeToggle}>
+          <ThemeToggle />
+        </div>
+
         <ul className={styles.mobileMenuList}>
           {renderNavItems(closeMobileMenu)}
         </ul>
@@ -117,7 +139,11 @@ export const Menu = () => {
             aria-label="Open favorites"
             onClick={closeMobileMenu}
           >
-            <img src={favoriteIcon} alt="favorite icon" />
+            <img
+              src={favoriteIcon}
+              alt="favorite icon"
+              className={styles.iconImage}
+            />
             {favoriteItemsCount > 0 && (
               <span className={styles.favoriteCount}>
                 {favoriteItemsCount}
@@ -131,7 +157,11 @@ export const Menu = () => {
             aria-label="Open cart"
             onClick={closeMobileMenu}
           >
-            <img src={cartIcon} alt="cart icon" />
+            <img
+              src={cartIcon}
+              alt="cart icon"
+              className={styles.iconImage}
+            />
             {cartHasItems && (
               <span className={styles.cartBadge}>{cartBadgeValue}</span>
             )}
