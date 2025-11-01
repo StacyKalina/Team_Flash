@@ -1,0 +1,107 @@
+.filtersBar {
+  display: flex;
+  /* Добавляем небольшой отступ между секциями фильтров */
+  gap: 15px; 
+  align-items: center;
+  padding: 15px 20px;
+  background-color: transparent; /* Оставляем фон прозрачным */
+  box-shadow: none; /* Убираем тень */
+  margin-bottom: 20px;
+}
+
+.filterSection {
+  display: flex;
+  align-items: center;
+  /* Отступ между элементами внутри секции, например между Label и Inputs */
+  gap: 10px;
+}
+
+.filterLabel {
+  font-weight: 500;
+  color: #333;
+}
+
+.priceInputs {
+  display: flex;
+  /* Отступ между двумя полями ввода цены */
+  gap: 8px;
+}
+
+.priceInput {
+  width: 80px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px; /* Добавляем скругление */
+  font-size: 14px;
+}
+
+.discountToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.discountCheckbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px; /* Добавляем скругление */
+  position: relative;
+  cursor: pointer;
+}
+
+.discountCheckbox:checked {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+.discountCheckbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.sortControl {
+  position: relative;
+}
+
+.sortSelect {
+  padding: 8px 30px 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px; /* Добавляем скругление */
+  font-size: 14px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.sortIcon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.resetBtn {
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 6px; /* Добавляем скругление */
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.resetBtn:hover {
+  background-color: #e0e0e0;
+}
