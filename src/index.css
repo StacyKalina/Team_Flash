@@ -10,6 +10,7 @@
     --color-text-secondary: #424436;
     --color-text-muted: #8b8b8b;
     --color-text-inverted: #ffffff;
+    --color-text-strong: #012b2c;
     --color-accent: #92a134;
     --color-accent-strong: #f26d22;
     --color-accent-strong-hover: #d65b19;
@@ -40,6 +41,7 @@ body[data-theme='dark'] {
     --color-text-secondary: #d8d8c8;
     --color-text-muted: #a4a48f;
     --color-text-inverted: #ffffff;
+    --color-text-strong: #10110c;
     --color-accent: #a8c13c;
     --color-accent-strong: #f26d22;
     --color-accent-strong-hover: #c95716;
@@ -167,4 +169,3 @@ button {
  
 }
   }
-

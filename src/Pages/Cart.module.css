@@ -262,7 +262,7 @@
 
 .summaryCard {
     width: 548px;
-    height: 582px;
+    min-height: 582px;
     background-color: var(--color-surface-muted);
     border-radius: 32px;
     padding: 32px;
@@ -271,7 +271,7 @@
     gap: 32px;
     border: 1px solid var(--color-border);
     box-shadow: var(--shadow-elevated);
-    overflow: hidden;
+    overflow: visible;
     box-sizing: border-box;
 }
 
@@ -330,7 +330,6 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    height: 206px;
 }
 
 .summaryField {
@@ -373,6 +372,13 @@
     font-size: 14px;
     color: var(--color-danger);
     font-family: "Montserrat", sans-serif;
+    min-height: 18px;
+    display: block;
+}
+
+.summaryErrorPlaceholder {
+    display: block;
+    min-height: 18px;
 }
 
 .summaryButton {
