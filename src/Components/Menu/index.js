@@ -72,6 +72,7 @@ export const Menu = () => {
             alt="favorite icon"
             className={styles.iconImage}
           />
+          <img src={favoriteIcon} alt="favorite icon" />
           {favoriteItemsCount > 0 && (
             <span className={styles.favoriteCount}>
               {favoriteItemsCount}
