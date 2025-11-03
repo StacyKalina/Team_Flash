@@ -1,21 +1,69 @@
-.wrapper {  
-    gap: 40px;  
+.wrapper {
+  gap: 40px;
 }
-
 
 .header {
-    display: flex;
-    align-items: center;
-    gap: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
+
 .pageTitle {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 700;
-    font-size: 64px;
-    line-height: 110%;
-    color: #424436;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 110%;
+  color: var(--color-text-secondary);
 }
-.stateMessage { /* оставим, чтобы не дублировать */
-    font-size: 16px;
-    color: #6f7a7e;
+
+.stateMessage {
+  font-size: 16px;
+  color: var(--color-text-muted); /* CHANGE: вместо жёсткого #6f7a7e — переменная темы */
+}
+
+/* ======= Адаптив ======= */
+
+/* CHANGE: добавили контролируемую ширину и внутренние отступы на планшетах */
+@media (max-width: 1000px) {
+  .wrapper {
+    max-width: 920px;
+    padding: 0 20px 48px;
+    gap: 32px; /* чуть компактнее вертикальный ритм */
+  }
+}
+
+/* CHANGE: уменьшили контейнер и заголовок на md-экранах */
+@media (max-width: 768px) {
+  .wrapper {
+    max-width: 728px;
+    padding: 0 20px 48px;
+    gap: 32px;
+  }
+  .pageTitle {
+    font-size: 56px;
+  }
+}
+
+/* CHANGE: настройки для телефонов */
+@media (max-width: 480px) {
+  .wrapper {
+    max-width: 440px;
+    padding: 0 20px 48px;
+    gap: 24px;
+  }
+  .pageTitle {
+    font-size: 48px;
+  }
+}
+
+/* CHANGE: самые узкие устройства */
+@media (max-width: 360px) {
+  .wrapper {
+    max-width: 360px;
+    padding: 0 20px 48px;
+    gap: 24px;
+  }
+  .pageTitle {
+    font-size: 40px;
+  }
 }

@@ -1,78 +1,115 @@
 .form {
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* чтобы кнопка была на одну ширину с полями */
+  align-items: stretch;
   gap: 16px;
-  max-width: 518px; /* ограничитель, чтобы не расползалось */
+  max-width: 518px;
   width: 100%;
 }
 
-/* поле ввода */
 .input {
   box-shadow: none;
   padding: 16px 32px;
   background-color: transparent;
-  border: 1px solid #fff;
+  border: 1px solid var(--color-text-inverted);
   border-radius: 6px;
-  color: #fff;
+  color: var(--color-text-inverted);
   font-family: Montserrat, sans-serif;
-  width: 100%;          /* вместо фиксированных 518px */
+  width: 100%;
 }
 
 .input::placeholder {
   font-size: 20px;
   font-weight: 500;
   line-height: 1.3;
-  color: #fff;
+  color: var(--color-text-inverted);
   opacity: .7;
 }
 
 .input:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(255,255,255,.25);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
 }
 
-/* кнопка отправки */
 .submit {
   margin-top: 16px;
   margin-bottom: 32px;
-  border: 1px solid #fff;
+  border: 1px solid var(--color-text-inverted);
   border-radius: 6px;
   padding: 16px 32px;
-  background-color: #fff;
-  color: #000;
-  width: 100%;     /* тянется как поля */
+  background-color: var(--color-text-inverted);
+  color: var(--color-text-strong);
+  width: 100%;
   font-family: Montserrat, sans-serif;
   font-size: 20px;
   font-weight: 600;
   line-height: 1.3;
   cursor: pointer;
-  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .submit:hover {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--color-text-strong);
+  color: var(--color-text-inverted);
 }
 
 .submit:active {
-  background-color: rgba(242,246,211,1);
-  color: rgba(146,161,52,1);
-  border-color: rgba(146,161,52,1);
+  background-color: var(--color-surface-muted);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
-/* контейнер под одну строку ввода (на будущее) */
-.field { width: 100%; }
+.submit:disabled {
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+  cursor: not-allowed;
+}
 
+.submit:disabled:hover {
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
+}
 
+/* контейнер под одну строку ввода + подпись/ошибку */
+.field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding-bottom: 12px;
+}
 
+/* сообщения статуса */
+.statusMessage {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  background-color: rgba(146, 161, 52, 0.18);
+  color: var(--color-text-strong);
+  border: 1px solid var(--color-accent);
+}
 
+.statusMessageError {
+  background-color: rgba(209, 67, 67, 0.18);
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
 
+/* держим место под ошибку, чтобы форма не прыгала */
+.errorPlaceholder {
+  min-height: 24px;
+  display: block;
+  width: 100%;
+}
 
-/* ≥1200: форма шире; ≥1600: ещё чуть шире */
+/* ≥1200: форма шире; ≥1600: ещё шире (с clamp) */
 @media (min-width: 1200px) {
   .form {
-    /* вместо фиксированного max-width: 518px */
     max-width: clamp(520px, 36vw, 780px);
   }
 }

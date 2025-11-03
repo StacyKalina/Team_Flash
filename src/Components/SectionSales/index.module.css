@@ -6,10 +6,11 @@
 
 .infoMessage {
   font-size: 16px;
-  color: #6f7a7e;
+  color: var(--color-text-muted);
   text-align: center;
 }
 
 @media screen and (max-width: 1050px) {
   .cardsGrid { gap: 20px; }
 }
+

@@ -3,10 +3,10 @@
   border-radius: 12px;
   overflow: hidden;
   width: 100%;
-  color: #fff;
+  color: var(--color-text-inverted);
   padding: 32px 32px 0 0;
   min-height: 360px;
-  background: linear-gradient(rgba(135, 147, 61, 1), rgba(85, 97, 11, 1));
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
 }
 
 /* контент */

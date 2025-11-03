@@ -243,10 +243,15 @@ export const Cart = () => {
                                         },
                                     })}
                                 />
-                                {errors.name && (
+                                {errors.name ? (
                                     <span className={styles.summaryError}>
                                         {errors.name.message}
                                     </span>
+                                ) : (
+                                    <span
+                                        className={styles.summaryErrorPlaceholder}
+                                        aria-hidden="true"
+                                    />
                                 )}
                             </label>
 
@@ -265,10 +270,15 @@ export const Cart = () => {
                                         },
                                     })}
                                 />
-                                {errors.phone && (
+                                {errors.phone ? (
                                     <span className={styles.summaryError}>
                                         {errors.phone.message}
                                     </span>
+                                ) : (
+                                    <span
+                                        className={styles.summaryErrorPlaceholder}
+                                        aria-hidden="true"
+                                    />
                                 )}
                             </label>
 
@@ -288,10 +298,15 @@ export const Cart = () => {
                                         },
                                     })}
                                 />
-                                {errors.email && (
+                                {errors.email ? (
                                     <span className={styles.summaryError}>
                                         {errors.email.message}
                                     </span>
+                                ) : (
+                                    <span
+                                        className={styles.summaryErrorPlaceholder}
+                                        aria-hidden="true"
+                                    />
                                 )}
                             </label>
                         </div>

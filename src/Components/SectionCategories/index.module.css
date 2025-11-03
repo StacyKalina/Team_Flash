@@ -28,7 +28,7 @@
   padding: 20px;
   padding-bottom: 18px;
   border-radius: 12px;
-  background-color: #f2f6d3;
+  background-color: var(--color-surface-muted);
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
@@ -37,7 +37,7 @@
 
 .categoryCard:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(1, 43, 44, 0.1);
+  box-shadow: var(--shadow-elevated);
 }
 
 /* Контейнер для изображения */
@@ -70,7 +70,7 @@
 /* Сообщения состояния (loading/failed) */
 .infoMessage {
   font-size: 16px;
-  color: #6f7a7e;
+  color: var(--color-text-muted);
   text-align: center;
 }
 

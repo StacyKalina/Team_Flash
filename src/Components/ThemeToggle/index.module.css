@@ -1,0 +1,113 @@
+.toggle {
+  position: relative;
+  width: 60px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background-color: var(--color-toggle-track);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.toggle:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.toggleDark {
+  background-color: var(--color-toggle-track);
+}
+
+.thumb {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--color-toggle-thumb);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  transform: translateX(0);
+  transition: transform 0.25s ease, background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.toggleDark .thumb {
+  transform: translateX(26px);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: var(--color-toggle-icon);
+  pointer-events: none;
+  transition: color 0.25s ease;
+}
+
+.iconSun {
+  margin-right: auto;
+}
+
+.iconMoon {
+  margin-left: auto;
+}
+
+.svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  fill: none;
+}
+
+.svg line,
+.svg circle {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.iconMoon .svg {
+  fill: currentColor;
+  stroke: none;
+}
+
+@media (max-width: 768px) {
+  .toggle {
+    width: 52px;
+    height: 28px;
+    padding: 0 6px;
+  }
+
+  .thumb {
+    width: 20px;
+    height: 20px;
+    top: 3px;
+  }
+
+  .toggleDark .thumb {
+    transform: translateX(22px);
+  }
+
+  .icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .svg {
+    width: 14px;
+    height: 14px;
+  }
+}

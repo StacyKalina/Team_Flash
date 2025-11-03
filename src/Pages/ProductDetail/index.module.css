@@ -26,12 +26,12 @@
 
 .description {
   font-size: 16px;
-  color: #555;
+  color: var(--color-text-muted);
 }
 
 .price {
   font-size: 48px;
-  color: #282828;
+  color: var(--color-text-secondary);
   font-weight: bold;
 }
 .counterAndCart {
@@ -53,8 +53,8 @@
 
 .cartButton {
   margin-top: 15px;
-  background-color: #92a134;
-  color: white;
+  background-color: var(--color-accent);
+  color: var(--color-text-inverted);
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -67,9 +67,9 @@
   font-size: 16px;
   font-weight: bold;
   background-color: transparent;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 5px;
-  color: #000;
+  color: var(--color-text-primary);
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -83,7 +83,7 @@
   font-size: 16px;
   font-weight: bold;
   background-color: transparent; /* Прозрачный фон */
-  color: #000; /* Цвет текста для цифры */
+  color: var(--color-text-primary); /* Цвет текста для цифры */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,18 +99,18 @@
 .discountPrice {
   font-size: 48px;
   font-weight: bold;
-  color: #282828;
+  color: var(--color-text-secondary);
 }
 
 .oldPrice {
   font-size: 28px;
-  color: #8b8b8b;
+  color: var(--color-text-muted);
   text-decoration: line-through;
 }
 
 .discountPercentage {
-  background-color: #f26d22;
-  color: #fff;
+  background-color: var(--color-accent-strong);
+  color: var(--color-text-inverted);
   font-size: 10px;
   padding: 4px 8px;
   border-radius: 5px;
@@ -308,7 +308,7 @@
 .readMoreBtn {
   background: none; /* Убирает фоновый цвет */
   border: none; /* Убирает рамку */
-  color: #282828;
+  color: var(--color-text-secondary);
   cursor: pointer; /* Курсор в виде указателя */
   padding: 0; /* Убирает внутренние отступы */
   font-size: 1em; /* Размер шрифта */
@@ -329,3 +329,4 @@
   text-decoration: underline; /* Сохраняет подчеркивание */
   border: none;
 }
+
