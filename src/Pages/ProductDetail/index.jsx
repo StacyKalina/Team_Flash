@@ -16,7 +16,7 @@ export const ProductDetail = () => {
   const dispatch = useDispatch();
   const product = useSelector(selectSelectedProduct);
   const status = useSelector((state) => state.products.status);
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [showFullDescription, setShowFullDescription] = useState(false); 
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const ProductDetail = () => {
   }, [dispatch, id]);
 
   const handleIncrement = () => setCount((prev) => prev + 1);
-  const handleDecrement = () => setCount((prev) => (prev > 1 ? prev - 1 : 1));
+  const handleDecrement = () => setCount((prev) => (prev > 0 ? prev - 1 : 0));
   const toggleDescription = () => setShowFullDescription((prev) => !prev); 
   const handleAddToCart = () => {
     if (!product) return;
