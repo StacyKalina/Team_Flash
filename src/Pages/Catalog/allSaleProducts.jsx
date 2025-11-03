@@ -17,8 +17,7 @@ export const Sales = () => {
 
 
   return (
-    <section className="sectionWrapper">
-      <div className="sectionShell">
+    <section className="page__content sectionShell">
 
         <header className={styles.header}>
           <h1 className={styles.pageTitle}>All sales</h1>
@@ -29,7 +28,6 @@ export const Sales = () => {
         {status === "failed" && <p className={styles.stateMessage}>Error: {error}</p>}
         {status === "succeeded" && <ProductsGrid cameFrom={{ type: "sales" }} />}
 
-      </div>
     </section>
   );
 };

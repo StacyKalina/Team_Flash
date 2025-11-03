@@ -45,8 +45,7 @@ export const Catalog = () => {
   }, [dispatch, categoryId]);
 
   return (
-    <section className="sectionWrapper">
-      <div className="sectionShell">
+    <section className="page__content sectionShell">
 
         <header className={styles.header}>
           <h1 className={styles.pageTitle}>{pageTitle}</h1>
@@ -66,7 +65,6 @@ export const Catalog = () => {
             : <p className={styles.stateMessage}>No products in this category yet.</p>
         )}
 
-      </div>
     </section>
   );
 };

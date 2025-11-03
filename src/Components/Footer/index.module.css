@@ -61,6 +61,7 @@
   border-radius: 32px;
   overflow: hidden;
   background-color: var(--color-surface-muted);
+margin-top: 1.5vw;
 }
 
 .mapWrapper iframe {

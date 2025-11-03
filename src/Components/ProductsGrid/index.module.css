@@ -1,6 +1,6 @@
 .cardsGrid {
   display: grid;
-  gap: 32px;
+  gap: 42px;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   justify-content: stretch; /* растягиваем на всю ширину */
   margin-top: 16px; /* ← добавляем мягкий отступ */

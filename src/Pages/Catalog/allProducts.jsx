@@ -22,8 +22,7 @@ export const AllProducts = () => {
   }, [status, source, dispatch]);
 
   return (
-    <section className="sectionWrapper">
-      <div className="sectionShell">
+    <section className="page__content sectionShell">
 
         <header className={styles.header}>
           <h1 className={styles.pageTitle}>All products</h1>
@@ -35,7 +34,6 @@ export const AllProducts = () => {
         {status === "failed" && <p className={styles.stateMessage}>Error: {error}</p>}
         {status === "succeeded" && <ProductsGrid cameFrom={{ type: "all" }} />}
 
-      </div>
     </section>
   );
 };

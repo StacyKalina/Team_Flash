@@ -48,8 +48,7 @@ export const CategoriesPage = () => {
     return (
         // два класс чтобы дополнить глобальный 
         // <div className={`sectionWrapper ${styles.wrapper} page__content` }>
-        <section className="sectionWrapper">
-            <div className="sectionShell">
+        <section className="page__content sectionShell">
 
                 <h2 className="sectionTitle">Categories</h2>
 
@@ -98,7 +97,7 @@ export const CategoriesPage = () => {
                     </div>
                 )
                 }
-            </div>
+                
         </section >
     )
 }

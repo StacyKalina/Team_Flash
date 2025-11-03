@@ -2,7 +2,8 @@
 .bar {
   width: 100%;
   overflow: hidden;
-  margin-top: 24px; /* отступ после меню */
+  margin-top: clamp(24px, 5vw, 56px);  /* минимум 24px, максимум 56px */
+  padding-inline: var(--pad-sm); /* тот же горизонтальный ритм, что и у page__content */
 }
 
 /* Список — одна строка, скролл внутри при переполнении */
@@ -86,9 +87,24 @@
   }
 }
 
+@media (min-width: 768px) {
+  .bar {
+    padding-inline: var(--pad-md);
+  }
+}
+
+@media (min-width: 1000px) {
+  .bar {
+    padding-inline: var(--pad-lg);
+  }
+}
+
 @media (min-width: 2000px) {
   .pill {
     font-size: 24px;
+  }
+  .bar {
+    padding-inline: var(--pad-xlg);
   }
 }
 
