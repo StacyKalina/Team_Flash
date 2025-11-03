@@ -2,7 +2,7 @@
 .bar {
   width: 100%;
   overflow: hidden;
-  margin-top: 24px;      /* отступ после меню */
+  margin-top: 24px; /* отступ после меню */
 }
 
 /* Список — одна строка, скролл внутри при переполнении */
@@ -14,9 +14,9 @@
   margin: 0;
 
   list-style: none;
-  overflow-x: auto;           /* даём прокрутку по оси X */
-  white-space: nowrap;        /* всё в одну строку */
-  scrollbar-width: thin;      /* firefox */
+  overflow-x: auto;     /* прокрутка по X */
+  white-space: nowrap;  /* всё в одну строку */
+  scrollbar-width: thin; /* Firefox */
 }
 
 /* Элемент списка */
@@ -30,18 +30,18 @@
   display: inline-block;
   margin: 0 4px 0 8px;
   pointer-events: none;
-  color: #8B8B8B;
+  color: var(--color-text-muted);
   font-size: 14px;
   line-height: 1;
 }
 
 /* Пилюля — общий стиль и для <Link>, и для <span> текущего пункта.
-   Выполнена в стиле btnLink: бордер, радиус, цвета и hover */
+   Токены темы вместо хардкодов */
 .pill {
   padding: 6px 12px;
   border-radius: 8px;
-  border: 2px solid #DDDDDD; 
-  color: #8B8B8B;
+  border: 2px solid var(--color-border);
+  color: var(--color-text-muted);
   text-decoration: none;
   font-weight: 500;
   font-size: 14px;
@@ -49,28 +49,29 @@
   align-items: center;
   justify-content: center;
 
-  transition: background .15s, color .15s, border-color .15s;
+  background: transparent;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
 }
 
 /* Фокус для доступности */
 .pill:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(88, 28, 135, 0.15);
+  box-shadow: var(--shadow-focus-accent); /* 0 0 0 3px ... из темы */
 }
 
-/* Наведение — как у btnLink */
+/* Наведение */
 .pill:hover {
-  background-color: #F2F6D3;
-  border-color: #F2F6D3;
-  color: #424436;
+  background-color: var(--color-surface-muted);
+  border-color: var(--color-surface-muted);
+  color: var(--color-text-secondary);
 }
 
-/* Текущий пункт — делаем немного темнее и отключаем pointer */
+/* Текущий пункт */
 .current {
   cursor: default;
-  color: #424436;
-  border-color: #E6E6E6;
-  background-color: #FAFAFA;
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+  background-color: var(--color-surface);
 }
 
 /* Небольшие адаптивные корректировки */
@@ -86,7 +87,22 @@
 }
 
 @media (min-width: 2000px) {
-.pill {
-  font-size: 24px;
+  .pill {
+    font-size: 24px;
+  }
 }
+
+/* (опционально) тонкий webkit-скролл в цветах темы */
+.list::-webkit-scrollbar {
+  height: 8px;
+}
+.list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.list::-webkit-scrollbar-thumb {
+  background: var(--color-toggle-track);
+  border-radius: 8px;
+}
+.list::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border);
 }

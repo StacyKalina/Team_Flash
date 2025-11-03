@@ -5,10 +5,10 @@
    ========================= */
 :root {
   color-scheme: light;
-
+ --page-sheet: #fffff1; 
   --color-background: #fffff1;
   --color-surface: #ffffff;
-  --color-surface-muted: #f8f8f0;
+  --color-surface-muted: #F2F6D3;
   --color-border: #dddddd;
   --color-text-primary: #012b2c;
   --color-text-secondary: #424436;
@@ -58,11 +58,11 @@
    ========================= */
 body[data-theme='dark'] {
   color-scheme: dark;
-
+ --page-sheet: #424436;
   --color-background: #474942;
   --color-surface: #2a2c23;
   --color-surface-muted: #34362b;
-  --color-border: #4a4c3e;
+  --color-border: #626456;
   --color-text-primary: #f4f4e8;
   --color-text-secondary: #d8d8c8;
   --color-text-muted: #a4a48f;
@@ -189,22 +189,26 @@ video {
 /* белые поля снаружи страницы */
 html,
 body {
-  background: var(--bg-white);
+  background: var(--color-background);
 }
 
 /* =========================
    PAGE LAYOUT
    ========================= */
 
-/* вся страница с жёлтым фоном и стопом по ширине */
+/* используем лист; ограничиваем ширину по переменной, добавляем скругление и тень */
 .page {
-  background: var(--bg-yellow);
-  width: 100vw;           /* всегда тянется по ширине окна */
-  max-width: 2000px;      /* но не бесконечно — ограничение для очень широких экранов */
-  margin-inline: auto;    /* центрируем на больших экранах */
-  overflow-x: hidden;     /* убираем горизонтальный скролл */
-  position: relative;     /* нужно, если внутренние блоки вытягиваются (баннер) */
+  background: var(--page-sheet);
+  width: 100vw;
+  max-width: var(--page-max);   /* было 2000px → берём из переменной (у тебя 1600px) */
+  margin-inline: auto;
+  overflow-x: hidden;
+  position: relative;
+
+  border-radius: 12px;          /* мягкие края листа */
+  box-shadow: var(--shadow-elevated); /* тень для отделения от фона */
 }
+
 
 /* единые боковые паддинги для шапки/баннера/контента/футера */
 .page__content {
