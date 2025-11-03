@@ -9,14 +9,14 @@ import { addItem } from "../../store/slices/cartSlice";
 import styles from "./index.module.css";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE ?? "http://localhost:3333";
-const DESCRIPTION_LIMIT = 200;
+const DESCRIPTION_LIMIT = 150;
 
 export const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector(selectSelectedProduct);
   const status = useSelector((state) => state.products.status);
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [showFullDescription, setShowFullDescription] = useState(false); 
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const ProductDetail = () => {
   }, [dispatch, id]);
 
   const handleIncrement = () => setCount((prev) => prev + 1);
-  const handleDecrement = () => setCount((prev) => (prev > 1 ? prev - 1 : 1));
+  const handleDecrement = () => setCount((prev) => (prev > 0 ? prev - 1 : 0));
   const toggleDescription = () => setShowFullDescription((prev) => !prev); 
   const handleAddToCart = () => {
     if (!product) return;
@@ -95,7 +95,7 @@ export const ProductDetail = () => {
             </button>
           </div>
         </div>
-        <h2>Description</h2>
+        <h4>Description</h4>
         <p className={styles.description}>
           {showFullDescription || !needsReadMore
             ? product.description

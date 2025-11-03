@@ -1,7 +1,7 @@
 .footer {
   background-color: var(--page-sheet);
   padding-top: 20px;
-  padding-bottom: 80px; /* жёлтая рамка снизу */
+  padding-bottom: 80px;
 }
 
 .footerInner {
@@ -12,14 +12,20 @@
 
 .contactsGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 32px;
+  align-items: stretch;
 }
 
 .contactsCard {
   border-radius: 6px;
   background: var(--color-surface-muted);
   padding: 32px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .cardLabel {
@@ -61,7 +67,7 @@
   border-radius: 32px;
   overflow: hidden;
   background-color: var(--color-surface-muted);
-margin-top: 1.5vw;
+  margin-top: 1.5vw;
 }
 
 .mapWrapper iframe {
@@ -78,7 +84,6 @@ margin-top: 1.5vw;
   display: block;
 }
 
-/* ====== MEDIA ====== */
 @media (max-width: 1000px) {
   .footer {
     padding: 0 20px 60px;
@@ -104,7 +109,9 @@ margin-top: 1.5vw;
     height: 250px;
   }
 
-  .mapContainer { margin: 0; }
+  .mapContainer {
+    margin: 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -123,7 +130,7 @@ margin-top: 1.5vw;
   }
 
   .infoRow {
-    grid-template-columns: minmax(0, 479px) minmax(0, 229px);
+    grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     gap: 20px;
   }
@@ -149,14 +156,15 @@ margin-top: 1.5vw;
     gap: 12px;
   }
 
-  .infoRow {
-    grid-template-columns: 1fr;
+  .contactsGrid {
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
+    align-items: stretch;
   }
 
-  .card {
+  .contactsCard {
+    width: 100%;
     padding: 24px 20px;
-    gap: 12px;
   }
 
   .cardLabel {
@@ -182,46 +190,18 @@ margin-top: 1.5vw;
     gap: 12px;
   }
 
-  .mapContainer { margin: 0; }
+  .mapContainer {
+    margin: 0;
+  }
 }
 
-@media (max-width: 360px) {
-  .footer {
-    padding: 0 20px 56px;
-    gap: 24px;
-  }
-
-  .title,
-  .cards,
-  .mapWrapper {
-    max-width: 320px;
-  }
-
-  .title {
-    font-size: 40px;
-  }
-
-  .cards {
-    gap: 12px;
-  }
-
-  .card {
-    padding: 24px 20px;
-    gap: 12px;
-  }
-
-  .infoRow {
+@media (max-width: 380px) {
+  .contactsGrid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .socialCard {
-    gap: 12px;
+  .contactsCard {
+    width: 100%;
   }
-
-  .socialHeader {
-    gap: 12px;
-  }
-
-  .mapContainer { margin: 0; }
 }

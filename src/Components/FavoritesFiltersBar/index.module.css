@@ -1,129 +1,149 @@
 .filtersBar {
-  display: flex;
-  /* Добавляем небольшой отступ между секциями фильтров */
-  gap: 15px; 
-  align-items: center;
-  padding: 15px 20px;
-  background-color: transparent; /* Оставляем фон прозрачным */
-  box-shadow: none; /* Убираем тень */
-  margin-bottom: 20px;
+display: flex;
+/* Добавляем небольшой отступ между секциями фильтров */
+gap: 15px;
+align-items: center;
+padding: 15px 20px;
+background-color: transparent; /* Оставляем фон прозрачным */
+box-shadow: none; /* Убираем тень */
+margin-bottom: 20px;
 }
 
 .filterSection {
-  display: flex;
-  align-items: center;
-  /* Отступ между элементами внутри секции, например между Label и Inputs */
-  gap: 10px;
+display: flex;
+align-items: center;
+/* Отступ между элементами внутри секции, например между Label и Inputs */
+gap: 10px;
 }
 
 .filterLabel {
-  font-weight: 500;
-  color: var(--color-text-secondary);
+font-weight: 500;
+color: var(--color-text-secondary);
 }
 
 .priceInputs {
-  display: flex;
-  /* Отступ между двумя полями ввода цены */
-  gap: 8px;
+display: flex;
+/* Отступ между двумя полями ввода цены */
+gap: 8px;
 }
 
 .priceInput {
-  width: 80px;
-  padding: 8px 10px;
-  border: 1px solid var(--color-border);
-  border-radius: 6px; /* Добавляем скругление */
-  font-size: 14px;
-  background-color: var(--color-surface);
-  color: var(--color-text-secondary);
-  transition: border-color 0.2s ease, background-color 0.2s ease,
-    color 0.2s ease;
+width: 80px;
+padding: 8px 10px;
+border: 1px solid var(--color-border);
+border-radius: 6px; /* Добавляем скругление */
+font-size: 14px;
+background-color: var(--color-surface);
+color: var(--color-text-secondary);
+transition: border-color 0.2s ease, background-color 0.2s ease,
+color 0.2s ease;
 }
 
 .discountToggle {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
+display: flex;
+align-items: center;
+gap: 8px;
+cursor: pointer;
 }
 
-
 .discountCheckbox {
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 1px solid var(--color-border);
-  border-radius: 4px; /* Добавляем скругление */
-  position: relative;
-  cursor: pointer;
-  background-color: var(--color-surface);
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+appearance: none;
+width: 20px;
+height: 20px;
+border: 1px solid var(--color-border);
+border-radius: 4px; /* Добавляем скругление */
+position: relative;
+cursor: pointer;
+background-color: var(--color-surface);
+transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .discountCheckbox:checked {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
+background-color: var(--color-accent);
+border-color: var(--color-accent);
 }
 
 .discountCheckbox:checked::after {
-  content: '';
-  position: absolute;
-  left: 5px;
-  top: 1px;
-  width: 5px;
-  height: 10px;
-  border: solid var(--color-text-inverted);
-  border-width: 0 3px 3px 0;
-  transform: rotate(45deg);
+content: '';
+position: absolute;
+left: 5px;
+top: 1px;
+width: 5px;
+height: 10px;
+border: solid var(--color-text-inverted);
+border-width: 0 3px 3px 0;
+transform: rotate(45deg);
 }
 
 .sortControl {
-  position: relative;
+position: relative;
 }
 
 .sortSelect {
-  padding: 8px 30px 8px 10px;
-  border: 1px solid var(--color-border);
-  border-radius: 6px; /* Rounded corners */
-  font-size: 14px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-color: var(--color-surface);
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  transition: border-color 0.2s ease, background-color 0.2s ease,
-    color 0.2s ease;
+padding: 8px 30px 8px 10px;
+border: 1px solid var(--color-border);
+border-radius: 6px; /* Rounded corners */
+font-size: 14px;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+background-color: var(--color-surface);
+color: var(--color-text-secondary);
+cursor: pointer;
+transition: border-color 0.2s ease, background-color 0.2s ease,
+color 0.2s ease;
 }
-
 
 .sortIcon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  filter: var(--color-icon-filter-primary);
-  transition: filter 0.2s ease;
+position: absolute;
+right: 10px;
+top: 50%;
+transform: translateY(-50%);
+pointer-events: none;
+filter: var(--color-icon-filter-primary);
+transition: filter 0.2s ease;
 }
-
 
 .resetBtn {
-  padding: 8px 16px;
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 6px; /* Rounded corners */
-  cursor: pointer;
-  color: var(--color-text-secondary);
-  transition: background-color 0.2s ease, border-color 0.2s ease,
-    color 0.2s ease;
+padding: 8px 16px;
+background-color: var(--color-surface);
+border: 1px solid var(--color-border);
+border-radius: 6px; /* Rounded corners */
+cursor: pointer;
+color: var(--color-text-secondary);
+transition: background-color 0.2s ease, border-color 0.2s ease,
+color 0.2s ease;
 }
-
 
 .resetBtn:hover {
-  background-color: var(--color-surface-muted);
+background-color: var(--color-surface-muted);
 }
 
+/* ====== MEDIA ====== */
+@media (max-width: 768px) {
+.filtersBar {
+flex-wrap: wrap; /* разрешаем перенос элементов при уменьшении ширины */
+}
+}
 
+@media (max-width: 480px) {
+.filtersBar {
+flex-direction: column; /* все элементы в колонку */
+align-items: flex-start; /* выравнивание по левому краю */
+}
+
+/* Price остаётся сверху */
+.filterSection.priceSection {
+order: 0; /* остаётся первым */
+width: 100%; /* занимает всю ширину */
+}
+
+/* Sort и Reset уходят под Price */
+.sortControl, .resetBtn {
+order: 1; /* после Price */
+width: 100%; /* на всю ширину */
+}
+}
 
 
 
