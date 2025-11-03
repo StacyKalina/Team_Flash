@@ -5,15 +5,16 @@
     justify-content: space-between;
     width: 316px;
     min-height: 422px;
-    background-color: #ffffff;
-    border: 1px solid #dddddd;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 18px;
     overflow: hidden;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease,
+        background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
-    box-shadow: 0 12px 24px rgba(1, 43, 44, 0.12);
+    box-shadow: var(--shadow-elevated);
     transform: translateY(-3px);
 }
 
@@ -25,8 +26,8 @@
     align-items: center;
     justify-content: center;
     padding: 4px 8px;
-    background-color: #f26d22;
-    color: #ffffff;
+    background-color: var(--color-accent-strong);
+    color: var(--color-text-inverted);
     font-weight: 600;
     font-size: 20px;
     line-height: 1.3;
@@ -41,8 +42,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffffff;
-    border-bottom: 1px solid #dddddd;
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .image {
@@ -67,13 +69,14 @@
     font-size: 20px;
     font-weight: 600;
     line-height: 1.3;
-    background-color: #f26d22;
-    color: #ffffff;
+    background-color: var(--color-accent-strong);
+    color: var(--color-text-inverted);
     cursor: pointer;
     opacity: 0;
     transform: translateY(6px);
     pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease,
+        background-color 0.2s ease, color 0.2s ease;
 }
 
 .imageWrapper:hover .ctaButton,
@@ -84,7 +87,7 @@
 }
 
 .ctaButton:hover {
-    background-color: #454b1b;
+    background-color: var(--color-accent-strong-hover);
 }
 
 .footer {
@@ -93,13 +96,13 @@
     flex-direction: column;
     gap: 16px;
     cursor: pointer;
-    background-color: #ffffff;
-    transition: background-color 0.2s ease;
+    background-color: var(--color-surface);
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .footer:hover,
 .footer:focus-visible {
-    background-color: #f8f8f0;
+    background-color: var(--color-surface-muted);
 }
 
 .title {
@@ -107,7 +110,7 @@
     font-size: 20px;
     font-weight: 500;
     line-height: 1.3;
-    color: #424436;
+    color: var(--color-text-secondary);
     min-height: 78px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -124,14 +127,14 @@
     font-size: 40px;
     font-weight: 600;
     line-height: 1.1;
-    color: #424436;
+    color: var(--color-text-secondary);
 }
 
 .oldPrice {
     font-size: 20px;
     font-weight: 500;
     line-height: 1.3;
-    color: #8b8b8b;
+    color: var(--color-text-muted);
     text-decoration: line-through;
 }
 
