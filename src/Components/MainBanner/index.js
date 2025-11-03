@@ -1,23 +1,52 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 import Button from "../MainButton";
+import { Link, NavLink } from "react-router-dom";
+
+
 
 export const MainBanner = () => {
-  const navigate = useNavigate();
+    return (
+        <>
+        <nav>
+            <div className={styles.BannerWrapper} >
+                <div className={styles.BannerContent}>
+                    < h1 className={styles.MainHeader}>
+                        Amazing Discounts on Garden Products!
+                    </h1>
+                    <NavLink to="/cart" className={({ isActive }) => isActive ? styles.active : ""}                >
+                        <Button text="Check out" />
+                    </NavLink>
 
-  const handleCheckoutClick = () => {
-    navigate("/cart");
-  };
+                </div>
+            </div>
+        </nav>
+        </>
+    );
+}
 
-  return (
-     <div className={styles.bannerWrapper}>
-      <div className={styles.bannerContent}>
-        <h1 className={styles.MainHeader}>
-          Amazing Discounts on Garden Products!
-        </h1>
-        <Button text="Check out" onClick={handleCheckoutClick} />
-      </div>
-    </div>
-  );
-};
+
+
+
+
+
+
+//   const navigate = useNavigate();
+
+//   const handleCheckoutClick = () => {
+//     navigate("/cart");
+//   };
+
+//   return (
+//     <div className={styles.BannerWrapper}>
+//       <div className={styles.BannerContent}>
+//         <h1 className={styles.MainHeader}>
+//           Amazing Discounts on Garden Products!
+//         </h1>
+//         <Button text="Check out" onClick={handleCheckoutClick} />
+//       </div>
+//     </div>
+//   );
+// };
+

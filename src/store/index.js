@@ -7,7 +7,7 @@ import globalReducer from "./slices/globalSlice.js";
 import { loadingMiddleware } from "./middleware/loadingMiddleware.js";
 import favoriteReducer from "./slices/favoriteSlice.js";
 import favoriteFiltersSlice from "./slices/favoriteFiltersSlice";
-
+import formSlice from "./slices/formSlice.js";
 
 const CART_STORAGE_KEY = "cart_state";
 
@@ -54,6 +54,7 @@ export const store = configureStore({
     global: globalReducer,
     favorites: favoriteReducer,
     favoriteFilters: favoriteFiltersSlice,
+    form: formSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(loadingMiddleware),

@@ -1,0 +1,123 @@
+/* =========================
+   ФОН (тёмная подложка)
+   ========================= */
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  /* затемнение */
+  z-index: 999;
+  /* ниже модалки */
+}
+
+/* =========================
+   ОБОЛОЧКА МОДАЛКИ
+   ========================= */
+.modalOverlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(146, 161, 52, 1);
+  /* твой зелёный цвет */
+  color: #fff;
+  /* белый текст для контраста */
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 548px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  /* поверх фона */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: fixed;
+}
+
+/* =========================
+   КОНТЕНТ МОДАЛКИ
+   ========================= */
+.modalContent {
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  position: relative;
+}
+
+h2 {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+p {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+/* =========================
+   КНОПКА ЗАКРЫТИЯ
+   ========================= */
+.closeButton {
+  display: flex;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1001;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+}
+
+.closeButton:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+
+.closeIcon {
+  width: 22px;
+  height: 22px;
+  display: block;
+  pointer-events: none;
+  background-color: rgba(146, 161, 52, 1);
+
+
+
+  /* чтобы клик шел по кнопке */
+}
+
+
+/* =========================
+   АДАПТИВ
+   ========================= */
+@media screen and (max-width: 600px) {
+  .modalOverlay {
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: clamp(20px, 6vw, 32px);
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  .closeIcon {
+
+    width: 18px;
+    height: 18px;
+  }
+}
