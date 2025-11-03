@@ -1,7 +1,14 @@
 .navWrapper {
+  background-color: #fffff1; /* оставила твой явный цвет фона */
+}
+
+.navContent {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  /* CHANGE: склеила блок из ветки dev + сохранила твою высоту */
   background-color: var(--color-nav-background);
   color: var(--color-nav-text);
   height: 128px;
@@ -11,6 +18,7 @@
     border-color 0.3s ease;
 }
 
+/* CHANGE: блок brandSection отсутствовал в HEAD — вернула из dev */
 .brandSection {
   display: flex;
   align-items: center;
@@ -221,6 +229,7 @@
   transition: filter 0.3s ease;
 }
 
+/* CHANGE: объединила дублирующийся @media (max-width: 1000px) — он встречался дважды */
 @media screen and (max-width: 1000px) {
   .navWrapper {
     padding: 0 20px;
@@ -228,6 +237,7 @@
 }
 
 @media screen and (max-width: 768px) {
+  /* CHANGE: адаптив — скрыть десктопные вещи и показать мобильные */
   .navWrapper {
     height: 110px;
   }
@@ -258,5 +268,11 @@
 
   .logo {
     margin-right: auto;
+  }
+}
+
+@media (min-width: 2000px) {
+  .navItemsWrapper {
+    font-size: 24px;
   }
 }

@@ -5,8 +5,8 @@ import { FormError } from "./FormError";
 
 const NAME_PATTERN = /^[A-Za-z\u0410-\u044F\u0401\u0451\s'-]{2,40}$/u;
 const PHONE_PATTERN = /^\+?[0-9]{7,14}$/;
-const EMAIL_PATTERN =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/i;
+const EMAIL_PATTERN = /^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
 
 const ERROR_MESSAGES = {
   required: "Field is mandatory",
@@ -17,9 +17,7 @@ const ERROR_MESSAGES = {
 
 const simulateRequest = (payload) =>
   new Promise((resolve) => {
-    // emulate a network call; always succeeds after 1.2s
     setTimeout(() => {
-      // eslint-disable-next-line no-console
       console.info("Mock registration payload sent:", payload);
       resolve({ ok: true });
     }, 1200);
@@ -32,19 +30,24 @@ export const RegistrationForm = () => {
     formState: { errors },
     reset,
   } = useForm({ mode: "onBlur" });
+
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
   const [submissionError, setSubmissionError] = useState("");
-
   const resetTimerRef = useRef(null);
 
   useEffect(
     () => () => {
-      if (resetTimerRef.current) {
-        clearTimeout(resetTimerRef.current);
-      }
+      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
     },
     []
   );
+
+  // CHANGE: один общий текст ошибки (первый встретившийся)
+  const firstFieldErrorText =
+    errors.userName?.message ||
+    errors.tel?.message ||
+    errors.email?.message ||
+    "";
 
   const submitHandler = async (data) => {
     setSubmissionError("");
@@ -57,20 +60,9 @@ export const RegistrationForm = () => {
       setSubmissionError("Something went wrong, please try again later.");
       setStatus("error");
     } finally {
-      // return to idle after showing feedback for a while
-      if (resetTimerRef.current) {
-        clearTimeout(resetTimerRef.current);
-      }
+      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
       resetTimerRef.current = setTimeout(() => setStatus("idle"), 6000);
     }
-  };
-
-  const renderFieldError = (fieldName, errorId) => {
-    const fieldError = errors[fieldName];
-    if (fieldError) {
-      return <FormError id={errorId} text={fieldError.message} />;
-    }
-    return <span className={styles.errorPlaceholder} aria-hidden="true" />;
   };
 
   return (
@@ -87,13 +79,12 @@ export const RegistrationForm = () => {
           type="text"
           id="userName"
           aria-invalid={errors.userName ? "true" : "false"}
-          aria-describedby={errors.userName ? "userName-error" : undefined}
+          aria-errormessage={errors.userName ? "form-field-error" : undefined} // CHANGE
           {...register("userName", {
             required: ERROR_MESSAGES.required,
             pattern: { value: NAME_PATTERN, message: ERROR_MESSAGES.name },
           })}
         />
-        {renderFieldError("userName", "userName-error")}
       </div>
 
       <div className={styles.field}>
@@ -103,13 +94,12 @@ export const RegistrationForm = () => {
           placeholder="Phone number"
           id="tel"
           aria-invalid={errors.tel ? "true" : "false"}
-          aria-describedby={errors.tel ? "tel-error" : undefined}
+          aria-errormessage={errors.tel ? "form-field-error" : undefined} // CHANGE
           {...register("tel", {
             required: ERROR_MESSAGES.required,
             pattern: { value: PHONE_PATTERN, message: ERROR_MESSAGES.phone },
           })}
         />
-        {renderFieldError("tel", "tel-error")}
       </div>
 
       <div className={styles.field}>
@@ -119,15 +109,20 @@ export const RegistrationForm = () => {
           placeholder="Email"
           id="email"
           aria-invalid={errors.email ? "true" : "false"}
-          aria-describedby={errors.email ? "email-error" : undefined}
+          aria-errormessage={errors.email ? "form-field-error" : undefined} // CHANGE
           {...register("email", {
             required: ERROR_MESSAGES.required,
             pattern: { value: EMAIL_PATTERN, message: ERROR_MESSAGES.email },
           })}
         />
-        {renderFieldError("email", "email-error")}
       </div>
 
+      {/* CHANGE: показываем ошибку только если она есть */}
+      {firstFieldErrorText && (
+        <FormError id="form-field-error" text={firstFieldErrorText} />
+      )}
+
+      {/* серверная/сетевой фидбек и успех — ниже */}
       {submissionError && (
         <p className={`${styles.statusMessage} ${styles.statusMessageError}`}>
           {submissionError}

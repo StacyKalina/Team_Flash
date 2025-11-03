@@ -11,10 +11,10 @@ export const MainBanner = () => {
   };
 
   return (
-    <div className={styles.BannerWrapper}>
-      <div className={styles.BannerContent}>
+     <div className={styles.bannerWrapper}>
+      <div className={styles.bannerContent}>
         <h1 className={styles.MainHeader}>
-          Amazing Discounts on Garden Products!
+          Amazing Discounts on Garden Products!
         </h1>
         <Button text="Check out" onClick={handleCheckoutClick} />
       </div>

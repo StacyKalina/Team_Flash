@@ -6,7 +6,7 @@ export const FooterContact = ({ contact }) => {
     const socials = contact.socials || [];
 
     return (
-            <div className = "sectionWrapper">
+            <section className="sectionShell">
 
             <h2 className="sectionTitle" >
                 Contact
@@ -45,7 +45,7 @@ export const FooterContact = ({ contact }) => {
                 </div>
 
             </div>
-        </div>
+        </section>
 
     )
 }

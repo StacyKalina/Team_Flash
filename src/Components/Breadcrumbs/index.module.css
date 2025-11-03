@@ -1,0 +1,124 @@
+/* Внешний контейнер */
+.bar {
+  width: 100%;
+  overflow: hidden;
+  margin-top: clamp(24px, 5vw, 56px);  /* минимум 24px, максимум 56px */
+  padding-inline: var(--pad-sm); /* тот же горизонтальный ритм, что и у page__content */
+}
+
+/* Список — одна строка, скролл внутри при переполнении */
+.list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+  overflow-x: auto;     /* прокрутка по X */
+  white-space: nowrap;  /* всё в одну строку */
+  scrollbar-width: thin; /* Firefox */
+}
+
+/* Элемент списка */
+.item {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Разделитель между пунктами */
+.sep {
+  display: inline-block;
+  margin: 0 4px 0 8px;
+  pointer-events: none;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Пилюля — общий стиль и для <Link>, и для <span> текущего пункта.
+   Токены темы вместо хардкодов */
+.pill {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 2px solid var(--color-border);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+
+/* Фокус для доступности */
+.pill:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-accent); /* 0 0 0 3px ... из темы */
+}
+
+/* Наведение */
+.pill:hover {
+  background-color: var(--color-surface-muted);
+  border-color: var(--color-surface-muted);
+  color: var(--color-text-secondary);
+}
+
+/* Текущий пункт */
+.current {
+  cursor: default;
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+  background-color: var(--color-surface);
+}
+
+/* Небольшие адаптивные корректировки */
+@media (max-width: 480px) {
+  .pill {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .sep {
+    margin: 0 2px 0 6px;
+  }
+}
+
+@media (min-width: 768px) {
+  .bar {
+    padding-inline: var(--pad-md);
+  }
+}
+
+@media (min-width: 1000px) {
+  .bar {
+    padding-inline: var(--pad-lg);
+  }
+}
+
+@media (min-width: 2000px) {
+  .pill {
+    font-size: 24px;
+  }
+  .bar {
+    padding-inline: var(--pad-xlg);
+  }
+}
+
+/* (опционально) тонкий webkit-скролл в цветах темы */
+.list::-webkit-scrollbar {
+  height: 8px;
+}
+.list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.list::-webkit-scrollbar-thumb {
+  background: var(--color-toggle-track);
+  border-radius: 8px;
+}
+.list::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border);
+}

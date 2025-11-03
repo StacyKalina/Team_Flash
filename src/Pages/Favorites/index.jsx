@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductCard } from "../../Components/ProductCard";
-import { FavoritesFiltersBar } from "../../Components/FavoritesFiltersBar/index.jsx"; // �~ѬѨ��?�' ѫ���������� ѧ��ѬѨ��ѫ��ѫ�'��
-import { selectFilteredAndSortedFavorites } from "../../store/selectors/favoritesSelectors"; // �~ѬѨ��?�' ѫ���������� �?��ѯ��ѧ�'��?��
+import { FavoritesFiltersBar } from "../../Components/FavoritesFiltersBar/index.jsx"; // Компонент панели фильтров и сортировки для избранных товаров
+import { selectFilteredAndSortedFavorites } from "../../store/selectors/favoritesSelectors"; // Селектор, который возвращает отфильтрованные и отсортированные избранные товары
 import { addItem } from "../../store/slices/cartSlice";
 import styles from "./index.module.css";
 

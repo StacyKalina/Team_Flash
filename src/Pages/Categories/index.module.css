@@ -1,11 +1,8 @@
 
 /* Растягиваем секцию, задаём вертикальные отступы и промежутки */
-.wrapper {
-  display: flex;
-  flex-direction: column;
+/* .wrapper {
   gap: 32px;
-  padding-bottom: 64px;
-}
+} */
 
 /* Сообщения о состоянии (loading/failed/empty) */
 .infoMessage {

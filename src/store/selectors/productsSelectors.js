@@ -8,7 +8,7 @@ const selectProducts = (state) => state.products.items;
 const selectFilters = (state) => state.filters;
 const selectSelectedProduct = (state) => state.products.selectedProduct;
 
-// --- список карточек товаров (у тебя это уже есть) ---
+// --- список карточек товаров  ---
 export const selectVisibleProductCards = createSelector(
 [selectProducts, selectFilters],
 (products, filters) => {
@@ -22,12 +22,12 @@ const sortOrder = filters.sortOrder;
 let enriched = products.map((p) => ({ p, pricing: resolvePricing(p) }));
 
 // фильтрация
-enriched = enriched.filter(({ pricing }) => {
-if (!Number.isNaN(priceFrom) && pricing.currentPrice < priceFrom) return false;
-if (!Number.isNaN(priceTo) && pricing.currentPrice > priceTo) return false;
-if (discountOnly && !pricing.hasDiscount) return false;
-return true;
-});
+  enriched = enriched.filter(({ pricing }) => {
+  if (!Number.isNaN(priceFrom) && pricing.currentPrice < priceFrom) return false;
+  if (!Number.isNaN(priceTo) && pricing.currentPrice > priceTo) return false;
+  if (discountOnly && !pricing.hasDiscount) return false;
+  return true;
+  });
 
 // сортировка
 if (sortOrder === "priceAsc")
@@ -44,13 +44,13 @@ return enriched.map(({ p, pricing }) => mapProductToCard(p, pricing));
 }
 );
 
-// --- 💥 новый селектор: один товар (для страницы ProductDetail) ---
+// ---  новый селектор: один товар (для страницы ProductDetail) ---
 export const selectProductById = (productId) =>
 createSelector([selectProducts], (products) =>
 products.find((product) => product.id === Number(productId))
 );
 
-// --- 💥 селектор выбранного товара из Redux (если загружен по API) ---
+// ---  селектор выбранного товара из Redux (если загружен по API) ---
 export const selectSelectedProductItem = createSelector(
 [selectSelectedProduct],
 (selectedProduct) => selectedProduct

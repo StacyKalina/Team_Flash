@@ -40,3 +40,9 @@ transition: background-color .3s ease,
   .btn {
     -webkit-tap-highlight-color: transparent;
   }
+
+  @media (min-width: 2000px){
+    .btn {
+      font-size: 30px;
+    }
+  }
