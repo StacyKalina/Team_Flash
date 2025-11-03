@@ -47,57 +47,59 @@ export const CategoriesPage = () => {
 
     return (
         // два класс чтобы дополнить глобальный 
-        <div className={`sectionWrapper ${styles.wrapper}`}>
+        // <div className={`sectionWrapper ${styles.wrapper} page__content` }>
+        <section className="sectionWrapper">
+            <div className="sectionShell">
 
-            <h2 className="sectionTitle">Categories</h2>
-
-
-            {status === "loading" && <p className={styles.infoMessage}> Loading Categories… </p>}
-
-            {status === "failed" && (
-                <p className={styles.infoMessage}> Could not load categories. Ensure the backend on port 3333 is running
-                    {error ? `(${error})` : ""}
-                </p>
-            )}
-
-            {status === "succeeded" && categories.length === 0 && (
-                <p className={styles.infoMessage}> No categories found yet. </p>
-            )}
+                <h2 className="sectionTitle">Categories</h2>
 
 
-            {status === "succeeded" && categories.length > 0 && (
-                <div className={styles.cardsGrid}>
-                    {categories.map((category) => {
+                {status === "loading" && <p className={styles.infoMessage}> Loading Categories… </p>}
 
-                        const title = category.title ?? category.name ?? "Category";
-                        const imageSrc = buildImageUrl(category.image) ?? placeHolderImage;
+                {status === "failed" && (
+                    <p className={styles.infoMessage}> Could not load categories. Ensure the backend on port 3333 is running
+                        {error ? `(${error})` : ""}
+                    </p>
+                )}
 
-                        return (
-                            // корневой элемент итерации, поэтому прописываем именно ему key
-                            <div className={styles.imgWrapper} key={category.id}>
-                                <Link className={styles.categoryCard} to={`/categories/${category.id}`} >
-                                    <div className={styles.thumbWrapper}>
+                {status === "succeeded" && categories.length === 0 && (
+                    <p className={styles.infoMessage}> No categories found yet. </p>
+                )}
 
-                                        <img
-                                            src={imageSrc}
-                                            alt={title}
-                                            loading="lazy"
-                                            onError={(e) => {
-                                                e.currentTarget.src = placeHolderImage;
-                                            }}
-                                        />
 
-                                    </div>
-                                    <p className={styles.caption}>{title}</p>
-                                </Link>
-                            </div>
-                        );
-                    })}
-                </div>
-            )
-            }
+                {status === "succeeded" && categories.length > 0 && (
+                    <div className={styles.cardsGrid}>
+                        {categories.map((category) => {
 
-        </div >
+                            const title = category.title ?? category.name ?? "Category";
+                            const imageSrc = buildImageUrl(category.image) ?? placeHolderImage;
+
+                            return (
+                                // корневой элемент итерации, поэтому прописываем именно ему key
+                                <div className={styles.imgWrapper} key={category.id}>
+                                    <Link className={styles.categoryCard} to={`/categories/${category.id}`} >
+                                        <div className={styles.thumbWrapper}>
+
+                                            <img
+                                                src={imageSrc}
+                                                alt={title}
+                                                loading="lazy"
+                                                onError={(e) => {
+                                                    e.currentTarget.src = placeHolderImage;
+                                                }}
+                                            />
+
+                                        </div>
+                                        <p className={styles.caption}>{title}</p>
+                                    </Link>
+                                </div>
+                            );
+                        })}
+                    </div>
+                )
+                }
+            </div>
+        </section >
     )
 }
 

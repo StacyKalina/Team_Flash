@@ -63,3 +63,22 @@
 
 /* контейнер под одну строку ввода (на будущее) */
 .field { width: 100%; }
+
+
+
+
+
+
+/* ≥1200: форма шире; ≥1600: ещё чуть шире */
+@media (min-width: 1200px) {
+  .form {
+    /* вместо фиксированного max-width: 518px */
+    max-width: clamp(520px, 36vw, 780px);
+  }
+}
+
+@media (min-width: 1600px) {
+  .form {
+    max-width: clamp(560px, 38vw, 860px);
+  }
+}

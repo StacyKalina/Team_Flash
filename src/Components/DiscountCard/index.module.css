@@ -63,24 +63,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media (max-width: 1000px) {
   .banner{
     padding: 20px 20px 0 0;
@@ -164,3 +146,21 @@
     background-size: auto 75%;
   }
   }
+
+  @media (min-width: 1600px) {
+
+  .visual {
+    /* фон внутри своей колонки — по центру снизу */
+    background-position: center bottom;
+  }
+
+  /* немного «воздуха» справа у баннера, чтобы форма не липла к краю */
+  .banner {
+    padding-right: clamp(40px, 7vw, 120px);
+  }
+
+  /* приятнее, если зазор между колонками тоже растёт */
+  .inner {
+    gap: clamp(24px, 10vw, 56px);
+  }
+}

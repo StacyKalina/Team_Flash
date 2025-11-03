@@ -1,11 +1,10 @@
 /* index.module.css — SectionCategories */
 
 /* Вся секция */
-.sectionWrapper {
+.root {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding-bottom: 64px;
+  gap: 24px;   /* без внешних паддингов */
 }
 
 /* Сетка карточек */
@@ -104,3 +103,9 @@
     font-size: 15px;
   }
 }
+
+@media (min-width: 1600px) {
+  .cardsGrid {
+    gap: 60px;
+  }
+  }

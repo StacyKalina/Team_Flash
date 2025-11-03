@@ -7,11 +7,13 @@ import { AutoBreadcrumbs } from "../Components/Breadcrumbs"
 
 export const Template = () => {
     return (
-        <>
-        <Menu/>
-        <AutoBreadcrumbs />
-        <Outlet/>
-        <Footer/>
-        </>
+        <div className="page">
+            <Menu />
+
+                <AutoBreadcrumbs />
+                <Outlet />
+
+            <Footer />
+        </div>
     )
 }

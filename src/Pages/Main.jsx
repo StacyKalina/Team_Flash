@@ -18,9 +18,11 @@ export const Main = () => {
     return (
         <div>
             <MainBanner />
-            <DiscountCard/>
-            <SectionCategories />
-            <SectionSales />
+            <div className="page__content">
+                <SectionCategories />
+                <DiscountCard />
+                <SectionSales />
+            </div>
         </div>
     );
 

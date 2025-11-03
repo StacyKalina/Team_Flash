@@ -1,9 +1,11 @@
 .cardsGrid {
-    display: grid;
-    gap: 32px;
-    grid-template-columns: repeat(4, 316px);
-    justify-content: center;
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  justify-content: stretch; /* растягиваем на всю ширину */
+  margin-top: 16px; /* ← добавляем мягкий отступ */
 }
+
 .stateMessage {
     font-size: 16px;
     color: #6f7a7e;

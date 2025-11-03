@@ -7,7 +7,7 @@ import { selectAllProducts, selectSelectedProduct } from "../../store/slices/pro
 import styles from "./index.module.css";
 
 export function AutoBreadcrumbs() {
-  const matches  = useMatches();
+  const matches = useMatches();
   const location = useLocation();
 
   // 1) пришли ли мы с конкретного списка (категория/все/распродажа)
@@ -21,13 +21,13 @@ export function AutoBreadcrumbs() {
       const id = Number(rawSource.split(":")[1]);
       return { productsSource: "category", productsCategoryId: Number.isFinite(id) ? id : null };
     }
-    if (rawSource === "all")   return { productsSource: "all",   productsCategoryId: null };
+    if (rawSource === "all") return { productsSource: "all", productsCategoryId: null };
     if (rawSource === "sales") return { productsSource: "sales", productsCategoryId: null };
     return { productsSource: null, productsCategoryId: null };
   }, [rawSource]);
 
-  const categories      = useSelector(selectAllCategories);
-  const products        = useSelector(selectAllProducts);
+  const categories = useSelector(selectAllCategories);
+  const products = useSelector(selectAllProducts);
   const selectedProduct = useSelector(selectSelectedProduct);
 
   const dispatch = useDispatch();
@@ -43,10 +43,10 @@ export function AutoBreadcrumbs() {
     productsSource === "category" && productsCategoryId != null
       ? { type: "category", id: productsCategoryId }
       : productsSource === "all"
-      ? { type: "all" }
-      : productsSource === "sales"
-      ? { type: "sales" }
-      : undefined;
+        ? { type: "all" }
+        : productsSource === "sales"
+          ? { type: "sales" }
+          : undefined;
 
   const cameFrom = stateCameFrom ?? fallbackFrom;
 
@@ -58,12 +58,12 @@ export function AutoBreadcrumbs() {
     const res =
       typeof bc === "function"
         ? bc({
-            params: m.params,
-            categories,
-            products,
-            selectedProduct,
-            cameFrom,
-          })
+          params: m.params,
+          categories,
+          products,
+          selectedProduct,
+          cameFrom,
+        })
         : bc;
 
     const normalize = (x) => {
@@ -83,26 +83,26 @@ export function AutoBreadcrumbs() {
 
   return (
     <nav className={styles.bar} aria-label="Breadcrumb">
-      <ol className={styles.list}>
-        {items.map((it, i) => {
-          const isLast = i === items.length - 1;
-          return (
-            <li className={styles.item} key={`${it.label}-${i}`}>
-              {isLast || !it.to ? (
-                <span className={`${styles.pill} ${styles.current}`} aria-current="page">
-                  {it.label}
-                </span>
-              ) : (
-                <Link className={styles.pill} to={it.to}>
-                  {it.label}
-                </Link>
-              )}
+        <ol className={styles.list}>
+          {items.map((it, i) => {
+            const isLast = i === items.length - 1;
+            return (
+              <li className={styles.item} key={`${it.label}-${i}`}>
+                {isLast || !it.to ? (
+                  <span className={`${styles.pill} ${styles.current}`} aria-current="page">
+                    {it.label}
+                  </span>
+                ) : (
+                  <Link className={styles.pill} to={it.to}>
+                    {it.label}
+                  </Link>
+                )}
 
-              {!isLast && <span className={styles.sep} aria-hidden="true">›</span>}
-            </li>
-          );
-        })}
-      </ol>
+                {!isLast && <span className={styles.sep} aria-hidden="true">›</span>}
+              </li>
+            );
+          })}
+        </ol>
     </nav>
   );
 }

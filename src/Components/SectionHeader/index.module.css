@@ -46,3 +46,10 @@
   outline: none;
   box-shadow: 0 0 0 3px rgba(88, 28, 135, 0.15);
 }
+
+@media (min-width: 1600px) {
+  .btnLink {
+    font-size: 24px;
+    padding: 10px 24px;
+  }
+  }

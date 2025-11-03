@@ -17,15 +17,19 @@ export const Sales = () => {
 
 
   return (
-    <section className={styles.wrapper}>
-      <header className={styles.header}>
-        <h1 className={styles.pageTitle}>All sales</h1>
-      </header>
+    <section className="sectionWrapper">
+      <div className="sectionShell">
 
-      <FiltersBar hideDiscountToggle />
-      {status === "loading"   && <p className={styles.stateMessage}>Loading…</p>}
-      {status === "failed"    && <p className={styles.stateMessage}>Error: {error}</p>}
-      {status === "succeeded" && <ProductsGrid cameFrom={{ type: "all" }} />}
+        <header className={styles.header}>
+          <h1 className={styles.pageTitle}>All sales</h1>
+        </header>
+
+        <FiltersBar hideDiscountToggle />
+        {status === "loading" && <p className={styles.stateMessage}>Loading…</p>}
+        {status === "failed" && <p className={styles.stateMessage}>Error: {error}</p>}
+        {status === "succeeded" && <ProductsGrid cameFrom={{ type: "sales" }} />}
+
+      </div>
     </section>
   );
 };

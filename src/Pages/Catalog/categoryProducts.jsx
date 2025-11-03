@@ -45,24 +45,28 @@ export const Catalog = () => {
   }, [dispatch, categoryId]);
 
   return (
-    <section className={styles.wrapper}>
-      <header className={styles.header}>
-        <h1 className={styles.pageTitle}>{pageTitle}</h1>
-      </header>
+    <section className="sectionWrapper">
+      <div className="sectionShell">
 
-      <FiltersBar />
+        <header className={styles.header}>
+          <h1 className={styles.pageTitle}>{pageTitle}</h1>
+        </header>
 
-      {status === "loading" && <p className={styles.stateMessage}>Loading…</p>}
-      {status === "failed" && (
-        <p className={styles.stateMessage}>
-          Error: {error || "Failed to load products for this category"}
-        </p>
-      )}
-      {status === "succeeded" && (
-        products?.length
-          ? <ProductsGrid cameFrom={{ type: "category", id: Number(categoryId) }} />
-          : <p className={styles.stateMessage}>No products in this category yet.</p>
-      )}
+        <FiltersBar />
+
+        {status === "loading" && <p className={styles.stateMessage}>Loading…</p>}
+        {status === "failed" && (
+          <p className={styles.stateMessage}>
+            Error: {error || "Failed to load products for this category"}
+          </p>
+        )}
+        {status === "succeeded" && (
+          products?.length
+            ? <ProductsGrid cameFrom={{ type: "category", id: Number(categoryId) }} />
+            : <p className={styles.stateMessage}>No products in this category yet.</p>
+        )}
+
+      </div>
     </section>
   );
 };

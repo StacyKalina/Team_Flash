@@ -1,12 +1,8 @@
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    width: 100%;
-    max-width: 1360px;
-    margin: 0 auto;
-    padding-bottom: 64px;
+.wrapper {  
+    gap: 40px;  
 }
+
+
 .header {
     display: flex;
     align-items: center;
@@ -22,20 +18,4 @@
 .stateMessage { /* оставим, чтобы не дублировать */
     font-size: 16px;
     color: #6f7a7e;
-}
-
-@media (max-width: 1000px) {
-  .wrapper { max-width: 920px; padding: 0 20px 48px; gap: 32px; }
-}
-@media (max-width: 768px) {
-  .wrapper { max-width: 728px; padding: 0 20px 48px; gap: 32px; }
-  .pageTitle { font-size: 56px; }
-}
-@media (max-width: 480px) {
-  .wrapper { max-width: 440px; padding: 0 20px 48px; gap: 24px; }
-  .pageTitle { font-size: 48px; }
-}
-@media (max-width: 360px) {
-  .wrapper { max-width: 360px; padding: 0 20px 48px; gap: 24px; }
-  .pageTitle { font-size: 40px; }
 }

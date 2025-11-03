@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 html {
-    box-sizing: border-box;
-    font-family: Montserrat;
-    background-color: #FFFFF1;
-  }
-  
-  * {
-    box-sizing: inherit;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  font-family: Montserrat;
+  background-color: #FFFFF1;
+}
+
+* {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
 }
 
 ul[class],
 ol[class] {
-    padding: 0;
+  padding: 0;
 }
 
 body,
@@ -33,74 +33,154 @@ figcaption,
 blockquote,
 dl,
 dd {
-    margin: 0;
+  margin: 0;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #fffff1;
-    color: #012b2c;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fffff1;
+  color: #012b2c;
 }
 
 ul[class] {
-    list-style: none;
+  list-style: none;
 }
 
 img {
-    max-width: 100%;
-    display: block;
-  }
-  
-  input,
-  button,
-  textarea,
-  select {
-    font: inherit;
-  }
-  
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
+  max-width: 100%;
+  display: block;
+}
 
 input,
 button,
 textarea,
 select {
-    font: inherit;
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
 }
 
 a[class] {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 button {
-    border: none;
-    appearance: none;
-    -webkit-appearance: none;
-  }
+  border: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
 
-.sectionWrapper {
-  margin: 0 40px;
-  padding-top: 80px;
+
+/* медиаправила для медиа — чтобы вели себя адаптивно */
+img,
+picture,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* белые поля снаружи страницы */
+html,
+body {
+  background: var(--bg-white);
+}
+
+
+:root {
+  --page-max: 1600px;
+  /* стоп всей «жёлтой страницы» */
+  --pad-xlg: 80px;
+  /* ≥ 1600px */
+  --pad-lg: 40px;
+  /* ≥ 1000px */
+  --pad-md: 24px;
+  /* ≥ 768px */
+  --pad-sm: 16px;
+  /* < 768px */
+  --bg-yellow: #fffff1;
+  /* фон страницы */
+  --bg-white: #FFFFFF;
+  /* фон вне страницы */
+  --section-gap: 80px;
+  /* ЕДИНЫЙ отступ между секциями */
+}
+
+/* вся страница с жёлтым фоном и стопом по ширине */
+.page {
+  background: var(--bg-yellow);
+  width: 100vw;
+  /* всегда тянется по ширине окна */
+  max-width: 2000px;
+  /* но не бесконечно — ограничение для супершироких экранов */
+  margin-inline: auto;
+  /* центрируем при больших экранах */
+  overflow-x: hidden;
+  /* убираем горизонтальный скролл */
+
+  position: relative;
+  /* нужно, если внутренние блоки вытягиваются (баннер) */
+}
+
+
+/* единые боковые паддинги для шапки/баннера/контента/футера */
+.page__content {
+  padding-inline: var(--pad-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionShell {
+  /* легкая внутренняя вертикальная сетка */
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding-bottom: 64px;
+  /* внутренний ритм секции */
+  padding-top: 60px;
 }
 
-  .sectionTitle {
-    font-size: 46px;
-    font-weight: bold;
-    line-height: 1.1;
-    color: rgb(1, 43, 44);
-    margin-bottom: 24px;
+.sectionTitle {
+  font-size: 46px;
+  font-weight: bold;
+  line-height: 1.1;
+  color: rgb(1, 43, 44);
+  margin-bottom: 24px;
+}
+
+
+@media (min-width: 768px) {
+  .page__content {
+    padding-inline: var(--pad-md);
   }
+}
+
+@media (min-width: 1000px) {
+  .page__content {
+    padding-inline: var(--pad-lg);
+  }
+}
+
+@media (min-width: 2000px) {
   
-
-  @media screen and (max-width: 1000px)  {
-    .sectionWrapper, .page {
-  margin: 0 20px;
- 
-}
+  .page__content {
+    padding-inline: var(--pad-xlg);
   }
+
+  .sectionShell {
+    /* легкая внутренняя вертикальная сетка */
+    gap: 28px;
+    /* внутренний ритм секции */
+    padding-top: 100px;
+  }
+}

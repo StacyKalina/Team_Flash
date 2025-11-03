@@ -47,40 +47,42 @@ export const Menu = () => {
 
   return (
     <nav className={styles.navWrapper}>
-      <div className={styles.logo}>
-        <Link to="/">
-          <img src={logo} alt="main logo" />
-        </Link>
-      </div>
+      <div className={`page__content ${styles.navContent}`}>
 
-      <ul className={styles.navItemsWrapper}>{renderNavItems()}</ul>
+        <div className={styles.logo}>
+          <Link to="/">
+            <img src={logo} alt="main logo" />
+          </Link>
+        </div>
 
-      <div className={styles.iconsWrapper}>
-        <Link
-          to="/favorites"
-          className={styles.favoriteIconWrapper}
-          aria-label="Open favorites"
-        >
-          <img src={favoriteIcon} alt="favorite icon" />
-          {favoriteItemsCount > 0 && (
-            <span className={styles.favoriteCount}>
-              {favoriteItemsCount}
-            </span>
-          )}
-        </Link>
+        <ul className={styles.navItemsWrapper}>{renderNavItems()}</ul>
 
-        <Link
-          to="/cart"
-          className={styles.cartLink}
-          aria-label="Open cart"
-          onClick={closeMobileMenu}
-        >
-          <img src={cartIcon} alt="cart icon" />
-          {cartHasItems && (
-            <span className={styles.cartBadge}>{cartBadgeValue}</span>
-          )}
-        </Link>
-      </div>
+        <div className={styles.iconsWrapper}>
+          <Link
+            to="/favorites"
+            className={styles.favoriteIconWrapper}
+            aria-label="Open favorites"
+          >
+            <img src={favoriteIcon} alt="favorite icon" />
+            {favoriteItemsCount > 0 && (
+              <span className={styles.favoriteCount}>
+                {favoriteItemsCount}
+              </span>
+            )}
+          </Link>
+
+          <Link
+            to="/cart"
+            className={styles.cartLink}
+            aria-label="Open cart"
+            onClick={closeMobileMenu}
+          >
+            <img src={cartIcon} alt="cart icon" />
+            {cartHasItems && (
+              <span className={styles.cartBadge}>{cartBadgeValue}</span>
+            )}
+          </Link>
+        </div>
 
         <button
           type="button"
@@ -90,11 +92,11 @@ export const Menu = () => {
         >
           <img src={burgerMenuIcon} alt="burger icon" />
         </button>
+      </div>
 
       <aside
-        className={`${styles.mobileMenu} ${
-          isMobileMenuOpen ? styles.mobileMenuOpen : ""
-        }`}
+        className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ""
+          }`}
         aria-hidden={!isMobileMenuOpen}
       >
         <button

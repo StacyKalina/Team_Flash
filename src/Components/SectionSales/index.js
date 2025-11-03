@@ -7,7 +7,7 @@ import { ProductCard } from "../ProductCard";
 import styles from "./index.module.css";
 
 import { fetchSalesProducts } from "../../store/slices/productsSlice";
-import { mapProductToCard } from "../../store/selectors/productsHelper"; // ��?ѯ�� �� �'����? helper �� ��?������Ѭ Ѩ���'�� �?" Ѩ��Ѩ�?�����O ��ѬѨ��?�'
+import { mapProductToCard } from "../../store/selectors/productsHelper"; 
 import { addItem } from "../../store/slices/cartSlice";
 
 function getRandomFour(arr) {
@@ -41,14 +41,14 @@ export const SectionSales = () => {
   };
 
   return (
-    <div className="sectionWrapper">
+    <section className="sectionShell">
       <SectionHeader
         title="Sale"
         buttonText="Alle Sales"
         fromRouterPath="/sales"
       />
 
-      {status === "loading" && <p>Loading�?�</p>}
+      {status === "loading" && <p>Loading…</p>}
       {status === "failed" && (
         <p style={{ color: "crimson" }}>{error || "Etwas ist schiefgelaufen"}</p>
       )}
@@ -68,7 +68,7 @@ export const SectionSales = () => {
         ) : (
           <p className={styles.infoMessage}>No discounted products yet.</p>
         ))}
-    </div>
+    </section>
   );
 };
 

@@ -1,10 +1,13 @@
 .navWrapper {
+  background-color: #fffff1;
+}
+
+.navContent {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: #fffff1;
   height: 128px;
-  padding: 0 40px;
 }
 
 .logo {
@@ -184,11 +187,7 @@
   z-index: 1000;
 }
 
-@media screen and (max-width: 1000px) {
-  .navWrapper {
-    padding: 0 20px;
-  }
-}
+
 
 @media screen and (max-width: 768px) {
   .navWrapper {
@@ -214,4 +213,16 @@
   .logo {
     margin-right: auto;
   }
+}
+
+@media screen and (max-width: 1000px) {
+  .navWrapper {
+    padding: 0 20px;
+  }
+}
+
+@media (min-width: 2000px) {
+.navItemsWrapper {
+  font-size: 24px;
+}
 }
