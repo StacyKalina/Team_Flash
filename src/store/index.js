@@ -3,7 +3,6 @@ import categoriesReducer from "./slices/categories.js";
 import cartReducer, { hydrateCart } from "./slices/cartSlice.js";
 import filtersReducer from "./slices/filtersSlice";
 import productsReducer from "./slices/productsSlice";
-import productDetailsReducer from "./slices/productDetailsSlice.js";
 import globalReducer from "./slices/globalSlice.js";
 import { loadingMiddleware } from "./middleware/loadingMiddleware.js";
 import favoriteReducer from "./slices/favoriteSlice.js";
@@ -52,7 +51,6 @@ export const store = configureStore({
     filters: filtersReducer,
     products: productsReducer,
     cart: cartReducer,
-    productDetails: productDetailsReducer,
     global: globalReducer,
     favorites: favoriteReducer,
     favoriteFilters: favoriteFiltersSlice,

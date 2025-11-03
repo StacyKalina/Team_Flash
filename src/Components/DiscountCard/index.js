@@ -4,7 +4,7 @@ import { RegistrationForm } from "../RegistrationForm";
 
 export const DiscountCard = () => {
     return (
-        <div className="sectionWrapper">
+        <section className="sectionShell">
             <div className={styles.banner}>
                 <h1 className={styles.title}>5% off on the first order</h1>
                 <div className={styles.inner}>
@@ -14,7 +14,7 @@ export const DiscountCard = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
     );
 };

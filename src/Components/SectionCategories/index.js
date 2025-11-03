@@ -67,7 +67,7 @@ export const SectionCategories = () => {
 
 
         return (
-                <div className="sectionWrapper">
+                <section className={`sectionShell ${styles.root}`}>
                         <SectionHeader
                                 title="Categories"
                                 buttonText="Alle Kategorien"
@@ -114,6 +114,6 @@ export const SectionCategories = () => {
                                 </div>
                         )
                         }
-                </div>
+                </section>
         );
 };

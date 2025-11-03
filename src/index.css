@@ -1,20 +1,122 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* =========================
+   THEME VARIABLES (LIGHT)
+   ========================= */
+:root {
+  color-scheme: light;
+ --page-sheet: #fffff1; 
+  --color-background: #fffff1;
+  --color-surface: #ffffff;
+  --color-surface-muted: #F2F6D3;
+  --color-border: #dddddd;
+  --color-text-primary: #012b2c;
+  --color-text-secondary: #424436;
+  --color-text-muted: #8b8b8b;
+  --color-text-inverted: #ffffff;
+  --color-text-strong: #012b2c;
+
+  --color-accent: #92a134;
+  --color-accent-hover: #809027;
+  --color-accent-disabled: #c5caa6;
+  --color-accent-contrast: #4f5c1a;
+
+  --color-accent-strong: #f26d22;
+  --color-accent-strong-hover: #d65b19;
+
+  --color-nav-background: #fffff1;
+  --color-nav-text: #424436;
+
+  --color-toggle-track: #e6e6dd;
+  --color-toggle-thumb: #ffffff;
+  --color-toggle-icon: #424436;
+
+  --color-icon-filter-primary: none;
+
+  --shadow-elevated: 0 12px 24px rgba(1, 43, 44, 0.12);
+  --color-focus-outline: rgba(66, 68, 54, 0.25);
+  --shadow-focus-accent: 0 0 0 3px rgba(146, 161, 52, 0.25);
+
+  --color-danger: #d14343;
+
+  --color-skeleton-base: #e0e0e0;
+  --color-skeleton-highlight: #f0f0f0;
+
+  /* layout vars */
+  --page-max: 1600px;          /* стоп всей «жёлтой страницы» */
+  --pad-xlg: 80px;             /* ≥ 1600px */
+  --pad-lg: 40px;              /* ≥ 1000px */
+  --pad-md: 24px;              /* ≥ 768px */
+  --pad-sm: 16px;              /* < 768px */
+  --bg-yellow: #fffff1;        /* фон страницы */
+  --bg-white: #ffffff;         /* фон вне страницы */
+  --section-gap: 80px;         /* единый отступ между секциями */
+}
+
+/* =========================
+   THEME VARIABLES (DARK)
+   ========================= */
+body[data-theme='dark'] {
+  color-scheme: dark;
+ --page-sheet: #424436;
+  --color-background: #474942;
+  --color-surface: #2a2c23;
+  --color-surface-muted: #34362b;
+  --color-border: #626456;
+  --color-text-primary: #f4f4e8;
+  --color-text-secondary: #d8d8c8;
+  --color-text-muted: #a4a48f;
+  --color-text-inverted: #ffffff;
+  --color-text-strong: #10110c;
+
+  --color-accent: #a8c13c;
+  --color-accent-hover: #6f8626;
+  --color-accent-disabled: #444933;
+  --color-accent-contrast: #dfe6b3;
+
+  --color-accent-strong: #f26d22;
+  --color-accent-strong-hover: #c95716;
+
+  --color-nav-background: #424436;
+  --color-nav-text: #f4f4e8;
+
+  --color-toggle-track: #3a3c30;
+  --color-toggle-thumb: #f4f4e8;
+  --color-toggle-icon: #f4f4e8;
+
+  --color-icon-filter-primary: brightness(0) invert(1);
+
+  --shadow-elevated: 0 12px 24px rgba(0, 0, 0, 0.4);
+  --color-focus-outline: rgba(244, 244, 232, 0.45);
+  --shadow-focus-accent: 0 0 0 3px rgba(168, 193, 60, 0.35);
+
+  --color-danger: #f07272;
+
+  --color-skeleton-base: #363830;
+  --color-skeleton-highlight: #45483d;
+}
+
+/* =========================
+   GLOBAL RESET / BASE
+   ========================= */
+
 html {
-    box-sizing: border-box;
-    font-family: Montserrat;
-    background-color: #FFFFF1;
-  }
-  
-  * {
-    box-sizing: inherit;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
 }
 
 ul[class],
 ol[class] {
-    padding: 0;
+  padding: 0;
 }
 
 body,
@@ -33,74 +135,129 @@ figcaption,
 blockquote,
 dl,
 dd {
-    margin: 0;
+  margin: 0;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #fffff1;
-    color: #012b2c;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ul[class] {
-    list-style: none;
+  list-style: none;
 }
 
 img {
-    max-width: 100%;
-    display: block;
-  }
-  
-  input,
-  button,
-  textarea,
-  select {
-    font: inherit;
-  }
-  
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
+  max-width: 100%;
+  display: block;
+}
 
+/* форменные элементы наследуют шрифт */
 input,
 button,
 textarea,
 select {
-    font: inherit;
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 a[class] {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 button {
-    border: none;
-    appearance: none;
-    -webkit-appearance: none;
-  }
+  border: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
 
-.sectionWrapper {
-  margin: 0 40px;
-  padding-top: 80px;
+/* Медиа должны быть адаптивными */
+img,
+picture,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* белые поля снаружи страницы */
+html,
+body {
+  background: var(--color-background);
+}
+
+/* =========================
+   PAGE LAYOUT
+   ========================= */
+
+/* используем лист; ограничиваем ширину по переменной, добавляем скругление и тень */
+.page {
+  background: var(--page-sheet);
+  width: 100vw;
+  max-width: var(--page-max);   /* было 2000px → берём из переменной (у тебя 1600px) */
+  margin-inline: auto;
+  overflow-x: hidden;
+  position: relative;
+
+  border-radius: 12px;          /* мягкие края листа */
+  box-shadow: var(--shadow-elevated); /* тень для отделения от фона */
+}
+
+
+/* единые боковые паддинги для шапки/баннера/контента/футера */
+.page__content {
+  padding-inline: var(--pad-sm);
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding-bottom: 64px;
 }
 
-  .sectionTitle {
-    font-size: 46px;
-    font-weight: bold;
-    line-height: 1.1;
-    color: rgb(1, 43, 44);
-    margin-bottom: 24px;
-  }
-  
-
-  @media screen and (max-width: 1000px)  {
-    .sectionWrapper, .page {
-  margin: 0 20px;
- 
+/* обёртка секции */
+.sectionShell {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;         /* внутренний ритм секции */
+  padding-top: 60px;
 }
+
+/* заголовок секции */
+.sectionTitle {
+  font-size: 46px;
+  font-weight: bold;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  margin-bottom: 24px;
+}
+
+/* =========================
+   MEDIA QUERIES
+   твой медиазапрос и дальше
+   ========================= */
+
+@media (min-width: 768px) {
+  .page__content {
+    padding-inline: var(--pad-md);
   }
+}
+
+@media (min-width: 1000px) {
+  .page__content {
+    padding-inline: var(--pad-lg);
+  }
+}
+
+@media (min-width: 2000px) {
+  .page__content {
+    padding-inline: var(--pad-xlg);
+  }
+
+  .sectionShell {
+    gap: 28px;
+    padding-top: 100px;
+  }
+}

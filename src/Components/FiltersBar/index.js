@@ -11,7 +11,7 @@ const SORT_OPTIONS = [
   { value: "discountDesc", label: "discount" },
 ];
 
-export const FiltersBar = () => {
+export const FiltersBar = ({ hideDiscountToggle = false }) => {
   const dispatch = useDispatch();
   const filters = useSelector((s) => s.filters);
 
@@ -40,6 +40,7 @@ export const FiltersBar = () => {
         </div>
       </div>
 
+{!hideDiscountToggle && (
       <label className={styles.discountToggle}>
         <span className={styles.filterLabel}>Discounted items</span>
         <input
@@ -48,6 +49,8 @@ export const FiltersBar = () => {
           className={styles.discountCheckbox}
         />
       </label>
+)}
+
 
       <div className={styles.filterSection}>
         <span className={styles.filterLabel}>Sorted</span>

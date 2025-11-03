@@ -1,6 +1,6 @@
 .btn {
-background-color: #92A134;
-color: white;
+background-color: var(--color-accent);
+color: var(--color-text-inverted);
 padding: 16px 56px;
 border-radius: 6px;
 font-size: 20px;
@@ -17,7 +17,7 @@ transition: background-color .3s ease,
 }
 
 .btn:hover{
-    background-color: #b3cd0e;
+    background-color: var(--color-accent-hover);
 }
 
 
@@ -28,7 +28,7 @@ transition: background-color .3s ease,
   
   .btn:focus-visible {
     /* доступный кастомный фокус */
-    box-shadow: 0 0 0 2px rgba(146, 161, 52, 0.45);
+    box-shadow: var(--shadow-focus-accent);
   }
   
   /* Небольшой отклик при нажатии */
@@ -39,4 +39,10 @@ transition: background-color .3s ease,
   /* По желанию: отключить серую подсветку тапов на iOS */
   .btn {
     -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (min-width: 2000px){
+    .btn {
+      font-size: 30px;
+    }
   }

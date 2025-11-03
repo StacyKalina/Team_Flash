@@ -22,16 +22,18 @@ export const AllProducts = () => {
   }, [status, source, dispatch]);
 
   return (
-    <section className={styles.wrapper}>
-      <header className={styles.header}>
-        <h1 className={styles.pageTitle}>All products</h1>
-      </header>
+    <section className="page__content sectionShell">
 
-      <FiltersBar />
+        <header className={styles.header}>
+          <h1 className={styles.pageTitle}>All products</h1>
+        </header>
 
-      {status === "loading" && <p className={styles.stateMessage}>Loading…</p>}
-      {status === "failed" && <p className={styles.stateMessage}>Error: {error}</p>}
-      {status === "succeeded" && <ProductsGrid />}
+        <FiltersBar />
+
+        {status === "loading" && <p className={styles.stateMessage}>Loading…</p>}
+        {status === "failed" && <p className={styles.stateMessage}>Error: {error}</p>}
+        {status === "succeeded" && <ProductsGrid cameFrom={{ type: "all" }} />}
+
     </section>
   );
 };

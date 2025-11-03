@@ -10,7 +10,7 @@
   flex: 1;
  
   min-width: 20px;
-  background-color: #DDDD;
+  background-color: var(--color-border);
   margin-left: 32px;
 
   position: relative;
@@ -20,11 +20,11 @@
 .btnLink {
   padding: 6px 16px;
   border-radius: 8px;
-  border: 2px solid #DDDD;
+  border: 2px solid var(--color-border);
 
   position: relative;
   top: -8px;
-  color: #8B8B8B;
+  color: var(--color-text-muted);
   text-decoration: none;
   font-weight: 500;
   font-size: 16px;
@@ -33,16 +33,23 @@
   align-items: center;
   justify-content: center;
 
-  transition: background .15s, color .15s, border-color .15s, ;
+  transition: background 0.15s, color 0.15s, border-color 0.15s; 
 }
 
 .btnLink:hover{
-  background-color: #F2F6D3;
-  border: 2px solid #F2F6D3;
-  color: #424436;
+  background-color: var(--color-surface-muted);
+  border: 2px solid var(--color-surface-muted);
+  color: var(--color-text-secondary);
 }
 
 .btnLink:focus-visible{
   outline: none;
   box-shadow: 0 0 0 3px rgba(88, 28, 135, 0.15);
 }
+
+@media (min-width: 1600px) {
+  .btnLink {
+    font-size: 24px;
+    padding: 10px 24px;
+  }
+  }

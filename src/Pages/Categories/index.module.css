@@ -1,11 +1,8 @@
 
 /* Растягиваем секцию, задаём вертикальные отступы и промежутки */
-.wrapper {
-  display: flex;
-  flex-direction: column;
+/* .wrapper {
   gap: 32px;
-  padding-bottom: 64px;
-}
+} */
 
 /* Сообщения о состоянии (loading/failed/empty) */
 .infoMessage {
@@ -38,7 +35,7 @@
   padding: 24px;
   padding-bottom: 21px;
   border-radius: 12px;
-  background-color: #F2F6D3;
+  background-color: var(--color-surface-muted);
   text-decoration: none;
   /* для Link */
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
@@ -47,7 +44,7 @@
 
 .categoryCard:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(1, 43, 44, 0.1);
+  box-shadow: var(--shadow-elevated);
 }
 
 
