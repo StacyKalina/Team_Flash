@@ -31,6 +31,35 @@
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
 }
 
+/* контейнер строки ввода */
+.field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* сообщения статуса (успех/серверная ошибка) */
+.statusMessage {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  background-color: rgba(146, 161, 52, 0.18);
+  color: var(--color-text-strong);
+  border: 1px solid var(--color-accent);
+  /* небольшая дистанция от инпутов */
+  margin-top: 4px; /* CHANGE */
+}
+
+.statusMessageError {
+  background-color: rgba(209, 67, 67, 0.18);
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
 .submit {
   margin-top: 16px;
   margin-bottom: 32px;
@@ -71,51 +100,10 @@
   color: var(--color-text-muted);
 }
 
-/* контейнер под одну строку ввода + подпись/ошибку */
-.field {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 8px;
-  padding-bottom: 12px;
-}
-
-/* сообщения статуса */
-.statusMessage {
-  width: 100%;
-  padding: 12px 16px;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.4;
-  background-color: rgba(146, 161, 52, 0.18);
-  color: var(--color-text-strong);
-  border: 1px solid var(--color-accent);
-}
-
-.statusMessageError {
-  background-color: rgba(209, 67, 67, 0.18);
-  color: var(--color-danger);
-  border-color: var(--color-danger);
-}
-
-/* держим место под ошибку, чтобы форма не прыгала */
-.errorPlaceholder {
-  min-height: 24px;
-  display: block;
-  width: 100%;
-}
-
-/* ≥1200: форма шире; ≥1600: ещё шире (с clamp) */
+/* шире на больших экранах */
 @media (min-width: 1200px) {
-  .form {
-    max-width: clamp(520px, 36vw, 780px);
-  }
+  .form { max-width: clamp(520px, 36vw, 780px); }
 }
-
 @media (min-width: 1600px) {
-  .form {
-    max-width: clamp(560px, 38vw, 860px);
-  }
+  .form { max-width: clamp(560px, 38vw, 860px); }
 }
