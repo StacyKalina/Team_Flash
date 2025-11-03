@@ -9,7 +9,7 @@ import { addItem } from "../../store/slices/cartSlice";
 import styles from "./index.module.css";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE ?? "http://localhost:3333";
-const DESCRIPTION_LIMIT = 200;
+const DESCRIPTION_LIMIT = 150;
 
 export const ProductDetail = () => {
   const { id } = useParams();
@@ -95,7 +95,7 @@ export const ProductDetail = () => {
             </button>
           </div>
         </div>
-        <h2>Description</h2>
+        <h4>Description</h4>
         <p className={styles.description}>
           {showFullDescription || !needsReadMore
             ? product.description
