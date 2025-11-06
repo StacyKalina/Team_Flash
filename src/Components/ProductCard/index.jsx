@@ -58,7 +58,14 @@ export const ProductCard = ({
   const resolvedImageSrc = imageSrc || placeHolderImage;
 
   // Пэйлоады
-  const cartPayload = { id, title, price };
+  const cartPayload = {
+    id,
+    title,
+    price,
+    oldPrice,
+    imageSrc: resolvedImageSrc,
+    quantity: 1,
+  };
   const favoritePayload = { id, title, price, imageSrc, oldPrice, discount };
 
   // Действия
@@ -134,3 +141,4 @@ export const ProductCard = ({
     </article>
   );
 };
+

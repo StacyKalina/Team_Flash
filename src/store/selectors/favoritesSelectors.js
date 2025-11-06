@@ -1,43 +1,48 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { resolvePricing, mapProductToCard } from "./productsHelper";
 
-// --- Базовые селекторы ---
-const selectFavoritesItems = (state) => state.favorites.items;
-const selectFilters = (state) => state.filters;
+const selectFavoritesItems = (state) => state.favorites.items ?? [];
+const selectFavoriteFilters = (state) => state.favoriteFilters ?? {};
 
 export const selectFilteredAndSortedFavorites = createSelector(
-  [selectFavoritesItems, selectFilters],
+  [selectFavoritesItems, selectFavoriteFilters],
   (favorites, filters) => {
-    if (!Array.isArray(favorites)) return [];
+    if (!Array.isArray(favorites) || favorites.length === 0) {
+      return [];
+    }
 
-    const priceFrom = parseFloat(filters.priceFrom);
-    const priceTo = parseFloat(filters.priceTo);
-    const sortOrder = filters.sortOrder;
+    const priceFrom = Number.parseFloat(filters.priceFrom);
+    const priceTo = Number.parseFloat(filters.priceTo);
+    const sortOrder = filters.sortOrder ?? "default";
 
-    let enriched = favorites.map((p) => ({ p, pricing: resolvePricing(p) }));
+    const enriched = favorites
+      .map((product) => ({ product, pricing: resolvePricing(product) }))
+      .filter(({ pricing }) => {
+        if (!Number.isNaN(priceFrom) && pricing.currentPrice < priceFrom) {
+          return false;
+        }
+        if (!Number.isNaN(priceTo) && pricing.currentPrice > priceTo) {
+          return false;
+        }
+        return true;
+      });
 
-    // Фильтрация по цене
-    enriched = enriched.filter(({ pricing }) => {
-      if (!Number.isNaN(priceFrom) && pricing.currentPrice < priceFrom)
-        return false;
-      if (!Number.isNaN(priceTo) && pricing.currentPrice > priceTo)
-        return false;
-      return true;
-    });
-
-    // Сортировка
-    if (sortOrder === "priceAsc")
+    if (sortOrder === "priceAsc") {
       enriched.sort((a, b) => a.pricing.currentPrice - b.pricing.currentPrice);
-    else if (sortOrder === "priceDesc")
+    } else if (sortOrder === "priceDesc") {
       enriched.sort((a, b) => b.pricing.currentPrice - a.pricing.currentPrice);
-    
+    }
 
-    return enriched.map(({ p, pricing }) => ({
-  ...mapProductToCard(p, pricing),
-  imageSrc: p.imageSrc || p.image, // если у тебя разные названия
-}))});
-
-    // Возвращаем данные для карточек
-//     return enriched.map(({ p, pricing }) => mapProductToCard(p, pricing));
-//   }
-// );
+    return enriched.map(({ product, pricing }) => {
+      const productForMapping = {
+        ...product,
+        image: product.image ?? product.imageSrc ?? product.imageUrl ?? "",
+      };
+      const card = mapProductToCard(productForMapping, pricing);
+      return {
+        ...card,
+        imageSrc: product.imageSrc ?? card.imageSrc,
+      };
+    });
+  }
+);
