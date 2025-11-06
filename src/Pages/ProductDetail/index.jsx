@@ -49,7 +49,8 @@ export const ProductDetail = () => {
   if (!product) return <p>Product not found.</p>;
 
   const imageUrl = `${API_BASE_URL}${product.image}`;
-  const needsReadMore = product.description.length > DESCRIPTION_LIMIT; // �Y�?������?ѧ��, ѫ����ѫ�� ѯ�� Ѩ��ѧ�����<�����'�O ѧѫ��Ѩѧ��
+  const needsReadMore =
+    product.description.length > DESCRIPTION_LIMIT; // Show toggle when description exceeds limit
 
   return (
     <div className={styles.container}>
@@ -57,7 +58,7 @@ export const ProductDetail = () => {
       <div className={styles.info}>
         <h1 className={styles.title}>{product.title}</h1>
         <div className={styles.priceAndActions}>
-          {/* �s��ѫ�'����ѫ��? ��ѯ�? ����ѫ */}
+          {/* Pricing block with optional discount badge */}
           <div className={styles.priceContainer}>
             {product.discont_price ? (
               <span className={styles.discountPrice}>
@@ -110,3 +111,4 @@ export const ProductDetail = () => {
     </div>
   );
 };
+
