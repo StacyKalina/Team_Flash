@@ -159,7 +159,7 @@ export const Cart = () => {
           register,
           handleSubmit,
           reset,
-          formState: { errors, isSubmitting, isSubmitSuccessful },
+          formState: { errors, isSubmitting },
      } = useForm({
           mode: "onBlur",
           defaultValues: {
@@ -168,9 +168,15 @@ export const Cart = () => {
                email: "",
           },
      });
-     const [submitMessage, setSubmitMessage] = useState(null);
+     const [submitMessage, setSubmitMessage] = useState("");
+     const [submitError, setSubmitError] = useState("");
 
      const hasItems = items.length > 0;
+
+     const closeModal = () => {
+          setIsModalOpen(false);
+          setSubmitMessage("");
+     };
 
      return (
           <>
@@ -207,7 +213,13 @@ export const Cart = () => {
                          <aside className={styles.summaryColumn}>
                               <form
                                    className={styles.summaryCard}
-                                   onSubmit={handleSubmit((data) => {
+                                   onSubmit={handleSubmit(async (data) => {
+                                        if (!hasItems) {
+                                             setSubmitError("Add at least one product to place an order.");
+                                             return;
+                                        }
+                                        setSubmitError("");
+                                        setSubmitMessage("");
                                         const payload = {
                                              customer: data,
                                              cart: {
@@ -217,10 +229,15 @@ export const Cart = () => {
                                              },
                                         };
                                         console.log("Order submission", payload);
-                                        setSubmitMessage("Thank you! We will contact you soon.");
-                                        dispatch(clearCart());
-                                        reset();
-                                        setIsModalOpen(true);
+                                        try {
+                                             await new Promise((resolve) => setTimeout(resolve, 1000));
+                                             dispatch(clearCart());
+                                             reset(undefined, { keepValues: false });
+                                             setSubmitMessage("Thank you! We will contact you soon.");
+                                             setIsModalOpen(true);
+                                        } catch (error) {
+                                             setSubmitError("Something went wrong. Please try again later.");
+                                        }
                                    })}
                               >
                                    <div className={styles.summaryTop}>
@@ -310,13 +327,18 @@ export const Cart = () => {
                                         Order
                                    </button>
 
-                                   {/* {submitMessage && isSubmitSuccessful && (
+                                   {submitError && (
+                                        <p className={`${styles.summaryMessage} ${styles.summaryMessageError}`}>
+                                             {submitError}
+                                        </p>
+                                   )}
+                                   {submitMessage && (
                                         <p className={styles.summaryMessage}>{submitMessage}</p>
-                                   )} */}
+                                   )}
                               </form>
                          </aside>
                     </div>
-                    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                    <Modal isOpen={isModalOpen} onClose={closeModal}>
 
                          <div className={styles.modalContent}>
                               <h2>Congratulations! </h2>
