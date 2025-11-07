@@ -1,146 +1,144 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { useEffect, useRef, useState } from "react";
 import styles from "./index.module.css";
 import { FormError } from "./FormError";
+import { resetFormState, submitForm } from "../../store/slices/formSlice";
 
-const NAME_PATTERN = /^[A-Za-z\u0410-\u044F\u0401\u0451\s'-]{2,40}$/u;
-const PHONE_PATTERN = /^\+?[0-9]{7,14}$/;
-const EMAIL_PATTERN = /^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-
-
-const ERROR_MESSAGES = {
-  required: "Field is mandatory",
-  name: "Please enter 2-40 letters",
-  phone: "Use digits only, optionally starting with +",
-  email: "Please enter a valid email (example@mail.com)",
+const VALIDATION_MESSAGES = {
+  nameRequired: "Name is required",
+  nameLength: "Use 2-40 letters",
+  namePattern: "Letters, spaces, apostrophes only",
+  phoneRequired: "Phone number is required",
+  phonePattern: "Enter a valid phone number",
+  emailRequired: "Email is required",
+  emailPattern: "Enter a valid email address",
 };
 
-const simulateRequest = (payload) =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      console.info("Mock registration payload sent:", payload);
-      resolve({ ok: true });
-    }, 1200);
-  });
-
 export const RegistrationForm = () => {
+  const dispatch = useDispatch();
+  const { loading, success, error } = useSelector((state) => state.form);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ mode: "onBlur" });
-
-  const [status, setStatus] = useState("idle"); // idle | loading | success | error
-  const [submissionError, setSubmissionError] = useState("");
-  const resetTimerRef = useRef(null);
-
-  useEffect(
-    () => () => {
-      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
+  } = useForm({
+    mode: "onBlur",
+    defaultValues: {
+      userName: "",
+      tel: "",
+      email: "",
     },
-    []
-  );
+  });
 
-  // CHANGE: один общий текст ошибки (первый встретившийся)
-  const firstFieldErrorText =
-    errors.userName?.message ||
-    errors.tel?.message ||
-    errors.email?.message ||
-    "";
-
-  const submitHandler = async (data) => {
-    setSubmissionError("");
-    setStatus("loading");
-    try {
-      await simulateRequest(data);
-      setStatus("success");
+  useEffect(() => {
+    if (success) {
       reset();
-    } catch (error) {
-      setSubmissionError("Something went wrong, please try again later.");
-      setStatus("error");
-    } finally {
-      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
-      resetTimerRef.current = setTimeout(() => setStatus("idle"), 6000);
+      const timer = setTimeout(() => dispatch(resetFormState()), 3000);
+      return () => clearTimeout(timer);
     }
+    return undefined;
+  }, [success, dispatch, reset]);
+
+  const onSubmit = async (data) => {
+    await dispatch(submitForm(data));
   };
 
   return (
-    <form
-      className={styles.form}
-      onSubmit={handleSubmit(submitHandler)}
-      noValidate
-      aria-busy={status === "loading"}
-    >
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className={styles.field}>
         <input
-          className={styles.input}
+          className={`${styles.input} ${errors.userName ? styles.inputError : ""}`}
           placeholder="Name"
           type="text"
-          id="userName"
-          aria-invalid={errors.userName ? "true" : "false"}
-          aria-errormessage={errors.userName ? "form-field-error" : undefined} // CHANGE
+          aria-invalid={Boolean(errors.userName)}
+          aria-describedby={errors.userName ? "discount-name-error" : undefined}
           {...register("userName", {
-            required: ERROR_MESSAGES.required,
-            pattern: { value: NAME_PATTERN, message: ERROR_MESSAGES.name },
+            required: VALIDATION_MESSAGES.nameRequired,
+            minLength: { value: 2, message: VALIDATION_MESSAGES.nameLength },
+            maxLength: { value: 40, message: VALIDATION_MESSAGES.nameLength },
+            pattern: {
+              value: /^[\p{L}' -]+$/u,
+              message: VALIDATION_MESSAGES.namePattern,
+            },
           })}
         />
+        {errors.userName && (
+          <FormError
+            id="discount-name-error"
+            className={styles.fieldError}
+            text={errors.userName.message}
+          />
+        )}
       </div>
 
       <div className={styles.field}>
         <input
-          className={styles.input}
+          className={`${styles.input} ${errors.tel ? styles.inputError : ""}`}
           type="tel"
           placeholder="Phone number"
-          id="tel"
-          aria-invalid={errors.tel ? "true" : "false"}
-          aria-errormessage={errors.tel ? "form-field-error" : undefined} // CHANGE
+          aria-invalid={Boolean(errors.tel)}
+          aria-describedby={errors.tel ? "discount-phone-error" : undefined}
           {...register("tel", {
-            required: ERROR_MESSAGES.required,
-            pattern: { value: PHONE_PATTERN, message: ERROR_MESSAGES.phone },
+            required: VALIDATION_MESSAGES.phoneRequired,
+            pattern: {
+              value: /^\+?[0-9\s\-()]{7,}$/u,
+              message: VALIDATION_MESSAGES.phonePattern,
+            },
           })}
         />
+        {errors.tel && (
+          <FormError
+            id="discount-phone-error"
+            className={styles.fieldError}
+            text={errors.tel.message}
+          />
+        )}
       </div>
 
       <div className={styles.field}>
         <input
-          className={styles.input}
-          type="text"
+          className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
+          type="email"
           placeholder="Email"
-          id="email"
-          aria-invalid={errors.email ? "true" : "false"}
-          aria-errormessage={errors.email ? "form-field-error" : undefined} // CHANGE
+          aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? "discount-email-error" : undefined}
           {...register("email", {
-            required: ERROR_MESSAGES.required,
-            pattern: { value: EMAIL_PATTERN, message: ERROR_MESSAGES.email },
+            required: VALIDATION_MESSAGES.emailRequired,
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/u,
+              message: VALIDATION_MESSAGES.emailPattern,
+            },
           })}
         />
+        {errors.email && (
+          <FormError
+            id="discount-email-error"
+            className={styles.fieldError}
+            text={errors.email.message}
+          />
+        )}
       </div>
 
-      {/* CHANGE: показываем ошибку только если она есть */}
-      {firstFieldErrorText && (
-        <FormError id="form-field-error" text={firstFieldErrorText} />
-      )}
-
-      {/* серверная/сетевой фидбек и успех — ниже */}
-      {submissionError && (
-        <p className={`${styles.statusMessage} ${styles.statusMessageError}`}>
-          {submissionError}
+      {error && (
+        <p
+          className={`${styles.statusMessage} ${styles.statusMessageError}`}
+          role="alert"
+        >
+          {error}
         </p>
       )}
 
-      {status === "success" && !submissionError && (
-        <p className={styles.statusMessage}>
-          Thanks! We will contact you as soon as possible.
+      {success && (
+        <p className={styles.statusMessage} role="status">
+          Form sent successfully!
         </p>
       )}
 
-      <button
-        className={styles.submit}
-        type="submit"
-        disabled={status === "loading"}
-      >
-        {status === "loading" ? "Sending..." : "Get a discount"}
+      <button className={styles.submit} type="submit" disabled={loading}>
+        {loading ? "Sending Request" : "Get a discount"}
       </button>
     </form>
   );

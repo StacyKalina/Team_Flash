@@ -6,7 +6,7 @@
 }
 
 .image {
-  max-width: 400px;
+  max-width: 350px;
   height: auto;
   object-fit: cover;
   border-radius: 8px;
@@ -52,7 +52,7 @@
 }
 
 .cartButton {
-  margin-top: 15px;
+  /* margin-top: 15px; */
   background-color: var(--color-accent);
   color: var(--color-text-inverted);
   padding: 10px 20px;

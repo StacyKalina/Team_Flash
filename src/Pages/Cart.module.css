@@ -420,6 +420,13 @@
     color: var(--color-accent-contrast);
 }
 
+.summaryMessageError {
+    color: var(--color-danger);
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+}
+
 @media (max-width: 960px) {
     .cartPage {
         padding: 60px 24px 96px;

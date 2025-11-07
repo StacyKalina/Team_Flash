@@ -9,14 +9,14 @@ import { addItem } from "../../store/slices/cartSlice";
 import styles from "./index.module.css";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE ?? "http://localhost:3333";
-const DESCRIPTION_LIMIT = 200;
+const DESCRIPTION_LIMIT = 150;
 
 export const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector(selectSelectedProduct);
   const status = useSelector((state) => state.products.status);
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [showFullDescription, setShowFullDescription] = useState(false); 
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const ProductDetail = () => {
   }, [dispatch, id]);
 
   const handleIncrement = () => setCount((prev) => prev + 1);
-  const handleDecrement = () => setCount((prev) => (prev > 1 ? prev - 1 : 1));
+  const handleDecrement = () => setCount((prev) => (prev > 0 ? prev - 1 : 0));
   const toggleDescription = () => setShowFullDescription((prev) => !prev); 
   const handleAddToCart = () => {
     if (!product) return;
@@ -49,7 +49,8 @@ export const ProductDetail = () => {
   if (!product) return <p>Product not found.</p>;
 
   const imageUrl = `${API_BASE_URL}${product.image}`;
-  const needsReadMore = product.description.length > DESCRIPTION_LIMIT; // �Y�?������?ѧ��, ѫ����ѫ�� ѯ�� Ѩ��ѧ�����<�����'�O ѧѫ��Ѩѧ��
+  const needsReadMore =
+    product.description.length > DESCRIPTION_LIMIT; // Show toggle when description exceeds limit
 
   return (
     <div className={styles.container}>
@@ -57,7 +58,7 @@ export const ProductDetail = () => {
       <div className={styles.info}>
         <h1 className={styles.title}>{product.title}</h1>
         <div className={styles.priceAndActions}>
-          {/* �s��ѫ�'����ѫ��? ��ѯ�? ����ѫ */}
+          {/* Pricing block with optional discount badge */}
           <div className={styles.priceContainer}>
             {product.discont_price ? (
               <span className={styles.discountPrice}>
@@ -95,7 +96,7 @@ export const ProductDetail = () => {
             </button>
           </div>
         </div>
-        <h2>Description</h2>
+        <h4>Description</h4>
         <p className={styles.description}>
           {showFullDescription || !needsReadMore
             ? product.description
@@ -110,3 +111,4 @@ export const ProductDetail = () => {
     </div>
   );
 };
+
