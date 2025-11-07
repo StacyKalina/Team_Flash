@@ -1,107 +1,104 @@
+// Pages/Categories/index.jsx
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import styles from "./index.module.css";
-import placeHolderImage from "../../Images/placeholder.svg"
+import placeHolderImage from "../../Images/placeholder.svg";
 
 import {
-    fetchCategories,
-    selectAllCategories,
-    selectCategoriesStatus,
-    selectCategoriesError,
+  fetchCategories,
+  // ✅ новые селекторы (вместо selectAllCategories / selectCategoriesStatus)
+  selectCategoriesList,     // всегда массив []
+  selectCategoriesItems,    // null | []  (нужно, чтобы не мигал "No categories" до запроса)
+  selectCategoriesLoading,  // boolean
+  selectCategoriesError,    // string | null
 } from "../../store/slices/categories";
-
-
 
 const BASE_URL = "http://localhost:3333";
 
-
-const buildImageUrl = (relativePath) => { //убираем у относительного пути слэши
-    if (!relativePath) return undefined;
-    if (/^https?:/i.test(relativePath)) return relativePath; // уже абсолютный URL
-    const normalized = String(relativePath).replace(/^\/+/, ""); // убираем начальные /
-    return `${BASE_URL}/${normalized}`;
+// нормализуем относительный путь к абсолютному URL
+const buildImageUrl = (relativePath) => {
+  if (!relativePath) return undefined;
+  if (/^https?:/i.test(relativePath)) return relativePath; // уже абсолютный
+  const normalized = String(relativePath).replace(/^\/+/, ""); // убираем начальные /
+  return `${BASE_URL}/${normalized}`;
 };
 
-
-
-
-//создаем компонент
-
 export const CategoriesPage = () => {
+  const dispatch   = useDispatch();
 
-    // Он ничего не знает о том, как устроен Redux внутри, подписывается на Redux-состояние (через useSelector) и отправляет экшены (через dispatch)
+  // ✅ «булевая» схема для UI
+  const categories = useSelector(selectCategoriesList);     // []
+  const itemsNull  = useSelector(selectCategoriesItems);    // null | []
+  const isLoading  = useSelector(selectCategoriesLoading);  // bool
+  const error      = useSelector(selectCategoriesError);    // string|null
+  const hasData    = categories.length > 0;
 
-    const dispatch = useDispatch();
+  // ✅ один вызов на маунте; повторы в сеть гасит condition в thunk
+  useEffect(() => {
 
-    const categories = useSelector(selectAllCategories);
-    const status = useSelector(selectCategoriesStatus); // "idle" | "loading" | "succeeded" | "failed"
-    const error = useSelector(selectCategoriesError);
+    console.log("CategoriesPage → dispatch(fetchCategories())"); // проверка
+    
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
-    useEffect(() => {
-        // грузим только когда «ещё ничего не делали»
-        if (status !== "idle") return;
-        dispatch(fetchCategories());
-    }, [status, dispatch]);
+  return (
+    <section className="page__content sectionShell">
+      <h2 className="sectionTitle">Categories</h2>
 
-    return (
-        // два класс чтобы дополнить глобальный 
-        // <div className={`sectionWrapper ${styles.wrapper} page__content` }>
-        <section className="page__content sectionShell">
+      {/* загрузка */}
+      {isLoading && (
+        <p className={styles.infoMessage}>Loading Categories…</p>
+      )}
 
-                <h2 className="sectionTitle">Categories</h2>
+      {/* ошибка */}
+      {error && (
+        <p className={styles.infoMessage}>
+          {error}
+        </p>
+      )}
 
+      {/* ещё не запрашивали: items === null → ничего не показываем, чтобы не мигало */}
+      {itemsNull === null && !isLoading && !error && (
+        <p className={styles.infoMessage}></p>
+      )}
 
-                {status === "loading" && <p className={styles.infoMessage}> Loading Categories… </p>}
+      {/* успешно, но пусто */}
+      {!isLoading && !error && itemsNull && categories.length === 0 && (
+        <p className={styles.infoMessage}>No categories found yet.</p>
+      )}
 
-                {status === "failed" && (
-                    <p className={styles.infoMessage}> Could not load categories. Ensure the backend on port 3333 is running
-                        {error ? `(${error})` : ""}
-                    </p>
-                )}
+      {/* контент */}
+      {hasData && (
+        <div className={styles.cardsGrid}>
+          {categories.map((category) => {
+            const title = category.title ?? category.name ?? "Category";
+            const imageSrc = buildImageUrl(category.image) ?? placeHolderImage;
 
-                {status === "succeeded" && categories.length === 0 && (
-                    <p className={styles.infoMessage}> No categories found yet. </p>
-                )}
-
-
-                {status === "succeeded" && categories.length > 0 && (
-                    <div className={styles.cardsGrid}>
-                        {categories.map((category) => {
-
-                            const title = category.title ?? category.name ?? "Category";
-                            const imageSrc = buildImageUrl(category.image) ?? placeHolderImage;
-
-                            return (
-                                // корневой элемент итерации, поэтому прописываем именно ему key
-                                <div className={styles.imgWrapper} key={category.id}>
-                                    <Link className={styles.categoryCard} to={`/categories/${category.id}`} >
-                                        <div className={styles.thumbWrapper}>
-
-                                            <img
-                                                src={imageSrc}
-                                                alt={title}
-                                                loading="lazy"
-                                                onError={(e) => {
-                                                    e.currentTarget.src = placeHolderImage;
-                                                }}
-                                            />
-
-                                        </div>
-                                        <p className={styles.caption}>{title}</p>
-                                    </Link>
-                                </div>
-                            );
-                        })}
-                    </div>
-                )
-                }
-                
-        </section >
-    )
-}
-
-
-
-
+            return (
+              <div className={styles.imgWrapper} key={category.id}>
+                <Link
+                  className={styles.categoryCard}
+                  to={`/categories/${category.id}`}
+                >
+                  <div className={styles.thumbWrapper}>
+                    <img
+                      src={imageSrc}
+                      alt={title}
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.src = placeHolderImage;
+                      }}
+                    />
+                  </div>
+                  <p className={styles.caption}>{title}</p>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </section>
+  );
+};

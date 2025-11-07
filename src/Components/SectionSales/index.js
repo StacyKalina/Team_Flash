@@ -6,10 +6,16 @@ import { SectionHeader } from "../SectionHeader";
 import { ProductCard } from "../ProductCard";
 import styles from "./index.module.css";
 
-import { fetchSalesProducts } from "../../store/slices/productsSlice";
+import { fetchSalesProducts,
+         selectAllProducts,          // всегда массив ([])
+         selectProductsLoading,      // boolean
+         selectProductsError         // string | null
+} from "../../store/slices/productsSlice";
+
 import { mapProductToCard } from "../../store/selectors/productsHelper"; 
 import { addItem } from "../../store/slices/cartSlice";
 
+// Берём 4 случайных карты (Фишер–Йетс)
 function getRandomFour(arr) {
   if (!Array.isArray(arr)) return [];
   const copy = [...arr];
@@ -21,24 +27,27 @@ function getRandomFour(arr) {
 }
 
 export const SectionSales = () => {
-  const dispatch = useDispatch();
-  const { items, status, error, source } = useSelector((s) => s.products);
+  const dispatch    = useDispatch();
 
+  // === Чистые селекторы из productsSlice ===
+  const items       = useSelector(selectAllProducts);     // []
+  const isLoading   = useSelector(selectProductsLoading); // bool
+  const error       = useSelector(selectProductsError);   // string|null
+  const hasData     = items.length > 0;
+
+  // === Один диспатч на маунт. Никаких зависимостей по status/source ===
   useEffect(() => {
-    if (status === "idle" || source !== "sales") {
-      dispatch(fetchSalesProducts());
-    }
-  }, [dispatch, status, source]);
+    dispatch(fetchSalesProducts());
+  }, [dispatch]);
 
+  // === Готовим карточки и берём 4 случайные ===
   const randomCards = useMemo(() => {
-    if (!Array.isArray(items) || !items.length) return [];
-    const cards = items.map((product) => mapProductToCard(product));
+    if (!hasData) return [];
+    const cards = items.map(mapProductToCard);
     return getRandomFour(cards);
-  }, [items]);
+  }, [items, hasData]);
 
-  const handleAddToCart = (product) => {
-    dispatch(addItem(product));
-  };
+  const handleAddToCart = (product) => dispatch(addItem(product));
 
   return (
     <section className="sectionShell">
@@ -48,26 +57,25 @@ export const SectionSales = () => {
         fromRouterPath="/sales"
       />
 
-      {status === "loading" && <p>Loading…</p>}
-      {status === "failed" && (
-        <p style={{ color: "crimson" }}>{error || "Etwas ist schiefgelaufen"}</p>
+      {isLoading && <p>Loading…</p>}
+      {error && <p style={{ color: "crimson" }}>{error}</p>}
+
+      {!isLoading && !error && !hasData && (
+        <p className={styles.infoMessage}>No discounted products yet.</p>
       )}
 
-      {status === "succeeded" &&
-        (randomCards.length ? (
-          <div className={styles.cardsGrid}>
-            {randomCards.map((card) => (
-              <ProductCard
-                key={card.id}
-                {...card}
-                currencySymbol="$"
-                onAddToCart={handleAddToCart}
-              />
-            ))}
-          </div>
-        ) : (
-          <p className={styles.infoMessage}>No discounted products yet.</p>
-        ))}
+      {randomCards.length > 0 && (
+        <div className={styles.cardsGrid}>
+          {randomCards.map((card) => (
+            <ProductCard
+              key={card.id}
+              {...card}
+              currencySymbol="$"
+              onAddToCart={handleAddToCart}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 };

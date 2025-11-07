@@ -58,7 +58,14 @@ export const ProductCard = ({
   const resolvedImageSrc = imageSrc || placeHolderImage;
 
   // Пэйлоады
-  const cartPayload = { id, title, price };
+  const cartPayload = {
+    id,
+    title,
+    price,
+    imageSrc: resolvedImageSrc,
+    oldPrice, // <-- ВАЖНО: кладём уже разрешённый src
+    discount,
+  };
   const favoritePayload = { id, title, price, imageSrc, oldPrice, discount };
 
   // Действия
