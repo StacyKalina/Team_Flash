@@ -67,3 +67,76 @@
     font-size: 40px;
   }
 }
+
+
+
+/* ======= Общие утилиты для страниц каталога ======= */
+
+/* обёртка для сетки с товарами — чтобы можно было рисовать оверлей поверх */
+.gridWrapper {
+  position: relative;
+}
+
+/* прозрачный оверлей при обновлении данных (оставляет контент на месте) */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  border-radius: 12px;
+  transition: opacity 0.2s ease;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(0, 0, 0, 0.15);
+  border-top-color: rgba(0, 0, 0, 0.55);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Скелетоны для первой загрузки (если ещё нет данных) */
+.skeletonWrapper {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.skeletonBox {
+  height: 280px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #eee 25%, #f6f6f6 37%, #eee 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* Аккуратный блок для сообщений об ошибках */
+.errorBox {
+  background: #fff0f0;
+  border: 1px solid #e0b4b4;
+  color: #a33;
+  text-align: center;
+  padding: 24px;
+  margin-top: 32px;
+  border-radius: 8px;
+}
+.errorBox .small {
+  font-size: 14px;
+  color: #777;
+  margin-top: 8px;
+}

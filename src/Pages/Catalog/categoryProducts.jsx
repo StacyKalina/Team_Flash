@@ -1,4 +1,4 @@
-// Pages/Catalog/index.jsx
+// Pages/Catalog/categoryProducts.jsx
 import React, { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -11,39 +11,41 @@ import {
   selectAllProducts,
 } from "../../store/slices/productsSlice";
 
-import { selectCategoriesList } from "../../store/slices/categories"; // <- новый селектор (всегда массив)
+import { selectCategoriesList } from "../../store/slices/categories";
 import { FiltersBar } from "../../Components/FiltersBar";
 import { ProductsGrid } from "../../Components/ProductsGrid";
-
 import styles from "./index.module.css";
 
 export const Catalog = () => {
   const dispatch = useDispatch();
-  const { categoryId } = useParams();                  // строка из URL
+  const { categoryId } = useParams();
   const catIdNum = useMemo(() => Number(categoryId), [categoryId]);
 
-  // булевые/простые селекторы
+  // --- данные из Redux ---
   const isLoading = useSelector(selectProductsLoading);
-  const error     = useSelector(selectProductsError);
-  const products  = useSelector(selectAllProducts);
-  const hasData   = Array.isArray(products) && products.length > 0;
-
-  // заголовок категории (если уже загружены категории)
+  const error = useSelector(selectProductsError);
+  const products = useSelector(selectAllProducts);
   const categories = useSelector(selectCategoriesList);
-  const category   = categories.find(c => Number(c.id) === catIdNum);
-  const pageTitle  = category?.title || category?.name || `Category #${categoryId}`;
 
-  // Защита от двойного эффекта в StrictMode + загрузка при смене categoryId
+  // --- вычисляем заголовок категории ---
+  const category = categories.find((c) => Number(c.id) === catIdNum);
+  const pageTitle = category?.title || category?.name || `Category #${categoryId}`;
+
+  // --- фазы загрузки ---
+  const isPriming = products === null && isLoading; // первая загрузка → скелетон
+  const isUpdating = products !== null && isLoading; // повторная → оверлей
+  const hasData = Array.isArray(products) && products.length > 0;
+
+  // --- контролируем подгрузку ---
   const lastCatRef = useRef(null);
   useEffect(() => {
-    if (lastCatRef.current === categoryId) return;
-    lastCatRef.current = categoryId;
-
-    // очищаем список, чтобы не мигали старые товары, и запрашиваем новые
-    dispatch(clearProducts());
-    dispatch(fetchProductsByCategory(categoryId));
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // если категория изменилась — чистим старые товары и грузим новые
+    if (lastCatRef.current !== categoryId) {
+      lastCatRef.current = categoryId;
+      dispatch(clearProducts());
+      dispatch(fetchProductsByCategory(categoryId));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }, [dispatch, categoryId]);
 
   return (
@@ -54,17 +56,38 @@ export const Catalog = () => {
 
       <FiltersBar />
 
-      {isLoading && <p className={styles.stateMessage}>Loading…</p>}
-      {error && (
-        <p className={styles.stateMessage}>
-          Error: {error || "Failed to load products for this category"}
-        </p>
+      {/* --- Первая загрузка — скелетон --- */}
+      {isPriming && (
+        <div className={styles.skeletonWrapper}>
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className={styles.skeletonBox}></div>
+          ))}
+        </div>
       )}
-      {!isLoading && !error && !hasData && (
+
+      {/* --- Ошибка загрузки --- */}
+      {!isPriming && error && (
+        <div className={styles.errorBox}>
+          <p>Etwas ist schiefgelaufen.</p>
+          <p className="small">Bitte versuchen Sie es später erneut.</p>
+        </div>
+      )}
+
+      {/* --- Пустая категория --- */}
+      {!isPriming && !error && !hasData && (
         <p className={styles.stateMessage}>No products in this category yet.</p>
       )}
+
+      {/* --- Отображаем товары --- */}
       {hasData && (
-        <ProductsGrid cameFrom={{ type: "category", id: Number(categoryId) }} />
+        <div className={styles.gridWrapper}>
+          <ProductsGrid cameFrom={{ type: "category", id: catIdNum }} />
+          {isUpdating && (
+            <div className={styles.overlay}>
+              <div className={styles.spinner}></div>
+            </div>
+          )}
+        </div>
       )}
     </section>
   );
