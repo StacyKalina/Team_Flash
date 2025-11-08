@@ -1,188 +1,180 @@
-/* Контейнер для сетки карточек */
-.cardsGrid {
-display: grid;
-gap: 32px;
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-/* как в первом файле: карточки сами переносятся */
-}
-
 /* Карточка товара */
 .card {
-position: relative;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-background-color: var(--color-surface);
-border: 1px solid var(--color-border);
-border-radius: 18px;
-overflow: hidden;
-transition: box-shadow 0.3s ease, transform 0.3s ease,
-background-color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease,
+        background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
-box-shadow: var(--shadow-elevated);
-transform: translateY(-3px);
+    box-shadow: var(--shadow-elevated);
+    transform: translateY(-3px);
 }
 
 /* Значок (скидка, новинка и т.д.) */
 .badge {
-position: absolute;
-top: 16px;
-right: 16px;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-padding: 4px 8px;
-background-color: var(--color-accent-strong);
-color: var(--color-text-inverted);
-font-weight: 600;
-font-size: 20px;
-border-radius: 10px;
-z-index: 2;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    background-color: var(--color-accent-strong);
+    color: var(--color-text-inverted);
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 10px;
+    z-index: 2;
 }
 
 /* Обёртка для изображения */
 .imageWrapper {
-position: relative;
-padding: 18px;
-display: flex;
-align-items: center;
-justify-content: center;
-background-color: var(--color-surface);
-border-bottom: 1px solid var(--color-border);
-transition: background-color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+
+    /* всё, что выходит за рамку, обрезаем */
+    overflow: hidden;
 }
 
 /* Изображение товара */
 .image {
-width: 100%;
-height: 220px;
-object-fit: contain;
-transition: transform 0.3s ease;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    /* БЫЛО: contain — оставлял пустые поля */
+    display: block;
+
+    /* мягкое скругление самих картинок */
+    border-radius: 8px;
+    transition: transform 0.3s ease;
 }
 
 .imageWrapper:hover .image {
-transform: scale(1.02);
+    transform: scale(1.02);
 }
 
 /* Кнопка CTA */
 .ctaButton {
-position: absolute;
-left: 16px;
-right: 16px;
-bottom: 16px;
-height: 58px;
-padding: 16px 32px;
-border-radius: 12px;
-font-size: 20px;
-font-weight: 600;
-background-color: var(--color-accent-strong);
-color: var(--color-text-inverted);
-cursor: pointer;
-opacity: 0;
-transform: translateY(6px);
-pointer-events: none;
-transition: opacity 0.2s ease, transform 0.2s ease,
-background-color 0.2s ease, color 0.2s ease;
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    height: 58px;
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: var(--color-accent-strong);
+    color: var(--color-text-inverted);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease,
+        background-color 0.2s ease, color 0.2s ease;
 }
 
 .imageWrapper:hover .ctaButton,
 .ctaButton:focus-visible {
-opacity: 1;
-transform: translateY(0);
-pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 .ctaButton:hover {
-background-color: var(--color-accent-strong-hover);
+    background-color: var(--color-accent-strong-hover);
 }
 
 /* Нижняя часть карточки */
 .footer {
-padding: 24px;
-display: flex;
-flex-direction: column;
-gap: 12px;
-background-color: var(--color-surface);
-transition: background-color 0.2s ease;
-cursor: pointer;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: var(--color-surface);
+    transition: background-color 0.2s ease;
+    cursor: pointer;
 }
 
 .footer:hover {
-background-color: var(--color-surface-muted);
+    background-color: var(--color-surface-muted);
 }
 
 /* Заголовок */
 .title {
-text-align: left;
-font-size: 20px;
-font-weight: 500;
-line-height: 1.3;
-color: var(--color-text-secondary);
-min-height: 70px;
-display: -webkit-box;
--webkit-box-orient: vertical;
-overflow: hidden;
+    text-align: left;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--color-text-secondary);
+    min-height: 70px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 /* Цены */
 .priceRow {
-display: flex;
-align-items: baseline;
-gap: 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
 }
 
 .price {
-font-size: 32px;
-font-weight: 600;
-color: var(--color-text-secondary);
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
 }
 
 .oldPrice {
-font-size: 18px;
-color: var(--color-text-muted);
-text-decoration: line-through;
+    font-size: 18px;
+    color: var(--color-text-muted);
+    text-decoration: line-through;
 }
 
 /* Адаптивность — как в первом файле */
 @media screen and (max-width: 1050px) {
-.cardsGrid {
-gap: 24px;
-grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
 
-.ctaButton {
-font-size: 18px;
-padding: 14px 24px;
-}
+    .ctaButton {
+        font-size: 18px;
+        padding: 14px 24px;
+    }
 
-.image {
-height: 200px;
-}
+    .image {
+        height: 200px;
+    }
 
-.price {
-font-size: 28px;
-}
+    .price {
+        font-size: 28px;
+    }
 }
 
 @media screen and (max-width: 460px) {
-.cardsGrid {
-gap: 18px;
-grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-}
 
-.image {
-height: 180px;
-}
+    .image {
+        height: 180px;
+    }
 
-.price {
-font-size: 26px;
-}
+    .price {
+        font-size: 26px;
+    }
 
-.title {
-font-size: 18px;
-}
+    .title {
+        font-size: 18px;
+    }
 }
 
 
@@ -190,80 +182,112 @@ font-size: 18px;
 
 /* ====== SKELETON: базовые блоки ====== */
 .skeletonCard [class] {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 .skeletonBox {
-  position: relative;
-  display: block;
-  border-radius: 4px;
-  background-color: #e6e7ea; /* светло-серый */
-  overflow: hidden;
+    position: relative;
+    display: block;
+    border-radius: 4px;
+    background-color: #e6e7ea;
+    /* светло-серый */
+    overflow: hidden;
 }
 
 /* Изображение: высоты 1:1 с реальной карточкой */
 .image.skeletonBox {
-  width: 100%;
-  height: 220px; /* как .image { height: 220px } */
+    width: 100%;
+    height: 220px;
+    /* как .image { height: 220px } */
 }
 
 /* Заголовок имитируем одной строкой */
 .title.skeletonBox {
-  width: 80%;
-  height: 1em;
+    width: 80%;
+    height: 1em;
 }
 
 /* Цены в одну строку (у тебя flex уже задан) */
 .price.skeletonBox {
-  width: 40%;
-  height: 1em;
+    width: 40%;
+    height: 1em;
 }
 
 .oldPrice.skeletonBox {
-  width: 28%;
-  height: 1em;
-  opacity: 0.85;
+    width: 28%;
+    height: 1em;
+    opacity: 0.85;
 }
 
 /* Мягкий shimmer — уважаем reduced-motion */
 @media (prefers-reduced-motion: no-preference) {
-  .skeletonBox::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.35), rgba(255,255,255,0));
-    background-size: 200% 100%;
-    animation: __skeletonShimmer 1.4s infinite;
-  }
-  @keyframes __skeletonShimmer {
-    0%   { background-position: -150% 0; }
-    100% { background-position: 150% 0; }
-  }
+    .skeletonBox::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .35), rgba(255, 255, 255, 0));
+        background-size: 200% 100%;
+        animation: __skeletonShimmer 1.4s infinite;
+    }
+
+    @keyframes __skeletonShimmer {
+        0% {
+            background-position: -150% 0;
+        }
+
+        100% {
+            background-position: 150% 0;
+        }
+    }
 }
 
 /* ====== Адаптив 1:1 с карточкой ====== */
 @media screen and (max-width: 1050px) {
-  .image.skeletonBox { height: 200px; } /* как .image { height: 200px } */
+    .image {
+        height: 200px;
+    }
+
+    .image.skeletonBox {
+        height: 200px;
+    }
+
+    /* как .image { height: 200px } */
 }
 
 @media screen and (max-width: 460px) {
-  .image.skeletonBox { height: 180px; } /* как .image { height: 180px } */
-  .title.skeletonBox { width: 70%; }
-  .price.skeletonBox { width: 36%; }
-  .oldPrice.skeletonBox { width: 24%; }
+    .image {
+        height: 180px;
+    }
+
+    .image.skeletonBox {
+        height: 180px;
+    }
+
+    /* как .image { height: 180px } */
+    .title.skeletonBox {
+        width: 70%;
+    }
+
+    .price.skeletonBox {
+        width: 36%;
+    }
+
+    .oldPrice.skeletonBox {
+        width: 24%;
+    }
 }
 
 
 /* Плавное появление "живых" карточек (не скелетона) */
 .card:not([data-skeleton="true"]) {
-  opacity: 0;
-  transform: translateY(4px);
-  animation: cardFadeIn 0.35s ease-out forwards;
+    opacity: 0;
+    transform: translateY(4px);
+    animation: cardFadeIn 0.35s ease-out forwards;
 }
 
 @keyframes cardFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
