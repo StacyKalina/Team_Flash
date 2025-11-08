@@ -14,6 +14,7 @@ import {
 import { selectCategoriesList } from "../../store/slices/categories";
 import { FiltersBar } from "../../Components/FiltersBar";
 import { ProductsGrid } from "../../Components/ProductsGrid";
+import { ProductsGridSkeleton } from "../../Components/ProductsGrid/SkeletonGrid";
 import styles from "./index.module.css";
 
 export const Catalog = () => {
@@ -57,13 +58,7 @@ export const Catalog = () => {
       <FiltersBar />
 
       {/* --- Первая загрузка — скелетон --- */}
-      {isPriming && (
-        <div className={styles.skeletonWrapper}>
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className={styles.skeletonBox}></div>
-          ))}
-        </div>
-      )}
+      {isPriming && <ProductsGridSkeleton count={6} />}
 
       {/* --- Ошибка загрузки --- */}
       {!isPriming && error && (

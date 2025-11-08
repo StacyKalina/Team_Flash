@@ -6,13 +6,13 @@ import { SectionHeader } from "../SectionHeader";
 import { ProductCard } from "../ProductCard";
 import styles from "./index.module.css";
 
-import { fetchSalesProducts,
-         selectAllProducts,          // всегда массив ([])
-         selectProductsLoading,      // boolean
-         selectProductsError         // string | null
+import {
+  fetchSalesProducts,
+  selectProductsLoading,      // boolean
+  selectProductsError,       // string | null
 } from "../../store/slices/productsSlice";
 
-import { mapProductToCard } from "../../store/selectors/productsHelper"; 
+import { selectVisibleProductCards } from "../../store/selectors/productsSelectors";
 import { addItem } from "../../store/slices/cartSlice";
 
 // Берём 4 случайных карты (Фишер–Йетс)
@@ -27,25 +27,26 @@ function getRandomFour(arr) {
 }
 
 export const SectionSales = () => {
-  const dispatch    = useDispatch();
+  const dispatch = useDispatch();
 
-  // === Чистые селекторы из productsSlice ===
-  const items       = useSelector(selectAllProducts);     // []
-  const isLoading   = useSelector(selectProductsLoading); // bool
-  const error       = useSelector(selectProductsError);   // string|null
-  const hasData     = items.length > 0;
+  // === Готовые карточки, как в ProductsGrid ===
+  // Здесь уже лежат объекты в формате, который ждёт <ProductCard />:
+  // { id, title, price, discont_price, oldPrice, discount, imageSrc, ... }
+  const cards     = useSelector(selectVisibleProductCards);
+  const isLoading = useSelector(selectProductsLoading);
+  const error     = useSelector(selectProductsError);
+  const hasData   = cards.length > 0;
 
   // === Один диспатч на маунт. Никаких зависимостей по status/source ===
   useEffect(() => {
     dispatch(fetchSalesProducts());
   }, [dispatch]);
 
-  // === Готовим карточки и берём 4 случайные ===
-  const randomCards = useMemo(() => {
-    if (!hasData) return [];
-    const cards = items.map(mapProductToCard);
-    return getRandomFour(cards);
-  }, [items, hasData]);
+  // === Просто берём 4 случайные карточки из уже подготовленных ===
+  const randomCards = useMemo(
+    () => (hasData ? getRandomFour(cards) : []),
+    [cards, hasData]
+  );
 
   const handleAddToCart = (product) => dispatch(addItem(product));
 
@@ -69,7 +70,7 @@ export const SectionSales = () => {
           {randomCards.map((card) => (
             <ProductCard
               key={card.id}
-              {...card}
+              {...card}              // здесь уже есть price + discont_price + oldPrice + discount
               currencySymbol="$"
               onAddToCart={handleAddToCart}
             />
