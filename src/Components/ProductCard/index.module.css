@@ -20,8 +20,8 @@
 /* Значок (скидка, новинка и т.д.) */
 .badge {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 18px;
+    right: 20px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -30,17 +30,64 @@
     color: var(--color-text-inverted);
     font-weight: 600;
     font-size: 20px;
-    border-radius: 10px;
+    border-radius: 4px;
     z-index: 2;
 }
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease,
+        background-color 0.3s ease, border-color 0.3s ease;
+
+    /* НОВОЕ: резервируем высоту "хедера" под сердечко и бейдж */
+    padding-top: 0px;
+    /* поиграй 52–64px, чтобы идеально попасть в макет */
+}
+
+/* Кнопка избранного (контейнер под сердце) */
+.favoriteButton {
+    position: absolute;
+    top: 12px;
+    left: 18px;
+    z-index: 3;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.favoriteButton:hover {
+  transform: scale(1.08);
+}
+
 
 /* Обёртка для изображения */
 .imageWrapper {
     position: relative;
-    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    aspect-ratio: 1 / 1;  
+    padding: 30px;
     background-color: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
     transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -52,7 +99,9 @@
 /* Изображение товара */
 .image {
     width: 100%;
-    height: 220px;
+    height: 100%;
+    height: auto;              /* высота идёт из пропорций картинки */
+  max-height: 100%;          /* не вылезаем за wrapper, если вдруг */
     object-fit: cover;
     /* БЫЛО: contain — оставлял пустые поля */
     display: block;
@@ -69,15 +118,15 @@
 /* Кнопка CTA */
 .ctaButton {
     position: absolute;
-    left: 16px;
-    right: 16px;
-    bottom: 16px;
-    height: 58px;
-    padding: 16px 32px;
-    border-radius: 8px;
+    left: 27px;
+    right: 27px;
+    bottom: 26px;
+    height: 48px;
+    /* padding: 16px 32px; */
+    border-radius: 6px;
     font-size: 20px;
     font-weight: 600;
-    background-color: var(--color-accent-strong);
+    background-color: var(--color-accent-contrast);
     color: var(--color-text-inverted);
     cursor: pointer;
     opacity: 0;
@@ -100,10 +149,10 @@
 
 /* Нижняя часть карточки */
 .footer {
-    padding: 24px;
+    padding: 16px 26px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 2px;
     background-color: var(--color-surface);
     transition: background-color 0.2s ease;
     cursor: pointer;
@@ -116,11 +165,11 @@
 /* Заголовок */
 .title {
     text-align: left;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
-    line-height: 1.3;
+    line-height: 1.2;
     color: var(--color-text-secondary);
-    min-height: 70px;
+    min-height: 50px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -134,160 +183,224 @@
 }
 
 .price {
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 600;
     color: var(--color-text-secondary);
 }
 
 .oldPrice {
-    font-size: 18px;
+    font-size: 20px;
     color: var(--color-text-muted);
     text-decoration: line-through;
 }
 
-/* Адаптивность — как в первом файле */
+/* ============================================================
+   АДАПТИВ КАРТОЧКИ ТОВАРА
+   ============================================================ */
+
+/* ====== Планшеты и ноутбуки (до 1050px) ====== */
 @media screen and (max-width: 1050px) {
 
-    .ctaButton {
-        font-size: 18px;
-        padding: 14px 24px;
-    }
+  /* квадрат картинки остаётся, уменьшаем внутренние отступы */
+  .imageWrapper {
+    padding: 24px;
+  }
 
-    .image {
-        height: 200px;
-    }
+  /* сердечко — чуть меньше и ближе к краю */
+  .favoriteButton {
+    top: 10px;
+    left: 16px;
+    width: 34px;
+    height: 34px;
+  }
 
-    .price {
-        font-size: 28px;
-    }
+  /* бейдж скидки — меньше шрифт и отступы */
+  .badge {
+    top: 12px;
+    right: 16px;
+    font-size: 18px;
+    padding: 3px 7px;
+  }
+
+  /* кнопка CTA — ниже и уже */
+  .ctaButton {
+    left: 24px;
+    right: 24px;
+    bottom: 22px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  /* подвал карточки (текст, цена) — меньше отступы */
+  .footer {
+    padding: 14px 20px;
+    gap: 4px;
+  }
+
+  /* заголовок и цены — уменьшаем шрифт */
+  .title {
+    font-size: 17px;
+    min-height: 46px;
+  }
+
+  .price {
+    font-size: 24px;
+  }
+
+  .oldPrice {
+    font-size: 18px;
+  }
 }
 
-@media screen and (max-width: 460px) {
+/* ====== Телефоны (до 600px) ====== */
+@media screen and (max-width: 600px) {
 
-    .image {
-        height: 180px;
-    }
+  /* уменьшаем паддинги у блока с изображением */
+  .imageWrapper {
+    padding: 20px;
+  }
 
-    .price {
-        font-size: 26px;
-    }
+  /* сердечко — ещё чуть меньше и ближе к углу */
+  .favoriteButton {
+    top: 8px;
+    left: 12px;
+    width: 30px;
+    height: 30px;
+  }
 
-    .title {
-        font-size: 18px;
-    }
-}
-
-
-
-
-/* ====== SKELETON: базовые блоки ====== */
-.skeletonCard [class] {
-    pointer-events: none;
-}
-
-.skeletonBox {
-    position: relative;
-    display: block;
+  /* бейдж — мелкий и компактный */
+  .badge {
+    top: 10px;
+    right: 12px;
+    font-size: 16px;
+    padding: 2px 6px;
     border-radius: 4px;
-    background-color: #e6e7ea;
-    /* светло-серый */
-    overflow: hidden;
+  }
+
+  /* кнопка CTA — адаптируем под мобильный размер */
+  .ctaButton {
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    height: 42px;
+    font-size: 16px;
+  }
+
+  /* футер — минимальные паддинги и расстояния */
+  .footer {
+    padding: 12px 14px;
+    gap: 4px;
+  }
+
+  .title {
+    font-size: 15px;
+    min-height: 42px;
+  }
+
+  .price {
+    font-size: 22px;
+  }
+
+  .oldPrice {
+    font-size: 16px;
+  }
 }
 
-/* Изображение: высоты 1:1 с реальной карточкой */
+
+
+/* ============================================================
+   СКЕЛЕТОН (карточка-заглушка при загрузке)
+   ============================================================ */
+
+.skeletonCard [class] {
+  pointer-events: none; /* не кликается */
+}
+
+/* базовый фон серого цвета */
+.skeletonBox {
+  position: relative;
+  display: block;
+  border-radius: 8px;
+  background-color: var(--color-skeleton-base, #e6e7ea);
+  overflow: hidden;
+}
+
+/* "картинка" в скелетоне — квадрат, как в реальной карточке */
 .image.skeletonBox {
-    width: 100%;
-    height: 220px;
-    /* как .image { height: 220px } */
+  width: 100%;
+  aspect-ratio: 1 / 1;  /* 👈 сохраняет квадратную форму */
+  border-bottom: 1px solid var(--color-border);
 }
 
-/* Заголовок имитируем одной строкой */
+/* заглушка для заголовка */
 .title.skeletonBox {
-    width: 80%;
-    height: 1em;
+  width: 80%;
+  height: 1em;
+  border-radius: 4px;
 }
 
-/* Цены в одну строку (у тебя flex уже задан) */
+/* заглушка для цены */
 .price.skeletonBox {
-    width: 40%;
-    height: 1em;
+  width: 40%;
+  height: 1em;
+  border-radius: 4px;
 }
 
+/* заглушка для старой цены (чуть меньше) */
 .oldPrice.skeletonBox {
-    width: 28%;
-    height: 1em;
-    opacity: 0.85;
+  width: 28%;
+  height: 1em;
+  opacity: 0.85;
+  border-radius: 4px;
 }
 
-/* Мягкий shimmer — уважаем reduced-motion */
+/* анимация "сияния" (shimmer effect) */
 @media (prefers-reduced-motion: no-preference) {
-    .skeletonBox::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .35), rgba(255, 255, 255, 0));
-        background-size: 200% 100%;
-        animation: __skeletonShimmer 1.4s infinite;
-    }
+  .skeletonBox::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.35),
+      rgba(255, 255, 255, 0)
+    );
+    background-size: 200% 100%;
+    animation: __skeletonShimmer 1.4s infinite;
+  }
 
-    @keyframes __skeletonShimmer {
-        0% {
-            background-position: -150% 0;
-        }
-
-        100% {
-            background-position: 150% 0;
-        }
+  @keyframes __skeletonShimmer {
+    0% {
+      background-position: -150% 0;
     }
+    100% {
+      background-position: 150% 0;
+    }
+  }
 }
 
-/* ====== Адаптив 1:1 с карточкой ====== */
+/* адаптивные размеры для скелетона */
 @media screen and (max-width: 1050px) {
-    .image {
-        height: 200px;
-    }
-
-    .image.skeletonBox {
-        height: 200px;
-    }
-
-    /* как .image { height: 200px } */
+  .title.skeletonBox {
+    width: 70%;
+  }
+  .price.skeletonBox {
+    width: 36%;
+  }
+  .oldPrice.skeletonBox {
+    width: 24%;
+  }
 }
 
-@media screen and (max-width: 460px) {
-    .image {
-        height: 180px;
-    }
-
-    .image.skeletonBox {
-        height: 180px;
-    }
-
-    /* как .image { height: 180px } */
-    .title.skeletonBox {
-        width: 70%;
-    }
-
-    .price.skeletonBox {
-        width: 36%;
-    }
-
-    .oldPrice.skeletonBox {
-        width: 24%;
-    }
-}
-
-
-/* Плавное появление "живых" карточек (не скелетона) */
-.card:not([data-skeleton="true"]) {
-    opacity: 0;
-    transform: translateY(4px);
-    animation: cardFadeIn 0.35s ease-out forwards;
-}
-
-@keyframes cardFadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@media screen and (max-width: 600px) {
+  .title.skeletonBox {
+    width: 68%;
+  }
+  .price.skeletonBox {
+    width: 32%;
+  }
+  .oldPrice.skeletonBox {
+    width: 22%;
+  }
 }
