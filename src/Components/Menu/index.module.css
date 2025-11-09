@@ -1,5 +1,5 @@
 .navWrapper {
-  background-color: #fffff1; /* оставила твой явный цвет фона */
+  background-color: #fffff1;
 }
 
 .navContent {
@@ -8,14 +8,11 @@
   align-items: center;
   justify-content: space-between;
 
-  /* CHANGE: склеила блок из ветки dev + сохранила твою высоту */
   background-color: var(--color-nav-background);
   color: var(--color-nav-text);
   height: 128px;
-  padding: 0 40px;
   border-bottom: 1px solid var(--color-border);
-  transition: background-color 0.3s ease, color 0.3s ease,
-    border-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 /* CHANGE: блок brandSection отсутствовал в HEAD — вернула из dev */
@@ -245,12 +242,6 @@
   transition: filter 0.3s ease;
 }
 
-/* CHANGE: объединила дублирующийся @media (max-width: 1000px) — он встречался дважды */
-@media screen and (max-width: 1000px) {
-  .navWrapper {
-    padding: 0 20px;
-  }
-}
 
 @media screen and (max-width: 768px) {
   /* CHANGE: адаптив — скрыть десктопные вещи и показать мобильные */

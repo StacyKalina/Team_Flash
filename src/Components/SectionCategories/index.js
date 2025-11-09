@@ -57,7 +57,7 @@ export const SectionCategories = () => {
     <section className={`sectionShell ${styles.root}`}>
       <SectionHeader
         title="Categories"
-        buttonText="Alle Kategorien"
+        buttonText="All Categories"
         fromRouterPath="/categories"
       />
 

@@ -10,14 +10,11 @@
   display: flex;
   justify-content: flex-start;
   color: #fff;
-  padding: 0 60px;
 }
 
 .bannerContent {
-  display: flex;
-  flex-direction: column;
+  margin-top: 40px;
   align-items: flex-start;
-  gap: 24px;
 }
 
 .MainHeader {

@@ -54,7 +54,7 @@ export const SectionSales = () => {
     <section className="sectionShell">
       <SectionHeader
         title="Sale"
-        buttonText="Alle Sales"
+        buttonText="All Sales"
         fromRouterPath="/sales"
       />
 
