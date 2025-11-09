@@ -1,5 +1,5 @@
 .navWrapper {
-  background-color: #fffff1; /* оставила твой явный цвет фона */
+  background-color: #fffff1;
 }
 
 .navContent {
@@ -8,14 +8,11 @@
   align-items: center;
   justify-content: space-between;
 
-  /* CHANGE: склеила блок из ветки dev + сохранила твою высоту */
   background-color: var(--color-nav-background);
   color: var(--color-nav-text);
   height: 128px;
-  padding: 0 40px;
   border-bottom: 1px solid var(--color-border);
-  transition: background-color 0.3s ease, color 0.3s ease,
-    border-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 /* CHANGE: блок brandSection отсутствовал в HEAD — вернула из dev */
@@ -80,23 +77,55 @@
   cursor: pointer;
 }
 
+/* ❤️ Счётчик избранного */
 .favoriteCount {
   position: absolute;
-  top: -6px;
-  right: -12px;
-  min-width: 20px;
-  padding: 2px 6px;
-  border-radius: 999px;
+  top: 5px;
+  left: -2px;
+
+
+  min-width: 26px;
+  height: 26px;
+
+  padding: 0 4px;
+  border-radius: 50%;
   background-color: var(--color-accent);
   color: var(--color-text-inverted);
-  font-size: 12px;
+
+  font-size: 13px;
   font-weight: 600;
-  line-height: 1;
+   line-height: 26px;  /* = height → цифра по центру */
   text-align: center;
-  border: 1px solid var(--color-surface);
+
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+
   transition: background-color 0.3s ease, color 0.3s ease,
-    border-color 0.3s ease;
 }
+
+/* 🛍️ Счётчик корзины */
+.cartBadge {
+  position: absolute;
+  top: 5px;
+  left: -6px;
+
+  min-width: 26px;
+  height: 26px;
+
+  padding: 0 8px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: var(--color-text-inverted);
+
+  font-size: 13px;
+  font-weight: 600;
+   line-height: 26px;  /* = height → цифра по центру */
+  text-align: center;
+
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 
 .cartLink {
   position: relative;
@@ -110,22 +139,6 @@
   display: block;
 }
 
-.cartBadge {
-  position: absolute;
-  top: -6px;
-  right: -10px;
-  min-width: 22px;
-  padding: 2px 6px;
-  border-radius: 999px;
-  background-color: var(--color-accent);
-  color: var(--color-text-inverted);
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(146, 161, 52, 0.35);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
 
 .burgerMenu {
   display: none;
@@ -229,12 +242,6 @@
   transition: filter 0.3s ease;
 }
 
-/* CHANGE: объединила дублирующийся @media (max-width: 1000px) — он встречался дважды */
-@media screen and (max-width: 1000px) {
-  .navWrapper {
-    padding: 0 20px;
-  }
-}
 
 @media screen and (max-width: 768px) {
   /* CHANGE: адаптив — скрыть десктопные вещи и показать мобильные */

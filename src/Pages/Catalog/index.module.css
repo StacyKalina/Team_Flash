@@ -67,3 +67,55 @@
     font-size: 40px;
   }
 }
+
+
+
+/* ======= Общие утилиты для страниц каталога ======= */
+
+/* обёртка для сетки с товарами — чтобы можно было рисовать оверлей поверх */
+.gridWrapper {
+  position: relative;
+}
+
+/* прозрачный оверлей при обновлении данных (оставляет контент на месте) */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  border-radius: 12px;
+  transition: opacity 0.2s ease;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(0, 0, 0, 0.15);
+  border-top-color: rgba(0, 0, 0, 0.55);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Аккуратный блок для сообщений об ошибках */
+.errorBox {
+  background: #fff0f0;
+  border: 1px solid #e0b4b4;
+  color: #a33;
+  text-align: center;
+  padding: 24px;
+  margin-top: 32px;
+  border-radius: 8px;
+}
+.errorBox .small {
+  font-size: 14px;
+  color: #777;
+  margin-top: 8px;
+}

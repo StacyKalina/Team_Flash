@@ -1,18 +1,17 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./index.module.css";
 import placeHolderImage from "../../Images/placeholder.svg";
-import heartIcon from "../../Images/icons/heart.svg";
+import heartIcon from "../../Images/icons/heart-filledNull.svg";
 import heartFilledIcon from "../../Images/icons/heart-filled.svg";
 import { toggleFavorite } from "../../store/slices/favoriteSlice";
 
 /**
  * ProductCard
  * ------------
- * - Переход на страницу товара передаёт state: { cameFrom } — важно для хлебных крошек.
- * - Избранное: локальная кнопка с Redux (toggleFavorite).
+ * - Передаёт cameFrom в navigate для корректных хлебных крошек.
+ * - Избранное через Redux (toggleFavorite).
  * - Добавление в корзину — через onAddToCart (можно заменить в родителе).
  */
 
@@ -23,26 +22,33 @@ const defaultAddToCart = (payload) => {
 export const ProductCard = ({
   id,
   title,
+  // Базовая цена (без скидки)
   price,
+  // Картинка, которую мог отдать бэкенд/селектор
   imageSrc,
+  // Поле для «старой» цены (для зачёркнутого значения в UI)
   oldPrice,
+  // Процент скидки или метка; может быть числом (например, 15) или строкой («-15%»)
   discount,
+  // Если бэкенд отдаёт готовую скидочную цену — берём её
+  discont_price,
   currencySymbol = "$",
   onAddToCart = defaultAddToCart,
-  cameFrom, // контекст для крошек (Catalog/AllProducts/Sales/Favorites и т.п.)
+  cameFrom, // контекст для крошек: { type: "category"|"all"|"sales"|..., id? }
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Избранное
+  // === Избранное ===
+  // NB: в сторах это обычно 'favorites'; если у тебя другой ключ редьюсера — поправь здесь.
   const favoriteItems = useSelector((s) => s.favorites?.items || []);
   const isFavorite = favoriteItems.some((item) => item.id === id);
 
-  // Формат цены
+  // Формат цены вывода в карточке
   const formatPrice = (value) =>
     typeof value === "number" ? value.toLocaleString("en-US") : value;
 
-  // Бейдж скидки
+  // Текст бейджа скидки
   const resolveDiscountLabel = () => {
     if (discount === undefined || discount === null || discount === 0) return null;
     if (typeof discount === "number") {
@@ -50,29 +56,43 @@ export const ProductCard = ({
       const sign = discount > 0 ? "-" : "";
       return `${sign}${abs}%`;
     }
-    return discount;
+    return discount; // уже готовая строка
   };
   const discountLabel = resolveDiscountLabel();
 
-  // Картинка
+  // Разрешаем картинку, чтобы и в корзине/избранном не было пусто
   const resolvedImageSrc = imageSrc || placeHolderImage;
 
-  // Пэйлоады
+  // === Пэйлоады ===
+  // Корзина должна знать обе цены: price (базовая) и discont_price (если была).
+  // totalPrice в cartSlice будет считать по (discont_price ?? price) — см. ниже.
   const cartPayload = {
     id,
     title,
-    price,
-    oldPrice,
-    imageSrc: resolvedImageSrc,
-    quantity: 1,
+    price,                         // базовая цена (без скидки)
+    oldPrice: oldPrice ?? null,    // для вывода зачёркнутого значения
+    discount: discount ?? null,    // просто как справочная инфа (необязательно, но полезно)
+    discont_price: (typeof discont_price === "number" ? discont_price : null),
+    imageSrc: resolvedImageSrc,    // кладём уже «готовый» src
+    quantity: 1,                   // явно кладём 1; в слайсе есть ensureQuantity, но так читабельнее
   };
-  const favoritePayload = { id, title, price, imageSrc, oldPrice, discount };
 
-  // Действия
+  // Для избранного тоже храним готовую картинку и все полезные поля
+  const favoritePayload = {
+    id,
+    title,
+    price,
+    oldPrice: oldPrice ?? null,
+    discount: discount ?? null,
+    discont_price: (typeof discont_price === "number" ? discont_price : null),
+    imageSrc: resolvedImageSrc,
+  };
+
+  // === Действия ===
   const handleAddToCart = () => onAddToCart(cartPayload);
 
   const handleToggleFavorite = (e) => {
-    e.stopPropagation(); // чтобы не сработал переход на товар
+    e.stopPropagation(); // чтобы клик не открыл карточку товара
     dispatch(toggleFavorite(favoritePayload));
   };
 
@@ -81,12 +101,11 @@ export const ProductCard = ({
     navigate(`/product/${id}`, { state: { cameFrom } });
   };
 
+  // === Рендер ===
   return (
     <article className={styles.card}>
-      {/* Бейдж скидки (если есть) */}
       {discountLabel && <span className={styles.badge}>{discountLabel}</span>}
 
-      {/* Кнопка избранного (в верхнем углу карточки) */}
       <button
         type="button"
         className={styles.favoriteButton}
@@ -96,7 +115,6 @@ export const ProductCard = ({
         <img src={isFavorite ? heartFilledIcon : heartIcon} alt="" />
       </button>
 
-      {/* Изображение + CTA */}
       <div className={styles.imageWrapper}>
         <img
           className={styles.image}
@@ -116,7 +134,6 @@ export const ProductCard = ({
         </button>
       </div>
 
-      {/* Футер карточки: по клику — переход на страницу товара */}
       <button
         type="button"
         className={styles.footer}
@@ -127,9 +144,10 @@ export const ProductCard = ({
         <div className={styles.priceRow}>
           <span className={styles.price}>
             {currencySymbol}
-            {formatPrice(price)}
+            {formatPrice(typeof discont_price === "number" ? discont_price : price)}
           </span>
 
+          {/* показываем oldPrice, если он есть (UI — зачёркнуто) */}
           {oldPrice && (
             <span className={styles.oldPrice}>
               {currencySymbol}
@@ -141,4 +159,3 @@ export const ProductCard = ({
     </article>
   );
 };
-

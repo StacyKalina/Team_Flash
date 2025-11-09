@@ -261,3 +261,44 @@ body {
     padding-top: 100px;
   }
 }
+
+
+
+
+.appLoadingOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.55); /* лёгкая вуаль */
+  backdrop-filter: blur(2px);             /* мягкий блюр, можно убрать */
+
+  opacity: 0;
+  pointer-events: none;
+  animation: appOverlayFadeIn 0.18s ease-out forwards;
+}
+
+.appLoadingOverlay__spinner {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 0, 0, 0.15);
+  border-top-color: rgba(0, 0, 0, 0.6);
+  animation: appOverlaySpin 0.8s linear infinite;
+}
+
+@keyframes appOverlayFadeIn {
+  to {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@keyframes appOverlaySpin {
+  to {
+    transform: rotate(360deg);
+  }
+}

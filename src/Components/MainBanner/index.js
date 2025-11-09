@@ -11,7 +11,7 @@ export const MainBanner = () => {
 
   return (
     <div className={styles.bannerWrapper}>
-      <div className={styles.bannerContent}>
+      <div className={`page__content ${styles.bannerContent}`}>
         <h1 className={styles.MainHeader}>Amazing Discounts on Garden Products!</h1>
         <Button text="Check out" onClick={handleCheckoutClick} />
       </div>

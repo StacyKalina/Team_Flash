@@ -13,7 +13,6 @@ import { ProductDetail } from "./Pages/ProductDetail";
 import { NotFound } from "./Pages/NotFound";
 import Favorites from "./Pages/Favorites";
 
-import { Skeleton } from "./Components/Skeleton";
 import { selectIsLoading } from "./store/slices/globalSlice";
 
 // ----------------- router definition with breadcrumbs -----------------
@@ -111,13 +110,23 @@ export const router = createBrowserRouter([
   },
 ]);
 
-// ----------------- wrapper to show Skeleton overlay while loading -----------------
+
+
+// ---------- глобальный оверлей загрузки ----------
+const GlobalLoadingOverlay = () => (
+  <div className="appLoadingOverlay">
+    <div className="appLoadingOverlay__spinner" />
+  </div>
+);
+
+// ---------- Обёртка Router + оверлей ----------
 export const AppRouter = () => {
-  const isLoading = useSelector(selectIsLoading); // глобальный флаг загрузки
+  const isLoading = useSelector(selectIsLoading);
+
   return (
     <>
-      {isLoading && <Skeleton />}
       <RouterProvider router={router} />
+      {isLoading && <GlobalLoadingOverlay />}
     </>
   );
 };

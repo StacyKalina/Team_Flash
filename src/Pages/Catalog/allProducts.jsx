@@ -1,39 +1,68 @@
+// Pages/AllProducts/index.jsx
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAllProducts,
-  selectProductsStatus,
+  selectAllProducts,
+  selectProductsLoading,
   selectProductsError,
 } from "../../store/slices/productsSlice";
 import { FiltersBar } from "../../Components/FiltersBar";
+
 import { ProductsGrid } from "../../Components/ProductsGrid";
+import { ProductsGridSkeleton } from "../../Components/ProductsGrid/SkeletonGrid";
 import styles from "./index.module.css";
 
 export const AllProducts = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectProductsLoading);
   const error = useSelector(selectProductsError);
-  const status = useSelector(selectProductsStatus);
-  const source = useSelector((s) => s.products.source);
+  const items = useSelector(selectAllProducts);
 
+  // Фазы загрузки
+  const isPriming  = items === null && isLoading;   // первая загрузка → скелетон
+  const isUpdating = items !== null && isLoading;   // повторная → оверлей
+  const hasData    = Array.isArray(items) && items.length > 0;
+
+  // Один вызов на маунте; повторные запросы блокируются condition в thunk
   useEffect(() => {
-    if (status === "idle" || source !== "all") {
-      dispatch(fetchAllProducts());
-    }
-  }, [status, source, dispatch]);
+    console.log("AllProductsPage → dispatch(fetchAllProducts())");
+    dispatch(fetchAllProducts());
+  }, [dispatch]);
 
   return (
     <section className="page__content sectionShell">
+      <header className={styles.header}>
+        <h1 className={styles.pageTitle}>All products</h1>
+      </header>
 
-        <header className={styles.header}>
-          <h1 className={styles.pageTitle}>All products</h1>
-        </header>
+      <FiltersBar />
 
-        <FiltersBar />
+      {isPriming && <ProductsGridSkeleton count={6} />}
 
-        {status === "loading" && <p className={styles.stateMessage}>Loading…</p>}
-        {status === "failed" && <p className={styles.stateMessage}>Error: {error}</p>}
-        {status === "succeeded" && <ProductsGrid cameFrom={{ type: "all" }} />}
+      {!isPriming && error && (
+        <div className={styles.errorBox}>
+          <p>Etwas ist schiefgelaufen.</p>
+          <p className="small">Bitte versuchen Sie es später erneut.</p>
+        </div>
+      )}
 
+      {!isPriming && !error && !hasData && (
+        <p className={styles.stateMessage}>No products found.</p>
+      )}
+
+      {hasData && (
+        <div className={styles.gridWrapper}>
+          <ProductsGrid cameFrom={{ type: "all" }} />
+          {isUpdating && (
+            <div className={styles.overlay}>
+              <div className={styles.spinner}></div>
+            </div>
+          )}
+        </div>
+      )}
     </section>
   );
 };
+
+export default AllProducts;

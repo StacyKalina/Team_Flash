@@ -6,10 +6,16 @@ import { SectionHeader } from "../SectionHeader";
 import { ProductCard } from "../ProductCard";
 import styles from "./index.module.css";
 
-import { fetchSalesProducts } from "../../store/slices/productsSlice";
-import { mapProductToCard } from "../../store/selectors/productsHelper"; 
+import {
+  fetchSalesProducts,
+  selectProductsLoading,      // boolean
+  selectProductsError,       // string | null
+} from "../../store/slices/productsSlice";
+
+import { selectVisibleProductCards } from "../../store/selectors/productsSelectors";
 import { addItem } from "../../store/slices/cartSlice";
 
+// Берём 4 случайных карты (Фишер–Йетс)
 function getRandomFour(arr) {
   if (!Array.isArray(arr)) return [];
   const copy = [...arr];
@@ -22,52 +28,55 @@ function getRandomFour(arr) {
 
 export const SectionSales = () => {
   const dispatch = useDispatch();
-  const { items, status, error, source } = useSelector((s) => s.products);
 
+  // === Готовые карточки, как в ProductsGrid ===
+  // Здесь уже лежат объекты в формате, который ждёт <ProductCard />:
+  // { id, title, price, discont_price, oldPrice, discount, imageSrc, ... }
+  const cards     = useSelector(selectVisibleProductCards);
+  const isLoading = useSelector(selectProductsLoading);
+  const error     = useSelector(selectProductsError);
+  const hasData   = cards.length > 0;
+
+  // === Один диспатч на маунт. Никаких зависимостей по status/source ===
   useEffect(() => {
-    if (status === "idle" || source !== "sales") {
-      dispatch(fetchSalesProducts());
-    }
-  }, [dispatch, status, source]);
+    dispatch(fetchSalesProducts());
+  }, [dispatch]);
 
-  const randomCards = useMemo(() => {
-    if (!Array.isArray(items) || !items.length) return [];
-    const cards = items.map((product) => mapProductToCard(product));
-    return getRandomFour(cards);
-  }, [items]);
+  // === Просто берём 4 случайные карточки из уже подготовленных ===
+  const randomCards = useMemo(
+    () => (hasData ? getRandomFour(cards) : []),
+    [cards, hasData]
+  );
 
-  const handleAddToCart = (product) => {
-    dispatch(addItem(product));
-  };
+  const handleAddToCart = (product) => dispatch(addItem(product));
 
   return (
     <section className="sectionShell">
       <SectionHeader
         title="Sale"
-        buttonText="Alle Sales"
+        buttonText="All Sales"
         fromRouterPath="/sales"
       />
 
-      {status === "loading" && <p>Loading…</p>}
-      {status === "failed" && (
-        <p style={{ color: "crimson" }}>{error || "Etwas ist schiefgelaufen"}</p>
+      {isLoading && <p>Loading…</p>}
+      {error && <p style={{ color: "crimson" }}>{error}</p>}
+
+      {!isLoading && !error && !hasData && (
+        <p className={styles.infoMessage}>No discounted products yet.</p>
       )}
 
-      {status === "succeeded" &&
-        (randomCards.length ? (
-          <div className={styles.cardsGrid}>
-            {randomCards.map((card) => (
-              <ProductCard
-                key={card.id}
-                {...card}
-                currencySymbol="$"
-                onAddToCart={handleAddToCart}
-              />
-            ))}
-          </div>
-        ) : (
-          <p className={styles.infoMessage}>No discounted products yet.</p>
-        ))}
+      {randomCards.length > 0 && (
+        <div className={styles.cardsGrid}>
+          {randomCards.map((card) => (
+            <ProductCard
+              key={card.id}
+              {...card}              // здесь уже есть price + discont_price + oldPrice + discount
+              currencySymbol="$"
+              onAddToCart={handleAddToCart}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 };

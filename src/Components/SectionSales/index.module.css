@@ -1,7 +1,24 @@
 .cardsGrid {
   display: grid;
   gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 колонки по умолчанию */
+  align-items: stretch;
+}
+
+/* ——— при уменьшении экрана сразу 2 колонки ——— */
+@media (max-width: 760px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+/* ——— телефоны — одна колонка ——— */
+@media (max-width: 560px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 
 .infoMessage {
@@ -9,8 +26,3 @@
   color: var(--color-text-muted);
   text-align: center;
 }
-
-@media screen and (max-width: 1050px) {
-  .cardsGrid { gap: 20px; }
-}
-
