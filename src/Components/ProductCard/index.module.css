@@ -230,8 +230,8 @@
 
     /* кнопка CTA — ниже и уже */
     .ctaButton {
-        left: 24px;
-        right: 24px;
+        left: 22px;
+        right: 22px;
         bottom: 22px;
         height: 44px;
         font-size: 18px;
@@ -264,6 +264,7 @@
     /* уменьшаем паддинги у блока с изображением */
     .imageWrapper {
         padding: 20px;
+        aspect-ratio: 4 / 3;
     }
 
     /* сердечко — ещё чуть меньше и ближе к углу */
@@ -285,9 +286,9 @@
 
     /* кнопка CTA — адаптируем под мобильный размер */
     .ctaButton {
-        left: 18px;
-        right: 18px;
-        bottom: 18px;
+        left: 17px;
+        right: 17px;
+        bottom: 17px;
         height: 42px;
         font-size: 16px;
     }
