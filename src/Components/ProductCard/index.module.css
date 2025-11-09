@@ -75,7 +75,7 @@
 }
 
 .favoriteButton:hover {
-  transform: scale(1.08);
+    transform: scale(1.08);
 }
 
 
@@ -86,7 +86,7 @@
     align-items: center;
     justify-content: center;
 
-    aspect-ratio: 1 / 1;  
+    aspect-ratio: 1 / 1;
     padding: 30px;
     background-color: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
@@ -100,8 +100,10 @@
 .image {
     width: 100%;
     height: 100%;
-    height: auto;              /* высота идёт из пропорций картинки */
-  max-height: 100%;          /* не вылезаем за wrapper, если вдруг */
+    height: auto;
+    /* высота идёт из пропорций картинки */
+    max-height: 100%;
+    /* не вылезаем за wrapper, если вдруг */
     object-fit: cover;
     /* БЫЛО: contain — оставлял пустые поля */
     display: block;
@@ -149,10 +151,13 @@
 
 /* Нижняя часть карточки */
 .footer {
-    padding: 16px 26px;
+    flex: 1 0 auto;                /* фиксируем, чтобы он не сжимался и не рос произвольно */
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: 20px 26px;
     background-color: var(--color-surface);
     transition: background-color 0.2s ease;
     cursor: pointer;
@@ -179,6 +184,7 @@
 .priceRow {
     display: flex;
     align-items: baseline;
+    margin-top: 8px;
     gap: 16px;
 }
 
@@ -201,109 +207,109 @@
 /* ====== Планшеты и ноутбуки (до 1050px) ====== */
 @media screen and (max-width: 1050px) {
 
-  /* квадрат картинки остаётся, уменьшаем внутренние отступы */
-  .imageWrapper {
-    padding: 24px;
-  }
+    /* квадрат картинки остаётся, уменьшаем внутренние отступы */
+    .imageWrapper {
+        padding: 24px;
+    }
 
-  /* сердечко — чуть меньше и ближе к краю */
-  .favoriteButton {
-    top: 10px;
-    left: 16px;
-    width: 34px;
-    height: 34px;
-  }
+    /* сердечко — чуть меньше и ближе к краю */
+    .favoriteButton {
+        top: 10px;
+        left: 16px;
+        width: 34px;
+        height: 34px;
+    }
 
-  /* бейдж скидки — меньше шрифт и отступы */
-  .badge {
-    top: 12px;
-    right: 16px;
-    font-size: 18px;
-    padding: 3px 7px;
-  }
+    /* бейдж скидки — меньше шрифт и отступы */
+    .badge {
+        top: 12px;
+        right: 16px;
+        font-size: 18px;
+        padding: 3px 7px;
+    }
 
-  /* кнопка CTA — ниже и уже */
-  .ctaButton {
-    left: 24px;
-    right: 24px;
-    bottom: 22px;
-    height: 44px;
-    font-size: 18px;
-  }
+    /* кнопка CTA — ниже и уже */
+    .ctaButton {
+        left: 24px;
+        right: 24px;
+        bottom: 22px;
+        height: 44px;
+        font-size: 18px;
+    }
 
-  /* подвал карточки (текст, цена) — меньше отступы */
-  .footer {
-    padding: 14px 20px;
-    gap: 4px;
-  }
+    /* подвал карточки (текст, цена) — меньше отступы */
+    .footer {
+        padding: 14px 20px;
+        gap: 4px;
+    }
 
-  /* заголовок и цены — уменьшаем шрифт */
-  .title {
-    font-size: 17px;
-    min-height: 46px;
-  }
+    /* заголовок и цены — уменьшаем шрифт */
+    .title {
+        font-size: 17px;
+        min-height: 46px;
+    }
 
-  .price {
-    font-size: 24px;
-  }
+    .price {
+        font-size: 24px;
+    }
 
-  .oldPrice {
-    font-size: 18px;
-  }
+    .oldPrice {
+        font-size: 18px;
+    }
 }
 
 /* ====== Телефоны (до 600px) ====== */
 @media screen and (max-width: 600px) {
 
-  /* уменьшаем паддинги у блока с изображением */
-  .imageWrapper {
-    padding: 20px;
-  }
+    /* уменьшаем паддинги у блока с изображением */
+    .imageWrapper {
+        padding: 20px;
+    }
 
-  /* сердечко — ещё чуть меньше и ближе к углу */
-  .favoriteButton {
-    top: 8px;
-    left: 12px;
-    width: 30px;
-    height: 30px;
-  }
+    /* сердечко — ещё чуть меньше и ближе к углу */
+    .favoriteButton {
+        top: 8px;
+        left: 12px;
+        width: 30px;
+        height: 30px;
+    }
 
-  /* бейдж — мелкий и компактный */
-  .badge {
-    top: 10px;
-    right: 12px;
-    font-size: 16px;
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
+    /* бейдж — мелкий и компактный */
+    .badge {
+        top: 10px;
+        right: 12px;
+        font-size: 16px;
+        padding: 2px 6px;
+        border-radius: 4px;
+    }
 
-  /* кнопка CTA — адаптируем под мобильный размер */
-  .ctaButton {
-    left: 18px;
-    right: 18px;
-    bottom: 18px;
-    height: 42px;
-    font-size: 16px;
-  }
+    /* кнопка CTA — адаптируем под мобильный размер */
+    .ctaButton {
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+        height: 42px;
+        font-size: 16px;
+    }
 
-  /* футер — минимальные паддинги и расстояния */
-  .footer {
-    padding: 12px 14px;
-    gap: 4px;
-  }
+    /* футер — минимальные паддинги и расстояния */
+    .footer {
+        padding: 12px 14px;
+        gap: 4px;
+    }
 
-  .title {
-    font-size: 15px;
-    min-height: 42px;
-  }
+    .title {
+        font-size: 15px;
+        min-height: 42px;
+    }
 
-  .price {
-    font-size: 22px;
-  }
+    .price {
+        font-size: 22px;
+    }
 
-  .oldPrice {
-    font-size: 16px;
-  }
+    .oldPrice {
+        font-size: 16px;
+    }
 }
 
 
@@ -313,94 +319,99 @@
    ============================================================ */
 
 .skeletonCard [class] {
-  pointer-events: none; /* не кликается */
+    pointer-events: none;
+    /* не кликается */
 }
 
 /* базовый фон серого цвета */
 .skeletonBox {
-  position: relative;
-  display: block;
-  border-radius: 8px;
-  background-color: var(--color-skeleton-base, #e6e7ea);
-  overflow: hidden;
+    position: relative;
+    display: block;
+    border-radius: 8px;
+    background-color: var(--color-skeleton-base, #e6e7ea);
+    overflow: hidden;
 }
 
 /* "картинка" в скелетоне — квадрат, как в реальной карточке */
 .image.skeletonBox {
-  width: 100%;
-  aspect-ratio: 1 / 1;  /* 👈 сохраняет квадратную форму */
-  border-bottom: 1px solid var(--color-border);
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    /* 👈 сохраняет квадратную форму */
+    border-bottom: 1px solid var(--color-border);
 }
 
 /* заглушка для заголовка */
 .title.skeletonBox {
-  width: 80%;
-  height: 1em;
-  border-radius: 4px;
+    width: 80%;
+    height: 1em;
+    border-radius: 4px;
 }
 
 /* заглушка для цены */
 .price.skeletonBox {
-  width: 40%;
-  height: 1em;
-  border-radius: 4px;
+    width: 40%;
+    height: 1em;
+    border-radius: 4px;
 }
 
 /* заглушка для старой цены (чуть меньше) */
 .oldPrice.skeletonBox {
-  width: 28%;
-  height: 1em;
-  opacity: 0.85;
-  border-radius: 4px;
+    width: 28%;
+    height: 1em;
+    opacity: 0.85;
+    border-radius: 4px;
 }
 
 /* анимация "сияния" (shimmer effect) */
 @media (prefers-reduced-motion: no-preference) {
-  .skeletonBox::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.35),
-      rgba(255, 255, 255, 0)
-    );
-    background-size: 200% 100%;
-    animation: __skeletonShimmer 1.4s infinite;
-  }
+    .skeletonBox::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0.35),
+                rgba(255, 255, 255, 0));
+        background-size: 200% 100%;
+        animation: __skeletonShimmer 1.4s infinite;
+    }
 
-  @keyframes __skeletonShimmer {
-    0% {
-      background-position: -150% 0;
+    @keyframes __skeletonShimmer {
+        0% {
+            background-position: -150% 0;
+        }
+
+        100% {
+            background-position: 150% 0;
+        }
     }
-    100% {
-      background-position: 150% 0;
-    }
-  }
 }
 
 /* адаптивные размеры для скелетона */
 @media screen and (max-width: 1050px) {
-  .title.skeletonBox {
-    width: 70%;
-  }
-  .price.skeletonBox {
-    width: 36%;
-  }
-  .oldPrice.skeletonBox {
-    width: 24%;
-  }
+    .title.skeletonBox {
+        width: 70%;
+    }
+
+    .price.skeletonBox {
+        width: 36%;
+    }
+
+    .oldPrice.skeletonBox {
+        width: 24%;
+    }
 }
 
 @media screen and (max-width: 600px) {
-  .title.skeletonBox {
-    width: 68%;
-  }
-  .price.skeletonBox {
-    width: 32%;
-  }
-  .oldPrice.skeletonBox {
-    width: 22%;
-  }
+    .title.skeletonBox {
+        width: 68%;
+    }
+
+    .price.skeletonBox {
+        width: 32%;
+    }
+
+    .oldPrice.skeletonBox {
+        width: 22%;
+    }
 }

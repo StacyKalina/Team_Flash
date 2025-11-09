@@ -3,12 +3,13 @@
   <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
   <defs>
     <style>
-      .st0, .st1 {
+      .st0 {
         fill: none;
       }
 
       .st1 {
-        stroke: #424436;
+        fill: #fff;
+        stroke: #92a134;
         stroke-linecap: round;
         stroke-linejoin: round;
         stroke-width: 2.2px;

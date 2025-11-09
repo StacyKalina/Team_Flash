@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./index.module.css";
 import placeHolderImage from "../../Images/placeholder.svg";
-import heartIcon from "../../Images/icons/heart.svg";
+import heartIcon from "../../Images/icons/heart-filledNull.svg";
 import heartFilledIcon from "../../Images/icons/heart-filled.svg";
 import { toggleFavorite } from "../../store/slices/favoriteSlice";
 
