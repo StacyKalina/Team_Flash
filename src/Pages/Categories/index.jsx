@@ -15,7 +15,7 @@ import {
   selectCategoriesError,    // string | null
 } from "../../store/slices/categories";
 
-const BASE_URL = "http://localhost:3333";
+import { API_BASE_URL as BASE_URL } from "../../store/selectors/productsHelper";
 
 // нормализуем относительный путь к абсолютному URL
 const buildImageUrl = (relativePath) => {
