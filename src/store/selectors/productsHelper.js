@@ -3,7 +3,7 @@
  * Компоненты (SectionSales, ProductCard и т.д.) не дублируют логику.
  */
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE ?? "http://localhost:3333";
+export const API_BASE_URL = process.env.REACT_APP_API_BASE ?? "http://localhost:3333";
 
 // === ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ ===============================================
 /**
