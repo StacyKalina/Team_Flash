@@ -38,11 +38,12 @@
   font-size: 20px;
   color: var(--color-nav-text);
   transition: color 0.3s ease;
+      white-space: nowrap;    /* на всякий случай — чтобы не переносились */
+  gap: 32px; /* ← вот теперь расстояние регулируется только этим */
+
 }
 
-.navItem:not(:last-child) {
-  margin-right: 32px;
-}
+
 
 .navItemsWrapper a {
   color: inherit;
@@ -275,6 +276,15 @@
 
   .logo {
     margin-right: auto;
+  }
+}
+
+/* ——— Сжимаем меню на экранах до 1000px, пока бургер ещё не появился ——— */
+@media screen and (max-width: 1000px) {
+  .navItemsWrapper {
+    font-size: 18px;       /* было 20px → делаем компактнее */
+    letter-spacing: -0.1px;
+    gap: 16px;             /* добавь, если используешь gap */
   }
 }
 
